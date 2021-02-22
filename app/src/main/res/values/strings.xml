@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">KvantoriumProject</string>
+    <string name="enter">Вход</string>
+    <string name="enterBtn">Войти</string>
+    <string name="password">Пароль</string>
+    <string name="forgetPassword">Забыли пароль</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Личный кабинет</string>
+    <string name="title_dashboard">Список покупок</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="changeText">Редактировать профиль</string>
+    <string name="dateOfBirth">Дата рождения:</string>
+    <string name="data">Дата рождения</string>
+    <string name="phone">Телефон:</string>
+    <string name="forgetPasswordText">Восстановление пароля</string>
+    <string name="repair">восстановить</string>
+    <string name="telephone">Телефон</string>
+    <string name="registr">Регистрация</string>
+    <string name="redact">Изменение профиля</string>
+    <string name="name">Имя</string>
+    <string name="nameOfBuy">Сообщение</string>
+    <string name="enterWith">Войти с помощью:</string>
+    <string name="chat">Чат</string>
+    <string name="listOfUsers">Список экспертов</string>
+
+    <string name="describeString">Описание</string>
+    <string name="subject">Твоя специализация</string>
+
+    <string name="startTask">Начать задание</string>
+    <string name="aboutTask">Опишите задание</string>
+    <string name="finishTask">Закончить задание</string>
+
+    <string name="apologize">Приносим свои извенения, но экспертов в этой области наук, в нашем приложении, нет!</string>
+
+</resources>

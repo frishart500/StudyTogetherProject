@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "931649898568",
+    "project_id": "kvantoriumproject-552ef",
+    "storage_bucket": "kvantoriumproject-552ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931649898568:android:c1dd2a5a8d8450be04f07d",
+        "android_client_info": {
+          "package_name": "com.example.kvantoriumproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931649898568-klirbkgjimj5k2bom3dh2mn6ap3qc3go.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZMxucCnNvslRpKw2F4n_jauhrNI7kUrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931649898568-klirbkgjimj5k2bom3dh2mn6ap3qc3go.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
