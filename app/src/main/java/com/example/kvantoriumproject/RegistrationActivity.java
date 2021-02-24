@@ -35,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -47,6 +48,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Uri uploadUri;
     private StorageReference mStorageRef;
     private boolean isReached = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    private void getDataPicker(){
+    private void getDataPicker() {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -83,13 +85,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 String m = String.valueOf(month);
                 String d = String.valueOf(day);
                 System.out.println("MONTH " + month);
-                if (String.valueOf(day).length() == 1)
-                {
+                if (String.valueOf(day).length() == 1) {
                     d = ("0" + day);
                 }
 
-                if (String.valueOf(month).length() == 1)
-                {
+                if (String.valueOf(month).length() == 1) {
                     m = ("0" + month);
                 }
 
@@ -117,7 +117,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
+    private void init() {
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("ImageDB");
 
@@ -136,7 +136,7 @@ public class RegistrationActivity extends AppCompatActivity {
         dataImg = findViewById(R.id.dataImg);
     }
 
-    private void setOnClickReg(){
+    private void setOnClickReg() {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,101 +157,107 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void registration(String emailS, String passwordS){
+    private void registration(String emailS, String passwordS) {
 
-        if(!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().isEmpty() && !phone.getText().toString().isEmpty()){
-        try {
-            mAuth.createUserWithEmailAndPassword(emailS, passwordS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        if(uploadUri.toString() != null) {
+        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().isEmpty() && !phone.getText().toString().isEmpty()) {
+            try {
+                mAuth.createUserWithEmailAndPassword(emailS, passwordS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            if (uploadUri.toString() != null) {
 
-                            User user = new User(email.getText().toString(), name.getText().toString(), data.getText().toString(), describtion.getText().toString(), phone.getText().toString(), subject.getText().toString(), uploadUri.toString(), "500");
+                                User user = new User(email.getText().toString(), name.getText().toString(), data.getText().toString(), describtion.getText().toString(), phone.getText().toString(), subject.getText().toString(), uploadUri.toString(), "500");
 
-                            FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
+                                FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
 
-                                        Toast.makeText(RegistrationActivity.this, "Успешно сохранено в базе данных!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        startActivity(intent);
+                                            Toast.makeText(RegistrationActivity.this, "Успешно сохранено в базе данных!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
 
-                                    } else
-                                        Toast.makeText(RegistrationActivity.this, "Ошибка. Не сохранено в базе данных!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            Toast.makeText(RegistrationActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT).show();
-                        }else if(uploadUri.toString() == null){
-                            Toast.makeText(RegistrationActivity.this, "Выберите картинку", Toast.LENGTH_SHORT).show();
-                        }
-                    }else
-                        Toast.makeText(RegistrationActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }catch (Exception ex){}
+                                        } else
+                                            Toast.makeText(RegistrationActivity.this, "Ошибка. Не сохранено в базе данных!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                Toast.makeText(RegistrationActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT).show();
+                            } else if (uploadUri.toString() == null) {
+                                Toast.makeText(RegistrationActivity.this, "Выберите картинку", Toast.LENGTH_SHORT).show();
+                            }
+                        } else
+                            Toast.makeText(RegistrationActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception ex) {
+            }
 
-        }else if(emailS.isEmpty()){
+        } else if (emailS.isEmpty()) {
             showError(email, "Введите email");
-        }else if(passwordS.isEmpty() && passwordS.length() < 6){
+        } else if (passwordS.isEmpty() && passwordS.length() < 6) {
             showError(password, "Введите пароль, который должен иметь не менее 6 символов");
-        }
-        else if(data.getText().toString().isEmpty()){
+        } else if (data.getText().toString().isEmpty()) {
             showError(data, "Введите дату рождения");
-        }
-        else if(describtion.getText().toString().isEmpty() && describtion.getText().toString().length() <= 60){
+        } else if (describtion.getText().toString().isEmpty() && describtion.getText().toString().length() <= 60) {
             showError(describtion, "Введите описание, которое должно содержать менее 60 символов");
-        }
-        else if(phone.getText().toString().isEmpty()){
+        } else if (phone.getText().toString().isEmpty()) {
             showError(phone, "Введите номер телефона");
-        }
-        else if(subject.getText().toString().isEmpty()){
+        } else if (subject.getText().toString().isEmpty()) {
             showError(subject, "Введите предмет");
         }
     }
 
-    private void showError(EditText ed, String error){
+    private void showError(EditText ed, String error) {
         ed.setError(error);
         ed.requestFocus();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && data != null && data.getData() != null){
-            if(resultCode == RESULT_OK){
-                userImg.setImageURI(data.getData());
-                uploadImg();
+        try {
+            if (requestCode == 1 && data != null && data.getData() != null) {
+                if (resultCode == RESULT_OK) {
+                    userImg.setImageURI(data.getData());
+                    uploadImg();
+                }
             }
+        } catch (Exception e) {
         }
     }
 
-    private void uploadImg(){
-        Bitmap bitmap = ((BitmapDrawable)userImg.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] byteArray = baos.toByteArray();
+    private void uploadImg() {
 
-        final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + " my_img");
-        UploadTask up = mRef.putBytes(byteArray);
-        Task<Uri> task = up.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                return mRef.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                uploadUri = task.getResult();
-            }
-        });
+        try {
+
+            Bitmap bitmap = ((BitmapDrawable) userImg.getDrawable()).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] byteArray = baos.toByteArray();
+
+            final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + " my_img");
+            UploadTask up = mRef.putBytes(byteArray);
+            Task<Uri> task = up.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    return mRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    uploadUri = task.getResult();
+                }
+            });
+        } catch (Exception e) {
+        }
     }
 
-    private void getImage(){
+    private void getImage() {
         Intent intentChooser = new Intent();
         intentChooser.setType("image/*");
         intentChooser.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intentChooser, 1);
     }
+
 
 }

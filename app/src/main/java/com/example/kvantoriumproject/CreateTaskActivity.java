@@ -20,8 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class CreateTaskActivity extends AppCompatActivity {
-private EditText subject, describtionOfTask;
-private Button postTask;
+    private EditText subject, describtionOfTask;
+    private Button postTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +41,13 @@ private Button postTask;
         });
     }
 
-    private void init(){
+    private void init() {
         postTask = findViewById(R.id.postTask);
         subject = findViewById(R.id.subjectProblem);
         describtionOfTask = findViewById(R.id.describe);
     }
 
-    private void getUser(){
+    private void getUser() {
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
@@ -54,15 +55,23 @@ private Button postTask;
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Task task = new Task(subject.getText().toString(), describtionOfTask.getText().toString());
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Task").setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                String name = snapshot.child("name").getValue(String.class);
+                String subjectS = subject.getText().toString();
+                String discribtionS = describtionOfTask.getText().toString();
+                String points;
+
+                Task task = new Task(subjectS, discribtionS);
+                task.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                task.setName(name);
+                FirebaseDatabase.getInstance().getReference().child("Task").setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                     @Override
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(CreateTaskActivity.this, "Задание загружено", Toast.LENGTH_SHORT).show();
                             System.out.println("Задание загружено");
-                        }else{
+                        } else {
                             Toast.makeText(CreateTaskActivity.this, "Задание не загркжено", Toast.LENGTH_SHORT).show();
                             System.out.println("Задание не загружено");
                         }

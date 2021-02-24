@@ -2,6 +2,7 @@ package com.example.kvantoriumproject.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.RadioAccessSpecifier;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+
         readUsers();
         return root;
     }
@@ -66,7 +68,7 @@ public class DashboardFragment extends Fragment {
         final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference uidRef = rootRef.child("User");
         final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
-       // final DatabaseReference subjectTask = rootRef.child("User").child(uid).child("Task").child("subject");
+        // final DatabaseReference subjectTask = rootRef.child("User").child(uid).child("Task").child("subject");
         ValueEventListener eventListenerGetProfileData = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -80,7 +82,7 @@ public class DashboardFragment extends Fragment {
                             String imgPath = ds.child("imgUri").getValue(String.class);
                             String email = ds.child("email").getValue(String.class);
 
-                            if(!email.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                            if (!email.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
                                 arrayList.add(new Item(nameS, imgPath,
                                         "subject", "100",
                                         "describtion", email));

@@ -33,6 +33,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return new ViewHolder(view);
     }
     private OnUserClickListener listner;
+
     public interface OnUserClickListener{
         void onUserClickListener(int position);
     }
@@ -52,6 +53,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public int getItemCount() {
         return arrayList.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgUri;
@@ -97,5 +100,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             context.startActivity(intent);
         }
     }
+
 
 }
