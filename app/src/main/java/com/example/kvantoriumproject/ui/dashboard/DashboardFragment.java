@@ -2,6 +2,7 @@ package com.example.kvantoriumproject.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.telephony.RadioAccessSpecifier;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.example.kvantoriumproject.CreateTaskActivity;
 import com.example.kvantoriumproject.Item;
 import com.example.kvantoriumproject.MainActivity;
 import com.example.kvantoriumproject.R;
+import com.example.kvantoriumproject.Task;
 import com.example.kvantoriumproject.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -59,61 +61,60 @@ public class DashboardFragment extends Fragment {
         });
 
 
-        readUsers();
+        readUser();
         return root;
     }
 
-    private void readUsers() {
+
+    private void readUser() {
+
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference uidRef = rootRef.child("User");
-        final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
-        // final DatabaseReference subjectTask = rootRef.child("User").child(uid).child("Task").child("subject");
-        ValueEventListener eventListenerGetProfileData = new ValueEventListener() {
+        final DatabaseReference uidRef = rootRef.child("User").child(uid);
+
+        ValueEventListener eventListenerUser = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String nameSS = snapshot.child("name").getValue(String.class);
-                String subjectSS = snapshot.child("subject").getValue(String.class);
-                ValueEventListener eventListener = new ValueEventListener() {
+                String subjectUser = snapshot.child("subject").getValue(String.class);
+                System.out.println(subjectUser);
+                ValueEventListener valueEventTask = new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            String nameS = ds.child("name").getValue(String.class);
-                            String imgPath = ds.child("imgUri").getValue(String.class);
-                            String email = ds.child("email").getValue(String.class);
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String subjectTask = null;
+                        String describtion = null;
+                        String nameTask = null;
+                        String emailTask = null;
+                        String imgPath = null;
 
-                            if (!email.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-                                arrayList.add(new Item(nameS, imgPath,
-                                        "subject", "100",
-                                        "describtion", email));
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            subjectTask = ds.child("subject").getValue(String.class);
+                            System.out.println(subjectTask);
+                            describtion = ds.child("describe").getValue(String.class);
+                            nameTask = ds.child("name").getValue(String.class);
+                            emailTask = ds.child("email").getValue(String.class);
+                            imgPath = ds.child("img").getValue(String.class);
 
-                                adapter = new Adapter(getContext(), arrayList);
-                                rv.setAdapter(adapter);
+                            if (subjectTask != null) {
+                                if (subjectUser.equalsIgnoreCase(subjectTask)) {
+                                    arrayList.add(new Item(nameTask, imgPath,
+                                            subjectTask, "100",
+                                            describtion, emailTask));
+
+                                    adapter = new Adapter(getContext(), arrayList);
+                                    rv.setAdapter(adapter);
+                                }
                             }
 
-                         /*   if (!nameS.equals(nameSS)) {
-                                String subject = getActivity().getIntent().getStringExtra("subject");
-                                if (subject != null) {
-                                    if(subject.equalsIgnoreCase(subjectSS)) {
-                                        String describtion = getActivity().getIntent().getStringExtra("describtion");
-                                        arrayList.add(new Item(nameS, imgPath,
-                                            subject, "100",
-                                            describtion));
-                                    }
-                                }else
-                                    arrayList.clear();
-                            }
-                            adapter = new Adapter(getContext(), arrayList);
-                            rv.setAdapter(adapter);*/
                         }
 
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 };
-                uidRef.addListenerForSingleValueEvent(eventListener);
+                FirebaseDatabase.getInstance().getReference("Task").addListenerForSingleValueEvent(valueEventTask);
             }
 
             @Override
@@ -121,7 +122,6 @@ public class DashboardFragment extends Fragment {
 
             }
         };
-        uidRefGetUid.addListenerForSingleValueEvent(eventListenerGetProfileData);
+        uidRef.addListenerForSingleValueEvent(eventListenerUser);
     }
-
 }

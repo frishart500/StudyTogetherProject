@@ -1,11 +1,21 @@
 package com.example.kvantoriumproject;
 
 public class Task {
-    private String subject, describe, name, email, points;
+    private String subject, describe, name, email, points, img;
 
     public Task(String subjectForTask, String describe) {
         this.describe = describe;
         this.subject = subjectForTask;
+    }
+
+    public Task(){}
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getPoints() {

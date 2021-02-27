@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ActivityNavigator;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -62,6 +63,8 @@ public class ChatActivity extends AppCompatActivity {
 
         init();
         onClick();
+
+
         nameTitle = getIntent().getStringExtra("name");
         getSupportActionBar().setTitle(nameTitle);
         List<AwesomeMessage> awesomeMessages = new ArrayList<>();

@@ -59,13 +59,19 @@ public class CreateTaskActivity extends AppCompatActivity {
                 String name = snapshot.child("name").getValue(String.class);
                 String subjectS = subject.getText().toString();
                 String discribtionS = describtionOfTask.getText().toString();
+                String img = snapshot.child("imgUri").getValue(String.class);
                 String points;
 
                 Task task = new Task(subjectS, discribtionS);
                 task.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 task.setName(name);
-                FirebaseDatabase.getInstance().getReference().child("Task").setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
+                task.setImg(img);
 
+
+
+                DatabaseReference dr = FirebaseDatabase.getInstance().getReference("Task");
+
+                dr.push().setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
                         if (task.isSuccessful()) {
@@ -86,5 +92,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         };
         uidRefGetUid.addListenerForSingleValueEvent(eventListener);
     }
+
+    private void showError(){}
 
 }
