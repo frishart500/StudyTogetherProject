@@ -208,6 +208,18 @@
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.5" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/money"
+        app:layout_constraintBottom_toBottomOf="@+id/points"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.806"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/points"
+        app:layout_constraintVertical_bias="0.333" />
+
     <TextView
         android:id="@+id/data"
         android:layout_width="wrap_content"

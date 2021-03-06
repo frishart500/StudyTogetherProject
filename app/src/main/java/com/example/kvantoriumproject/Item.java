@@ -7,15 +7,25 @@ public class Item {
     private String points;
     private String describe;
     private String email;
+    private String phone;
 
     public Item(){}
-    public Item(String name, String imgUri, String subject, String points, String describe, String email){
+    public Item(String name, String imgUri, String subject, String points, String describe, String email, String phone){
         this.points = points;
         this.describe = describe;
         this.name = name;
         this.imgUri = imgUri;
         this.subject = subject;
         this.email = email;
+        this.phone = phone;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {

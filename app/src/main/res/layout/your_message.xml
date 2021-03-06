@@ -35,23 +35,6 @@
         android:textColor="@color/white" />
 
 
-    <!-- <de.hdodenhof.circleimageview.CircleImageView
-         android:id="@+id/img_on"
-         android:layout_width="15dp"
-         android:layout_height="15dp"
-         android:layout_alignParentStart="true"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentTop="true"
-         android:layout_marginStart="140dp"
-         android:layout_marginLeft="140dp"
-         android:layout_marginTop="19dp"
-         android:layout_marginEnd="-72dp"
-         android:layout_marginRight="-72dp"
-         android:layout_toStartOf="@+id/bubbleText"
-         android:layout_toLeftOf="@+id/bubbleText"
-         android:src="@mipmap/ic_launcher"
-         android:visibility="visible"
-         app:civ_border_color="@color/cardview_dark_background"
-         app:civ_border_width="10dp" />-->
+
 
 </RelativeLayout>

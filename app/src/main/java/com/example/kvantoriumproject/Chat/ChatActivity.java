@@ -2,10 +2,22 @@ package com.example.kvantoriumproject.Chat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.ActivityNavigator;
 
+import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,9 +29,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.kvantoriumproject.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +50,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -48,9 +65,12 @@ public class ChatActivity extends AppCompatActivity {
     private Button sendBtn, addPhotoBtn;
     private EditText messageEditText;
     private DatabaseReference dr;
-    private String nameTitle;
+    private String nameTitle, phoneTitle;
     private String recipientUserId;
     private ChildEventListener childEventListener;
+
+    private NotificationManager nm;
+    private final int NOTIFICTION_ID = 100;
 
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -64,8 +84,8 @@ public class ChatActivity extends AppCompatActivity {
         init();
         onClick();
 
-
         nameTitle = getIntent().getStringExtra("name");
+
         getSupportActionBar().setTitle(nameTitle);
         List<AwesomeMessage> awesomeMessages = new ArrayList<>();
         adapter = new AwesomeMessageAdapter(this, R.layout.message_item, awesomeMessages);
@@ -73,6 +93,8 @@ public class ChatActivity extends AppCompatActivity {
         progressBar.setVisibility(ProgressBar.INVISIBLE);
 
         recipientUserId = getIntent().getStringExtra("email");
+        phoneTitle = getIntent().getStringExtra("phone");
+        System.out.println(phoneTitle);
 
         childEventListener = new ChildEventListener() {
             @Override
@@ -115,7 +137,29 @@ public class ChatActivity extends AppCompatActivity {
         dr.addChildEventListener(childEventListener);
     }
 
+    private void notifiacation(){
+        nm = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification.Builder builder = new Notification.Builder(getApplicationContext());
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.ic_launcher))
+                .setTicker("Новое уведомление")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setContentTitle("Вам пришло сообщение")
+                .setContentText("Нажмите чтобы увидеть");
+        Notification notification = builder.build();
+        nm.notify(NOTIFICTION_ID, notification);
+    }
+
     private void init() {
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         messageListView = findViewById(R.id.list);
         sendBtn = findViewById(R.id.sendMessage);
         addPhotoBtn = findViewById(R.id.addPhoto);
@@ -159,6 +203,8 @@ public class ChatActivity extends AppCompatActivity {
                     final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                     final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
+
+                    notifiacation();
 
                     ValueEventListener eventListener = new ValueEventListener() {
 
@@ -246,7 +292,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    /*private void status(String status){
+    private void status(String status){
         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);
@@ -263,41 +309,50 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         status("offline");
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
+
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings_call:
-
-                final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-                final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
-
-                ValueEventListener valueEventListener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        String phone = snapshot.child("phone").getValue(String.class);
-                        Intent intent = new Intent(Intent.ACTION_CALL);
-                        intent.setData(Uri.parse("tel:" + phone));
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                };
-                uidRefGetUid.setValue(valueEventListener);
-
+                makePhoneCall();
                 break;
+            case android.R.id.home:
+                this.finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                makePhoneCall();
+            } else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void makePhoneCall() {
+
+
+        if (ContextCompat.checkSelfPermission(ChatActivity.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(ChatActivity.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            String dial = "tel:" + phoneTitle;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+        }
+
+
     }
 }

@@ -1,7 +1,7 @@
 package com.example.kvantoriumproject;
 
 public class Task {
-    private String subject, describe, name, email, points, img;
+    private String subject, describe, name, email, points, img, phone;
 
     public Task(String subjectForTask, String describe) {
         this.describe = describe;
@@ -9,6 +9,14 @@ public class Task {
     }
 
     public Task(){}
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getImg() {
         return img;

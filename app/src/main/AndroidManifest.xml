@@ -5,11 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -18,17 +16,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KvantoriumProject">
-        <activity android:name=".Chat.ImageActivity"></activity>
-        <activity android:name=".CreateTaskActivity" />
+        <activity android:name=".MainClasses.SplashScreenActivity"></activity>
+        <activity android:name=".Chat.ImageActivity" />
+        <activity android:name=".ui.dashboard.CreateTaskActivity" />
         <activity android:name=".Chat.ChatActivity" />
-        <activity android:name=".DeteilActivity" />
-        <activity android:name=".ChangesActivity" />
-        <activity android:name=".ForgetPasswordActivity" />
-        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".ui.dashboard.DeteilActivity" />
+        <activity android:name=".ui.home.ChangesActivity" />
+        <activity android:name=".MainClasses.ForgetPasswordActivity" />
+        <activity android:name=".MainClasses.RegistrationActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainClasses.MainActivity"
             android:label="@string/title_activity_main" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainClasses.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

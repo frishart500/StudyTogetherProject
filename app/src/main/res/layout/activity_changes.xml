@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChangesActivity">
+    tools:context=".ui.home.ChangesActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -44,10 +44,10 @@
                 android:text="Выберите картику"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.144"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/chooseImg"
                 app:layout_constraintTop_toBottomOf="@+id/chooseImg"
-                app:layout_constraintVertical_bias="0.466" />
+                app:layout_constraintVertical_bias="0.608" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs"

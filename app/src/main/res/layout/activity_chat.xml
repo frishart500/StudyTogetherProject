@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:padding="8dp"
     android:orientation="vertical"
+    android:background="@drawable/back_watsapp"
     tools:context=".Chat.ChatActivity">
+
+
 
     <ListView
         android:id="@+id/list"
@@ -33,13 +36,14 @@
             app:backgroundTint="@color/cardview_dark_background" />
 
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/messageEditText"
-            android:padding="10dp"
-            android:hint="Напишите сообщение"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:hint="Напишите сообщение"
+            android:padding="10dp"
+            app:met_floatingLabel="normal" />
 
         <Button
             android:id="@+id/sendMessage"

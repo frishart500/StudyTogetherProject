@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.kvantoriumproject.ui.dashboard.DashboardFragment"
-        android:label="Список экспертов"
+        android:label="Список заданий"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.kvantoriumproject.ui.notifications.AllYourChatsFragment"
+        android:name="com.example.kvantoriumproject.ui.chat.AllYourChatsFragment"
         android:label="Чаты"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_all_chats" />
 </navigation>

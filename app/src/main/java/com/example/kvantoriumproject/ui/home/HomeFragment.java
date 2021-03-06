@@ -10,17 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.kvantoriumproject.ChangesActivity;
-import com.example.kvantoriumproject.LoginActivity;
-import com.example.kvantoriumproject.MainActivity;
+import com.example.kvantoriumproject.MainClasses.LoginActivity;
+import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +51,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
         changeBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,5 +101,7 @@ public class HomeFragment extends Fragment {
         };
         uidRef.addListenerForSingleValueEvent(eventListener);
     }
+
+
 
 }

@@ -21,7 +21,9 @@ public class ImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
 
-        mImageView = (ImageView) findViewById(R.id.my_image_view);
+        mImageView = findViewById(R.id.my_image_view);
+
+        getSupportActionBar().hide();
 
         Bundle extras = getIntent().getExtras();
         String img = getIntent().getStringExtra("image_id");
