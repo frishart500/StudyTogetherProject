@@ -8,9 +8,16 @@ public class Item {
     private String describe;
     private String email;
     private String phone;
+    private String nameOfTask;
+    private String dateToFinish;
+    private String classText;
+    private String id, idOfTask;
+    private String subjectOfUser, describeOfUser;
+    private String imgUri1, imgUri2;
 
     public Item(){}
-    public Item(String name, String imgUri, String subject, String points, String describe, String email, String phone){
+    public Item(String name, String imgUri, String subject, String points, String describe, String email,
+                String phone, String nameOfTask, String dateToFinish, String classText, String subjectOfUser, String describeOfUser, String id, String idOfTask, String imgUri1){
         this.points = points;
         this.describe = describe;
         this.name = name;
@@ -18,6 +25,86 @@ public class Item {
         this.subject = subject;
         this.email = email;
         this.phone = phone;
+        this.nameOfTask = nameOfTask;
+        this.dateToFinish = dateToFinish;
+        this.classText = classText;
+        this.subjectOfUser = subjectOfUser;
+        this.describeOfUser = describeOfUser;
+        this.id = id;
+        this.idOfTask = idOfTask;
+        this.imgUri1 = imgUri1;
+    }
+
+    public String getImgUri1() {
+        return imgUri1;
+    }
+
+    public void setImgUri1(String imgUri1) {
+        this.imgUri1 = imgUri1;
+    }
+
+    public String getImgUri2() {
+        return imgUri2;
+    }
+
+    public void setImgUri2(String imgUri2) {
+        this.imgUri2 = imgUri2;
+    }
+
+    public String getIdOfTask() {
+        return idOfTask;
+    }
+
+    public void setIdOfTask(String idOfTask) {
+        this.idOfTask = idOfTask;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSubjectOfUser() {
+        return subjectOfUser;
+    }
+
+    public void setSubjectOfUser(String subjectOfUser) {
+        this.subjectOfUser = subjectOfUser;
+    }
+
+    public String getDescribeOfUser() {
+        return describeOfUser;
+    }
+
+    public void setDescribeOfUser(String describeOfUser) {
+        this.describeOfUser = describeOfUser;
+    }
+
+    public String getClassText() {
+        return classText;
+    }
+
+    public void setClassText(String classText) {
+        this.classText = classText;
+    }
+
+    public String getNameOfTask() {
+        return nameOfTask;
+    }
+
+    public void setNameOfTask(String nameOfTask) {
+        this.nameOfTask = nameOfTask;
+    }
+
+    public String getDateToFinish() {
+        return dateToFinish;
+    }
+
+    public void setDateToFinish(String dateToFinish) {
+        this.dateToFinish = dateToFinish;
     }
 
     public String getPhone() {

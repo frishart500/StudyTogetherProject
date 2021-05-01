@@ -12,28 +12,80 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Study.together"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KvantoriumProject">
-        <activity android:name=".MainClasses.SplashScreenActivity"></activity>
-        <activity android:name=".Chat.ImageActivity" />
-        <activity android:name=".ui.dashboard.CreateTaskActivity" />
-        <activity android:name=".Chat.ChatActivity" />
-        <activity android:name=".ui.dashboard.DeteilActivity" />
-        <activity android:name=".ui.home.ChangesActivity" />
-        <activity android:name=".MainClasses.ForgetPasswordActivity" />
-        <activity android:name=".MainClasses.RegistrationActivity" />
+        <activity android:name=".MainClasses.ChooseGenderActivity"></activity>
         <activity
-            android:name=".MainClasses.MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity android:name=".MainClasses.LoginActivity">
+            android:name=".MainClasses.SplashScreenActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.home.NotificationActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.dashboard.DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.dashboard.MyTasksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.chats.ChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Chat.ImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Chat.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.dashboard.CommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.home.ChangesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainClasses.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainClasses.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainClasses.MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainClasses.LoginActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <service
+            android:name=".notificationPack.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".notificationPack.MyFirebaseService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

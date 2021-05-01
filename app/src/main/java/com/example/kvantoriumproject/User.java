@@ -2,19 +2,81 @@ package com.example.kvantoriumproject;
 
 public class User {
 
-    private String name, email, data, describtion, phone, subject, imgUri, points, status;
+    private String name, email, data, describtion, phone, subject, imgUri, points;
+    private String countOfHowMuchTasksCreated, id, average, howMuchNotifications, howMuchTasksDone, gender, status;
 
     public User(){}
-    public User(String email, String name, String data, String describtion, String phone, String subject, String imgUri, String points){
+    public User(String email, String name, String data, String describtion, String phone, String subject, String imgUri, String points, String countOfHowMuchTasksCreated, String average, String howMuchNotifications, String howMuchTasksDone, String gender, String status){
         this.email = email;
         this.name = name;
         this.data = data;
         this.describtion = describtion;
+        this.howMuchNotifications = howMuchNotifications;
         this.imgUri = imgUri;
         this.phone = phone;
         this.subject = subject;
         this.points = points;
+        this.countOfHowMuchTasksCreated = countOfHowMuchTasksCreated;
+        this.average = average;
+        this.gender = gender;
+        this.status = status;
+        this.howMuchTasksDone = howMuchTasksDone;
+    }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getHowMuchTasksDone() {
+        return howMuchTasksDone;
+    }
+
+    public void setHowMuchTasksDone(String howMuchTasksDone) {
+        this.howMuchTasksDone = howMuchTasksDone;
+    }
+
+    public String getHowMuchNotifications() {
+        return howMuchNotifications;
+    }
+
+    public void setHowMuchNotifications(String howMuchNotifications) {
+        this.howMuchNotifications = howMuchNotifications;
+    }
+
+    public String getAverage() {
+        return average;
+    }
+
+    public void setAverage(String average) {
+        this.average = average;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCountOfHowMuchTasksCreated() {
+        return countOfHowMuchTasksCreated;
+    }
+
+    public void setCountOfHowMuchTasksCreated(String countOfHowMuchTasksCreated) {
+        this.countOfHowMuchTasksCreated = countOfHowMuchTasksCreated;
     }
 
     public void setName(String name) {
@@ -35,14 +97,6 @@ public class User {
 
     public void setImgUri(String imgUri) {
         this.imgUri = imgUri;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public void setPoints(String points) {

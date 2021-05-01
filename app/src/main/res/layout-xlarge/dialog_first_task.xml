@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="450dp"
+    android:layout_height="330dp"
+    android:id="@+id/preview"
+    android:background="@drawable/back_for_card"
+    android:layout_margin="15dp"
+    android:layout_gravity="center"
+    android:scaleType = "centerCrop">
+
+    <TextView
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:gravity="center"
+        android:layout_marginLeft="60sp"
+        android:text="Поздравляем, вы опубликовали свое первое задание! Поэтому мы зачислили вам еще 50 кристаллов!"
+        android:textColor="#601C80"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        >
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="157dp"
+            android:layout_height="63dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn"
+            android:layout_marginBottom="10dp"
+            android:text="Здорово!"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

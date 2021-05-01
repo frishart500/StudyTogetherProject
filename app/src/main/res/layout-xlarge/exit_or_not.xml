@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="450dp"
+    android:layout_height="330dp"
+    android:id="@+id/preview"
+    android:background="@drawable/back_for_card"
+    android:layout_margin="15dp"
+    android:layout_gravity="center"
+    android:scaleType = "centerCrop">
+
+    <TextView
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:gravity="center"
+        android:layout_marginLeft="60sp"
+        android:text="Вы уверены, что хотите выйти из своего аккаунта?"
+        android:textColor="#601C80"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        >
+
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn"
+            android:text="Да"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/no"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:background="@drawable/btn"
+            android:text="Нет"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

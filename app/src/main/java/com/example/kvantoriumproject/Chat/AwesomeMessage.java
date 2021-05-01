@@ -6,19 +6,45 @@ public class AwesomeMessage {
     private String nameRecipient;
     private String imgUrl;
     private String sender;
-    private String recipient;
+    private String recipient, id, idOfTask;
     private boolean isMine;
+    private boolean isSeen;
 
     public AwesomeMessage() {
     }
 
-    public AwesomeMessage(String text, String name, String imgUrl, String sender, String recipient, boolean isMine) {
+    public AwesomeMessage(String text, String name, String imgUrl, String sender, String recipient, boolean isMine, String id) {
         this.text = text;
         this.name = name;
         this.imgUrl = imgUrl;
         this.sender = sender;
         this.recipient = recipient;
         this.isMine = isMine;
+        this.id = id;
+    }
+
+    public boolean isSeen() {
+        return isSeen;
+    }
+
+    public void setSeen(boolean seen) {
+        isSeen = seen;
+    }
+
+    public String getIdOfTask() {
+        return idOfTask;
+    }
+
+    public void setIdOfTask(String idOfTask) {
+        this.idOfTask = idOfTask;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNameRecipient() {

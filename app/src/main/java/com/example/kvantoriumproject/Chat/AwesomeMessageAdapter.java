@@ -102,7 +102,7 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
     }
 
     private class ViewHolder {
-        private TextView messageTextView, nameOfUser;
+        private TextView messageTextView, nameOfUser, seen;
         private ImageView imageView;
 
         public ViewHolder(View v) {

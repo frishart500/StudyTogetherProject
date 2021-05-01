@@ -1,13 +1,18 @@
 package com.example.kvantoriumproject.MainClasses;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +30,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private ImageView back;
     private ProgressDialog mLoadingBar;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         enterBtn = findViewById(R.id.enterBtn);
         email = findViewById(R.id.email);
         back = findViewById(R.id.back);
+
+        setStatusBarColor();
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -89,5 +98,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private void showError(EditText input, String s){
         input.setError(s);
         input.requestFocus();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void setStatusBarColor(){
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.main));
     }
 }

@@ -1,7 +1,9 @@
 package com.example.kvantoriumproject.MainClasses;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -11,8 +13,11 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -38,16 +43,17 @@ import java.util.Calendar;
 
 public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private ImageView dataImg, back, userImg;
+    private ImageView dataImg, back;
     private TextView regText, textOfImage;
     private Button reg;
     private EditText email, password, name, phone, data, describtion, subject;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatabaseReference mDataBase;
-    private Uri uploadUri;
+    private Uri uploadUri = null;
     private StorageReference mStorageRef;
     private boolean isReached = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +64,7 @@ public class RegistrationActivity extends AppCompatActivity {
         init();
         setOnClickReg();
         getDataPicker();
-
+        setStatusBarColor();
 
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         switch (currentNightMode) {
@@ -120,11 +126,10 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("ImageDB");
 
-        textOfImage = findViewById(R.id.textOfImage);
+
         regText = findViewById(R.id.textView2);
         back = findViewById(R.id.back);
         reg = findViewById(R.id.registrBtn);
-        userImg = findViewById(R.id.chooseImg);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         name = findViewById(R.id.name);
@@ -135,6 +140,15 @@ public class RegistrationActivity extends AppCompatActivity {
         dataImg = findViewById(R.id.dataImg);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void setStatusBarColor() {
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.main));
+    }
+
+
     private void setOnClickReg() {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,12 +156,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 registration(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
-        userImg.setOnClickListener(new View.OnClickListener() {
+        /*userImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getImage();
             }
-        });
+        });*/
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,38 +172,24 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void registration(String emailS, String passwordS) {
 
-        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().isEmpty() && !phone.getText().toString().isEmpty()) {
-            try {
-                mAuth.createUserWithEmailAndPassword(emailS, passwordS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            if (uploadUri.toString() != null) {
+        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().trim().isEmpty() && !phone.getText().toString().isEmpty()) {
 
-                                User user = new User(email.getText().toString(), name.getText().toString(), data.getText().toString(), describtion.getText().toString(), phone.getText().toString(), subject.getText().toString(), uploadUri.toString(), "500");
-                                FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
+            Intent intent = new Intent(getApplicationContext(), ChooseGenderActivity.class);
+            intent.putExtra("email", email.getText().toString());
+            intent.putExtra("password", passwordS);
+            intent.putExtra("name", name.getText().toString());
+            intent.putExtra("data", data.getText().toString());
+            intent.putExtra("describtion", describtion.getText().toString());
+            intent.putExtra("phone", phone.getText().toString());
+            intent.putExtra("subject", subject.getText().toString());
+            intent.putExtra("imgUri", "");
+            intent.putExtra("points", "500");
+            intent.putExtra("imgUri", "0");
+            intent.putExtra("average", "5.0");
+            intent.putExtra("howMuchTaskDone", "0");
+            intent.putExtra("howMuchNotifications", "0");
+            startActivity(intent);
 
-                                            Toast.makeText(RegistrationActivity.this, "Успешно сохранено в базе данных!", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(intent);
-
-                                        } else
-                                            Toast.makeText(RegistrationActivity.this, "Ошибка. Не сохранено в базе данных!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                Toast.makeText(RegistrationActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT).show();
-                            } else if (uploadUri.toString() == null) {
-                                Toast.makeText(RegistrationActivity.this, "Выберите картинку", Toast.LENGTH_SHORT).show();
-                            }
-                        } else
-                            Toast.makeText(RegistrationActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (Exception ex) {
-            }
 
         } else if (emailS.isEmpty()) {
             showError(email, "Введите email");
@@ -210,54 +210,4 @@ public class RegistrationActivity extends AppCompatActivity {
         ed.setError(error);
         ed.requestFocus();
     }
-
-
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            if (requestCode == 1 && data != null && data.getData() != null) {
-                if (resultCode == RESULT_OK) {
-                    userImg.setImageURI(data.getData());
-                    uploadImg();
-                }
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    private void uploadImg() {
-
-        try {
-
-            Bitmap bitmap = ((BitmapDrawable) userImg.getDrawable()).getBitmap();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] byteArray = baos.toByteArray();
-
-            final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + " my_img");
-            UploadTask up = mRef.putBytes(byteArray);
-            Task<Uri> task = up.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    return mRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    uploadUri = task.getResult();
-                }
-            });
-        } catch (Exception e) {
-        }
-    }
-
-    private void getImage() {
-        Intent intentChooser = new Intent();
-        intentChooser.setType("image/*");
-        intentChooser.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intentChooser, 1);
-    }
-
-
 }
