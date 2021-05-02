@@ -2,30 +2,20 @@ package com.example.kvantoriumproject.Chat;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
+import com.example.kvantoriumproject.Items.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 public class ImageActivity extends AppCompatActivity {
     private ImageView mImageView, back;

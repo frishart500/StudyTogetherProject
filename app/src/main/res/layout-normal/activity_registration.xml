@@ -220,8 +220,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs6"
-                android:layout_width="307dp"
-                android:layout_height="117dp"
+                android:layout_width="308dp"
+                android:layout_height="139dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
@@ -233,16 +233,17 @@
 
                 <EditText
                     android:id="@+id/describe"
-                    android:layout_width="258dp"
-                    android:layout_height="62dp"
+                    android:layout_width="276dp"
+                    android:layout_height="84dp"
                     android:background="@android:color/transparent"
+                    android:gravity="left"
                     android:hint="@string/describeString"
                     android:inputType="text|textMultiLine|textCapSentences"
                     android:textColor="@color/main"
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.326"
+                    app:layout_constraintHorizontal_bias="0.444"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.29" />
@@ -272,10 +273,10 @@
                 android:src="@drawable/back_cross"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.957"
+                app:layout_constraintHorizontal_bias="0.997"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.023" />
+                app:layout_constraintVertical_bias="0.001" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

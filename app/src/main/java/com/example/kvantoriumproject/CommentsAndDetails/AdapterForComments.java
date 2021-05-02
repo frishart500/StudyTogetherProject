@@ -1,7 +1,6 @@
-package com.example.kvantoriumproject.ui.chats;
+package com.example.kvantoriumproject.CommentsAndDetails;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kvantoriumproject.ChooseInf;
+import com.example.kvantoriumproject.Items.ChooseInf;
 import com.example.kvantoriumproject.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;

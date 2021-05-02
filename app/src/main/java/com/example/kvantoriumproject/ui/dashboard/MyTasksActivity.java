@@ -3,10 +3,10 @@ package com.example.kvantoriumproject.ui.dashboard;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,14 +15,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.example.kvantoriumproject.Item;
+import com.example.kvantoriumproject.Items.Item;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Task;
-import com.example.kvantoriumproject.User;
+import com.example.kvantoriumproject.Items.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,13 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import static okhttp3.internal.http.HttpDate.parse;
 
 public class MyTasksActivity extends AppCompatActivity {
     private RecyclerView rv;
@@ -68,6 +60,7 @@ public class MyTasksActivity extends AppCompatActivity {
                 my_tasks.setTextSize(16);
                 allTasks.setTextSize(19);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
             }
         });
     }

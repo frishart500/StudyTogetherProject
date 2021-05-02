@@ -1,9 +1,8 @@
-package com.example.kvantoriumproject.ui.dashboard;
+package com.example.kvantoriumproject.CommentsAndDetails;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,15 +10,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.example.kvantoriumproject.ChooseInf;
+import com.example.kvantoriumproject.Items.ChooseInf;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
-import com.example.kvantoriumproject.ui.chats.AdapterForComments;
+import com.example.kvantoriumproject.Items.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

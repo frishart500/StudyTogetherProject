@@ -3,32 +3,12 @@ package com.example.kvantoriumproject.Chat;
 public class AwesomeMessage {
     private String text;
     private String name;
-    private String nameRecipient;
     private String imgUrl;
     private String sender;
     private String recipient, id, idOfTask;
     private boolean isMine;
-    private boolean isSeen;
 
     public AwesomeMessage() {
-    }
-
-    public AwesomeMessage(String text, String name, String imgUrl, String sender, String recipient, boolean isMine, String id) {
-        this.text = text;
-        this.name = name;
-        this.imgUrl = imgUrl;
-        this.sender = sender;
-        this.recipient = recipient;
-        this.isMine = isMine;
-        this.id = id;
-    }
-
-    public boolean isSeen() {
-        return isSeen;
-    }
-
-    public void setSeen(boolean seen) {
-        isSeen = seen;
     }
 
     public String getIdOfTask() {
@@ -45,14 +25,6 @@ public class AwesomeMessage {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getNameRecipient() {
-        return nameRecipient;
-    }
-
-    public void setNameRecipient(String nameRecipient) {
-        this.nameRecipient = nameRecipient;
     }
 
     public boolean isMine() {

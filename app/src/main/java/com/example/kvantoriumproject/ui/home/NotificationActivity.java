@@ -5,19 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kvantoriumproject.Friends;
-import com.example.kvantoriumproject.ItemNotification;
+import com.example.kvantoriumproject.Items.Friends;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
+import com.example.kvantoriumproject.Items.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +51,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

@@ -3,7 +3,6 @@ package com.example.kvantoriumproject.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kvantoriumproject.Chat.AwesomeMessage;
 import com.example.kvantoriumproject.Chat.ChatActivity;
-import com.example.kvantoriumproject.FinishTask;
-import com.example.kvantoriumproject.Friends;
-import com.example.kvantoriumproject.Item;
-import com.example.kvantoriumproject.ItemNotification;
+import com.example.kvantoriumproject.Items.FinishTask;
+import com.example.kvantoriumproject.Items.Friends;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
-import com.example.kvantoriumproject.ui.dashboard.Adapter;
-import com.example.kvantoriumproject.ui.dashboard.DetailActivity;
+import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.CommentsAndDetails.DetailActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.ArrayList;
 
 public class AdapterNotification extends RecyclerView.Adapter<AdapterNotification.ViewHolder> {

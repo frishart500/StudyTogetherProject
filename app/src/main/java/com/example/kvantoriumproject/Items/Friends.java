@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject;
+package com.example.kvantoriumproject.Items;
 
 public class Friends {
     private String subject, describe, name, email, points, img, phone, nameOfTask, dateToFinish,

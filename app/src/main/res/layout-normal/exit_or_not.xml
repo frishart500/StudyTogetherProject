@@ -16,6 +16,7 @@
         android:layout_weight="50"
         android:gravity="center"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:text="Вы уверены, что хотите выйти из своего аккаунта?"
         android:textColor="#601C80"

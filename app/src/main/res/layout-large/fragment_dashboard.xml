@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Все задания"
             android:textColor="#601C80"
-            android:textSize="24sp"
+            android:textSize="19sp"
             android:textStyle="bold"
             android:layout_marginRight="20dp"/>
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Мои задания"
             android:textColor="#D091EC"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +61,8 @@
             android:padding="15dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:padding="10dp"
                 android:layout_weight="1"
                 android:src="@drawable/search" />
@@ -95,16 +95,26 @@
         </LinearLayout>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_tasks"
+            android:textColor="@color/main"
+            android:id="@+id/textMainAct"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="155dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
-            android:layout_width="530dp"
+            android:layout_width="515dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="@+id/addTask"
-            app:layout_constraintEnd_toEndOf="@+id/edit_find"
-            app:layout_constraintStart_toStartOf="@+id/edit_find"
-            app:layout_constraintTop_toBottomOf="@+id/edit_find"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_gravity="center" />
+
+
 
     </LinearLayout>
 

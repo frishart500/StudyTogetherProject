@@ -12,21 +12,19 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_all"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/back_for_card"
-            android:paddingBottom="35dp">
+            android:paddingBottom="35dp"
+            android:background="@drawable/back_for_card">
 
 
             <TextView
                 android:id="@+id/nameOfTask"
-                android:layout_width="wrap_content"
+                android:layout_width="319dp"
                 android:layout_height="wrap_content"
                 android:text="Квадратное уравнение"
                 android:textColor="#601C80"
@@ -34,22 +32,22 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.144"
+                app:layout_constraintHorizontal_bias="0.219"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.103" />
+                app:layout_constraintVertical_bias="0.083" />
 
             <ImageView
                 android:id="@+id/goToProfile"
-                android:layout_width="21dp"
-                android:layout_height="27dp"
+                android:layout_width="32dp"
+                android:layout_height="26dp"
                 android:src="@drawable/profile_for_card"
                 app:layout_constraintBottom_toTopOf="@+id/beginToTask"
                 app:layout_constraintEnd_toEndOf="@+id/beginToTask"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.458" />
+                app:layout_constraintTop_toTopOf="@+id/nameOfTask"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/subject"
@@ -65,7 +63,7 @@
                 app:layout_constraintHorizontal_bias="0.058"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="@+id/textView9"
-                app:layout_constraintVertical_bias="0.061" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -73,25 +71,25 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:text="Предмет:"
-                android:layout_marginTop="5dp"
                 android:textColor="#601C80"
                 android:textSize="20sp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/nameOfTask"
                 app:layout_constraintTop_toBottomOf="@+id/nameOfTask"
-                app:layout_constraintVertical_bias="0.016" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Срок:"
                 android:textColor="#601C80"
                 android:textSize="20sp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -113,7 +111,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/textView17"
-                app:layout_constraintVertical_bias="0.016" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -121,16 +119,15 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:text="Класс:"
-                android:layout_marginTop="5dp"
                 android:textColor="#601C80"
                 android:textSize="20sp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
-                app:layout_constraintVertical_bias="0.011" />
-
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/classText"
@@ -138,15 +135,15 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:text="9"
+                android:textStyle="bold"
                 android:textColor="#601C80"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView17"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintHorizontal_bias="0.017"
                 app:layout_constraintStart_toEndOf="@+id/textView17"
                 app:layout_constraintTop_toTopOf="@+id/textView17"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/dateForFinish"
@@ -159,22 +156,24 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
+                app:layout_constraintHorizontal_bias="0.043"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView10"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.0" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl"
-                android:layout_width="482dp"
+                android:layout_width="474dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/dateForFinish"
-                app:layout_constraintVertical_bias="0.555">
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:id="@+id/textView6"
@@ -183,18 +182,18 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Описание:"
                     android:textColor="#601C80"
-                    android:textSize="20dp"
+                    android:textSize="22dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.064" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/describe"
-                    android:layout_width="473dp"
+                    android:layout_width="255dp"
                     android:layout_height="wrap_content"
                     android:text="describe"
                     android:textColor="#601C80"
@@ -205,6 +204,17 @@
                     app:layout_constraintStart_toStartOf="@+id/textView6"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
                     app:layout_constraintVertical_bias="0.23" />
+
+                <ImageView
+                    android:id="@+id/imgItem"
+                    android:layout_width="51dp"
+                    android:layout_height="41dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.901"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -232,27 +242,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.018"
                 app:layout_constraintStart_toEndOf="@+id/points"
-                app:layout_constraintTop_toBottomOf="@+id/classText" />
+                app:layout_constraintTop_toTopOf="@+id/points" />
 
             <Button
                 android:id="@+id/beginToTask"
-                android:layout_width="140dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn"
+                android:layout_width="121dp"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/main"
                 android:text="Решать"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@+id/dateForFinish"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.911"
+                app:layout_constraintHorizontal_bias="0.88"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.534" />
+                app:layout_constraintVertical_bias="0.513" />
 
             <Button
                 android:id="@+id/checkAllTask"
-                android:layout_width="140dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn"
+                android:layout_width="121dp"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/main"
                 android:text="Задание"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@+id/dateForFinish"
@@ -260,15 +270,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/beginToTask"
                 app:layout_constraintTop_toBottomOf="@+id/beginToTask"
-                app:layout_constraintVertical_bias="0.611" />
-
-            <ImageView
-                android:id="@+id/imgItem"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/checkAllTask" />
+                app:layout_constraintVertical_bias="1.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

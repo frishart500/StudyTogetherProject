@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject;
+package com.example.kvantoriumproject.Items;
 
 public class ChooseInf {
     private String comment;

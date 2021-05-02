@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.kvantoriumproject.ui.chats.AllYourChatsFragment"
+        android:name="com.example.kvantoriumproject.ui.friendsInChats.AllYourChatsFragment"
         android:label="Чаты"
         tools:layout="@layout/fragment_all_chats" />
 

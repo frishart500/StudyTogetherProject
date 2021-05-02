@@ -24,26 +24,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
+    //переменные
     private Button enterBtn;
     private EditText email;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     private ImageView back;
-    private ProgressDialog mLoadingBar;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        enterBtn = findViewById(R.id.enterBtn);
-        email = findViewById(R.id.email);
-        back = findViewById(R.id.back);
-
-        setStatusBarColor();
+        //иницилизация
+        init();
+        //activity без actionBar (базавая настройка)
         getSupportActionBar().hide();
-
-        mAuth = FirebaseAuth.getInstance();
-
+        //нажатия
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,52 +54,37 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         });
 
     }
-    private void resetPassword(){
 
-        mLoadingBar = new ProgressDialog(ForgetPasswordActivity.this);
+    private void init() {
+        mAuth = FirebaseAuth.getInstance();
+        enterBtn = findViewById(R.id.enterBtn);
+        email = findViewById(R.id.email);
+        back = findViewById(R.id.back);
+    }
 
-        mLoadingBar.setTitle("Отправка сообщения на почту");
-        mLoadingBar.setMessage("Пожалуйста подождите, пока мы проверяем ваши полномочия");
-        mLoadingBar.setCanceledOnTouchOutside(false);
-        mLoadingBar.show();
-
+    private void resetPassword() {
         String emailString = email.getText().toString().trim();
-        if(emailString.isEmpty()){
+        if (emailString.isEmpty()) {
             showError(email, "Введите email ввашей почты");
-            //email.requestFocus();
-            //return;
         }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(emailString).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
             showError(email, "Поожалуйста убедитесь в правильносте email");
-            //email.requestFocus();
-            //return;
         }
-
         mAuth.sendPasswordResetEmail(emailString).addOnCompleteListener(new OnCompleteListener<Void>() {
+            //отправка письма на почту со сменой email
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    mLoadingBar.dismiss();
+                if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Вы успешно получили письмо на почту!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                }else
+                } else
                     Toast.makeText(ForgetPasswordActivity.this, "Попробуйте снова!", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    private void showError(EditText input, String s){
+    private void showError(EditText input, String s) {
         input.setError(s);
         input.requestFocus();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setStatusBarColor(){
-        Window window = getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.main));
     }
 }

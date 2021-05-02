@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.chats.AllYourChatsFragment">
+    tools:context=".ui.friendsInChats.AllYourChatsFragment">
 
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -17,14 +17,15 @@
         android:padding="15dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:padding="10dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/search" />
 
         <EditText
             android:id="@+id/edit_find"
-            android:layout_width="493dp"
+            android:layout_width="492dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:hint="Найти задание..."
@@ -40,9 +41,23 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_chats"
+        android:textColor="@color/main"
+        android:id="@+id/my_chats"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="visible"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_width="474dp"
+        android:layout_width="417dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="2" />

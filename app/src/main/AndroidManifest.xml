@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -16,11 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KvantoriumProject">
-        <activity android:name=".MainClasses.ChooseGenderActivity"></activity>
+        <activity android:name=".MainClasses.IntroActivity"></activity>
+        <activity android:name=".MainClasses.ChooseGenderActivity" />
         <activity
             android:name=".MainClasses.SplashScreenActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,15 +30,15 @@
         </activity>
         <activity
             android:name=".ui.home.NotificationActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.dashboard.DetailActivity"
+            android:name=".CommentsAndDetails.DetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.dashboard.MyTasksActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.chats.ChooseActivity"
+            android:name=".Chat.ChooseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Chat.ImageActivity"
@@ -46,7 +47,7 @@
             android:name=".Chat.ChatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.dashboard.CommentActivity"
+            android:name=".CommentsAndDetails.CommentActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.ChangesActivity"
@@ -63,7 +64,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainClasses.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -85,7 +86,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject.ui.chats;
+package com.example.kvantoriumproject.ui.friendsInChats;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kvantoriumproject.Chat.ChatActivity;
+import com.example.kvantoriumproject.Items.ItemChat;
 import com.example.kvantoriumproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

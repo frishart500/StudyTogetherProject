@@ -35,33 +35,30 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+    //переменные
     private EditText email, password;
     private FirebaseAuth mAuth;
     private Button btnEnter;
     private TextView regBtn, forgetPassword, textView2, textView;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //базовые настройки
+        getSupportActionBar().hide();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        //методы
         init();
         setOnClickEnter();
         setOnClick();
         checkInternetConection();
 
-        getSupportActionBar().hide();
-        //        exit.setPaintFlags(exit.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        /*if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-        }*/
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-
     }
 
+
+    //проверка налиия интернета
     private void checkInternetConection(){
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -70,25 +67,29 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             connected = false;
+            //диалоговое окно
             Dialog dialog;
-            dialog = new Dialog(LoginActivity.this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.internet_conection);
+            dialog = new Dialog(LoginActivity.this);//создание объекта
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);//без Наиминования
+            dialog.setContentView(R.layout.internet_conection);//меняем layout
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setCancelable(false);
+            dialog.setCancelable(false);//не закрываться сразу
+            //переменные в диалоговом окне
             TextView exit = dialog.findViewById(R.id.exit);
             TextView settings = dialog.findViewById(R.id.settings);
+            //нажатия
             exit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finishAffinity();
-                    System.exit(0);
+                    System.exit(0);//выход из приложения
                 }
             });
 
             settings.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //переход в настройки
                     startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
                 }
             });
@@ -98,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
+        //создание объектов
         email = findViewById(R.id.email);
         textView2 = findViewById(R.id.textView2);
         password = findViewById(R.id.password);
@@ -106,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         forgetPassword = findViewById(R.id.forgetPassword);
         mAuth = FirebaseAuth.getInstance();
-
+        //подчеркивание текста
         regBtn.setPaintFlags(regBtn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         forgetPassword.setPaintFlags(regBtn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
@@ -115,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //вход по нажатию
                 signIn(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
@@ -126,9 +129,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch(v.getId()){
                     case R.id.registration:
+                        //переход в экран регистрации
                         startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
                         break;
                     case R.id.forgetPassword:
+                        //переход в экран "забыли пароль"
                         startActivity(new Intent(getApplicationContext(), ForgetPasswordActivity.class));
                         break;
                 }
@@ -140,7 +145,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signIn(String emailS, String passwordS) {
         try {
-            if (!emailS.trim().isEmpty() && !passwordS.isEmpty()) {
+            if (!emailS.trim().isEmpty() && !passwordS.isEmpty()) {//проверка был ли введен текст
+                //вход по логину и паролю
                 mAuth.signInWithEmailAndPassword(emailS, passwordS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -152,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-            } else if (emailS.isEmpty()) {
+            } else if (emailS.isEmpty()) {//если невведен текст
                 showError(email, "Введите email");
             } else if (passwordS.isEmpty() | passwordS.length() < 6) {
                 showError(password, "Введите пароль");
@@ -168,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        //диалоговое окно
         Dialog dialog;
         dialog = new Dialog(LoginActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

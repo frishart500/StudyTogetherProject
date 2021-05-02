@@ -7,7 +7,7 @@
 
 
         <RelativeLayout
-            android:layout_width="400dp"
+            android:layout_width="358dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true">
@@ -16,9 +16,11 @@
                 <ImageView
                     android:id="@+id/photoOfUser"
                     android:layout_width="100dp"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:background="@drawable/background_another_user"
+                    android:padding="5dp"
                     android:src="@mipmap/ic_launcher"
                     android:visibility="gone" />
 
@@ -27,11 +29,9 @@
                     android:id="@+id/nameOfUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-
                     android:text="name"
                     android:textSize="16dp" />
 
@@ -42,11 +42,11 @@
                     android:layout_below="@+id/nameOfUser"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/background_mine"
-                    android:maxWidth="300dp"
-                    android:textSize="20sp"
+                    android:background="@drawable/background_another_user"
+                    android:maxWidth="200dp"
                     android:padding="8dp"
                     android:text="hello"
+                    android:textSize="20dp"
                     android:textColor="#000" />
 
 

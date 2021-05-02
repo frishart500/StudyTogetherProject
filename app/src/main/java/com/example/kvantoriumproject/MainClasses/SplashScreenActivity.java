@@ -19,23 +19,26 @@ import com.example.kvantoriumproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    //переменные
     private FirebaseAuth mAuth;
     private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        mAuth = FirebaseAuth.getInstance();
+        //базовые настройки
         getSupportActionBar().hide();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        //иницилизация
         image = findViewById(R.id.image);
-
+        mAuth = FirebaseAuth.getInstance();
+        //анимация
         ObjectAnimator animation = ObjectAnimator.ofFloat(image, "rotationY", 0.0f, 360f);
         animation.setDuration(2000);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         animation.start();
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        //поток
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -44,12 +47,10 @@ public class SplashScreenActivity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     startActivity(intent);
-
                 }else{
-                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    intent = new Intent(getApplicationContext(), IntroActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     startActivity(intent);
-
                 }
                 finish();
             }

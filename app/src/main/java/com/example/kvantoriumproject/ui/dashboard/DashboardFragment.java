@@ -1,5 +1,6 @@
 package com.example.kvantoriumproject.ui.dashboard;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,27 +28,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kvantoriumproject.Item;
+import com.example.kvantoriumproject.Items.Item;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import okhttp3.internal.cache.DiskLruCache;
 
 public class DashboardFragment extends Fragment {
     private Adapter adapter;
@@ -79,6 +74,7 @@ public class DashboardFragment extends Fragment {
                 myTasks.setTextSize(19);
                 all_tasks.setTextSize(16);
                 startActivity(new Intent(getContext(), MyTasksActivity.class));
+                ((Activity) getContext()).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

@@ -1,25 +1,22 @@
-package com.example.kvantoriumproject.ui.chats;
+package com.example.kvantoriumproject.Chat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import com.example.kvantoriumproject.ChooseInf;
+import com.example.kvantoriumproject.Items.ChooseInf;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
+import com.example.kvantoriumproject.Items.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -102,6 +99,7 @@ public class ChooseActivity extends AppCompatActivity {
                                 choose.getRatingMiddle();
                                 FirebaseDatabase.getInstance().getReference("Raiting").push().setValue(choose);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             }
                         });
 

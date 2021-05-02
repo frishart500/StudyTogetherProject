@@ -1,12 +1,12 @@
 package com.example.kvantoriumproject.ui.home;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.security.FileIntegrityManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +18,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.kvantoriumproject.ChooseInf;
 import com.example.kvantoriumproject.MainClasses.LoginActivity;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
-import com.example.kvantoriumproject.ui.dashboard.Adapter;
-import com.example.kvantoriumproject.ui.dashboard.CommentActivity;
-import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.CommentsAndDetails.CommentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
-
-import java.text.DecimalFormat;
 
 
 public class HomeFragment extends Fragment {
@@ -59,6 +51,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), NotificationActivity.class));
+                ((Activity) getContext()).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 
@@ -97,6 +90,10 @@ public class HomeFragment extends Fragment {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        User user = new User();
+                        user.setStatus("offline");
+                        ref.child("status").setValue(user.getStatus());
                         mAuth.signOut();
                         startActivity(new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }

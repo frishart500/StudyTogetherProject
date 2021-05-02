@@ -3,7 +3,6 @@ package com.example.kvantoriumproject.ui.dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.renderscript.Sampler;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
@@ -20,9 +19,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kvantoriumproject.Chat.ImageActivity;
-import com.example.kvantoriumproject.Item;
+import com.example.kvantoriumproject.Items.Item;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,8 +34,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.ViewHolder> {
 

@@ -68,6 +68,7 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
             viewHolder.nameOfUser.setText(awesomeMessage.getName());
             viewHolder.messageTextView.setVisibility(View.GONE);
             viewHolder.imageView.setVisibility(View.VISIBLE);
+            viewHolder.imageView.setBackgroundResource(R.drawable.background_another_user);
             viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

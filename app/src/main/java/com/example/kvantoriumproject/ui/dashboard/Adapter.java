@@ -1,11 +1,8 @@
 package com.example.kvantoriumproject.ui.dashboard;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +20,17 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kvantoriumproject.Chat.ChatActivity;
 import com.example.kvantoriumproject.Chat.ImageActivity;
-import com.example.kvantoriumproject.Friends;
-import com.example.kvantoriumproject.Item;
+import com.example.kvantoriumproject.CommentsAndDetails.DetailActivity;
+import com.example.kvantoriumproject.Items.Friends;
+import com.example.kvantoriumproject.Items.Item;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Task;
-import com.example.kvantoriumproject.User;
+import com.example.kvantoriumproject.Items.User;
 import com.example.kvantoriumproject.notificationPack.APIService;
 import com.example.kvantoriumproject.notificationPack.Client;
 import com.example.kvantoriumproject.notificationPack.Data;
 import com.example.kvantoriumproject.notificationPack.MyResponse;
 import com.example.kvantoriumproject.notificationPack.NotificationSender;
-import com.example.kvantoriumproject.notificationPack.Token;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +38,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -52,13 +45,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import com.example.kvantoriumproject.notificationPack.APIService;
-import com.example.kvantoriumproject.notificationPack.Client;
-import com.example.kvantoriumproject.notificationPack.Data;
-import com.example.kvantoriumproject.notificationPack.MyResponse;
-import com.example.kvantoriumproject.notificationPack.NotificationSender;
-import com.example.kvantoriumproject.notificationPack.Token;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -374,14 +360,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                             dr.child(finalS).child("userId").setValue(friends.getUserId());
                             dr.child(finalS).child("anotherId").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-
                             FirebaseDatabase.getInstance().getReference().child("Tokens").child(friends.getUserId()).child("token").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    String usertoken = dataSnapshot.getValue(String.class);
-                                    sendNotifications(usertoken, "name", "message");
+                                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String name = snapshot.child("name").getValue(String.class);
+                                            String usertoken = dataSnapshot.getValue(String.class);
+                                            sendNotifications(usertoken, "Заявка на выполнение!",  name + " хочет выполнить задание");
+                                        }
 
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
 
                                 @Override

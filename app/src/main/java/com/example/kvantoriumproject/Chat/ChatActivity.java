@@ -17,7 +17,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -31,16 +30,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kvantoriumproject.FinishTask;
+import com.example.kvantoriumproject.Items.FinishTask;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.User;
-import com.example.kvantoriumproject.ui.chats.ChooseActivity;
+import com.example.kvantoriumproject.Items.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -360,6 +357,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 if (v.getId() == R.id.back) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 if (v.getId() == R.id.card) {
                     if (cl.getVisibility() == View.GONE) {
@@ -546,6 +544,7 @@ public class ChatActivity extends AppCompatActivity {
                         message.setIdOfTask(justId);
                         if (message.getIdOfTask().equals(justId)) {
                             message.setImgUrl(downloadUri.toString());
+
                         }
 
                         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {

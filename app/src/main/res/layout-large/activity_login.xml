@@ -13,60 +13,59 @@
         android:fontFamily="@font/montserrat"
         android:text="Вход в систему"
         android:textColor="#601C80"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.274" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout12"
-        android:layout_width="318dp"
-        android:layout_height="82dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="355dp"
+        android:layout_height="65dp"
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36">
+        app:layout_constraintVertical_bias="0.364">
 
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="254dp"
-            android:layout_height="37dp"
+            android:layout_width="304dp"
+            android:layout_height="32dp"
             android:background="@android:color/transparent"
             android:hint="E-mail"
             android:inputType="textEmailAddress"
-            android:textColor="@color/main"
-            android:textColorHint="#601C80"
+            android:textColorHint="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.511" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="318dp"
-        android:layout_height="82dp"
+        android:layout_width="355dp"
+        android:layout_height="65dp"
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout12"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458">
+        app:layout_constraintVertical_bias="0.447">
 
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="254dp"
-            android:layout_height="37dp"
+            android:layout_width="304dp"
+            android:layout_height="32dp"
             android:background="@android:color/transparent"
             android:hint="Пароль"
             android:inputType="textPassword"
@@ -75,24 +74,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.511" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/enterBtn"
-        android:layout_width="295dp"
-        android:layout_height="50dp"
-        android:background="@drawable/btn"
+        android:layout_width="320dp"
+        android:layout_height="58dp"
+        android:backgroundTint="@color/main"
         android:text="@string/enterBtn"
         android:textAllCaps="false"
         android:textColor="#fff"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.546" />
 
     <TextView
         android:id="@+id/forgetPassword"
@@ -100,6 +99,7 @@
         android:layout_height="wrap_content"
         android:text="@string/forgetPassword"
         android:textColor="#601C80"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -113,6 +113,7 @@
         android:layout_height="wrap_content"
         android:text="Регистрация"
         android:textColor="#601C80"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/enterBtn"
         app:layout_constraintHorizontal_bias="1.0"

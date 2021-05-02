@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".ui.dashboard.CommentActivity">
+    tools:context=".CommentsAndDetails.CommentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="62dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/back_cross" />

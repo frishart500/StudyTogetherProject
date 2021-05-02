@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject.ui.chats;
+package com.example.kvantoriumproject.ui.friendsInChats;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kvantoriumproject.Items.ItemChat;
 import com.example.kvantoriumproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

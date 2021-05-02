@@ -27,20 +27,20 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout6"
-                android:layout_width="308dp"
-                android:layout_height="60dp"
+                android:layout_width="355dp"
+                android:layout_height="65dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.202">
+                app:layout_constraintVertical_bias="0.139">
 
 
                 <EditText
                     android:id="@+id/email"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="304dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
@@ -48,16 +48,14 @@
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.509"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.483" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
-                android:layout_width="308dp"
-                android:layout_height="60dp"
+                android:layout_width="355dp"
+                android:layout_height="65dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
@@ -69,8 +67,8 @@
 
                 <EditText
                     android:id="@+id/password"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="304dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:hint="Пароль"
                     android:inputType="textPassword"
@@ -78,16 +76,14 @@
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.509"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.516" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs"
-                android:layout_width="308dp"
-                android:layout_height="60dp"
+                android:layout_width="355dp"
+                android:layout_height="65dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
@@ -99,25 +95,23 @@
 
                 <EditText
                     android:id="@+id/subject"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="304dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/subject"
                     android:textColor="@color/main"
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.39"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
-                android:layout_width="308dp"
-                android:layout_height="60dp"
+                android:layout_width="355dp"
+                android:layout_height="65dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
@@ -129,25 +123,23 @@
 
                 <EditText
                     android:id="@+id/name"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="304dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/name"
                     android:textColor="@color/main"
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.39"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
-                android:layout_width="308dp"
-                android:layout_height="60dp"
+                android:layout_width="355dp"
+                android:layout_height="65dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cs"
@@ -159,8 +151,8 @@
 
                 <EditText
                     android:id="@+id/editData"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="304dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/data"
                     android:inputType="date"
@@ -168,10 +160,8 @@
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.39"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/dataImg"
@@ -188,8 +178,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout5"
-                android:layout_width="308dp"
-                android:layout_height="60dp"
+                android:layout_width="355dp"
+                android:layout_height="65dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
@@ -201,8 +191,8 @@
 
                 <EditText
                     android:id="@+id/phone"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="304dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/telephone"
                     android:inputType="phone"
@@ -210,18 +200,16 @@
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.39"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs6"
-                android:layout_width="310dp"
-                android:layout_height="112dp"
+                android:layout_width="355dp"
+                android:layout_height="169dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
@@ -233,8 +221,9 @@
 
                 <EditText
                     android:id="@+id/describe"
-                    android:layout_width="258dp"
-                    android:layout_height="64dp"
+                    android:layout_width="315dp"
+                    android:layout_height="104dp"
+                    android:gravity="left"
                     android:background="@android:color/transparent"
                     android:hint="@string/describeString"
                     android:inputType="text|textMultiLine|textCapSentences"
@@ -242,45 +231,46 @@
                     android:textColorHint="#601C80"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.307"
+                    app:layout_constraintHorizontal_bias="0.4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.333" />
+                    app:layout_constraintVertical_bias="0.246" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/registrBtn"
-                android:layout_width="279dp"
-                android:layout_height="46dp"
-                android:background="@drawable/btn"
+                android:layout_width="295dp"
+                android:layout_height="61dp"
+                android:backgroundTint="@color/main"
                 android:text="Готово!"
                 android:textAllCaps="false"
                 android:textColor="#fff"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cs6"
-                app:layout_constraintHorizontal_bias="0.427"
                 app:layout_constraintStart_toStartOf="@+id/cs6"
                 app:layout_constraintTop_toBottomOf="@+id/cs6"
-                app:layout_constraintVertical_bias="0.26" />
+                app:layout_constraintVertical_bias="0.013" />
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/back_cross"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.957"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.023" />
+                app:layout_constraintVertical_bias="0.002" />
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/textView26"
@@ -289,14 +279,11 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/registr"
         android:textColor="#601C80"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.055"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105" />
-
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

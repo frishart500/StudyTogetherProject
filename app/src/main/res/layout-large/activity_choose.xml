@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chats.ChooseActivity">
+    tools:context=".Chat.ChooseActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="443dp"
-        android:layout_height="569dp"
+        android:layout_width="473dp"
+        android:layout_height="614dp"
         android:background="@drawable/back_for_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
             android:fontFamily="@font/montserrat"
             android:text="Напишите отзыв о работе:"
             android:textColor="@color/main"
-            android:textSize="24sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.223"
@@ -33,34 +33,32 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cs6"
-            android:padding="10dp"
-            android:layout_width="374dp"
-            android:layout_height="196dp"
+            android:layout_width="379dp"
+            android:layout_height="232dp"
             android:background="@drawable/edit_find"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14"
-            app:layout_constraintVertical_bias="0.078">
+            app:layout_constraintVertical_bias="0.079">
 
 
             <EditText
                 android:id="@+id/comment"
-                android:layout_width="289dp"
-                android:layout_height="110dp"
+                android:layout_width="324dp"
+                android:layout_height="143dp"
                 android:background="@android:color/transparent"
                 android:gravity="left"
                 android:hint="Написать..."
-
                 android:inputType="text|textMultiLine|textCapSentences"
                 android:textColor="@color/main"
                 android:textColorHint="@color/main"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.188"
+                app:layout_constraintHorizontal_bias="0.49"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.36" />
+                app:layout_constraintVertical_bias="0.337" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -72,7 +70,7 @@
             android:fontFamily="@font/montserrat"
             android:text="Оцените работу эксперта:"
             android:textColor="@color/main"
-            android:textSize="24sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.21"
@@ -82,45 +80,45 @@
 
         <RatingBar
             android:id="@+id/ratingBar_default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="242dp"
+            android:layout_height="67dp"
             android:progressBackgroundTint="#D091EC"
             android:progressTint="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11"
-            app:layout_constraintVertical_bias="0.075" />
+            app:layout_constraintVertical_bias="0.063" />
 
         <Button
             android:id="@+id/btn_send"
-            android:layout_width="245dp"
-            android:layout_height="57dp"
-            android:background="@drawable/btn"
+            android:layout_width="246dp"
+            android:layout_height="64dp"
+            android:backgroundTint="@color/main"
             android:text="Готово!"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar_default"
-            app:layout_constraintVertical_bias="0.877" />
+            app:layout_constraintTop_toTopOf="@+id/cs6"
+            app:layout_constraintVertical_bias="0.842" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="56dp"
-        android:layout_height="54dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:src="@drawable/back_cross"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.017" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
