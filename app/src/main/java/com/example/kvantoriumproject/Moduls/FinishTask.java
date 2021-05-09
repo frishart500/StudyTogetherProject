@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject.Items;
+package com.example.kvantoriumproject.Moduls;
 
 public class FinishTask {
     private String id1, id2, idOfTask, UID1, UID2, uidForCompare;

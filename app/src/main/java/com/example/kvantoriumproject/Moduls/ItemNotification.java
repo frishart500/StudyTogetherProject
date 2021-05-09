@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject.Items;
+package com.example.kvantoriumproject.Moduls;
 
 public class ItemNotification {
     private String name, nameOfTask, id, subjectOfUser, describtionOfUser;

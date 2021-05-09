@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.kvantoriumproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
@@ -77,8 +78,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Вы успешно получили письмо на почту!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                } else
-                    Toast.makeText(ForgetPasswordActivity.this, "Попробуйте снова!", Toast.LENGTH_SHORT).show();
+                } else{
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar snackbar = Snackbar.make(parentLayout, "Попробуйте снова!", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFF601C80);
+                    snackbar.setTextColor(0XFFffffff);
+                    snackbar.show();
+                }
             }
         });
     }

@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.kvantoriumproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -59,13 +60,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
     //проверка налиия интернета
-    private void checkInternetConection(){
+    private void checkInternetConection() {
         boolean connected = false;
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             connected = true;
-        }
-        else{
+        } else {
             connected = false;
             //диалоговое окно
             Dialog dialog;
@@ -113,21 +113,25 @@ public class LoginActivity extends AppCompatActivity {
         forgetPassword.setPaintFlags(regBtn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
-    private void setOnClickEnter(){
+    private void setOnClickEnter() {
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //вход по нажатию
+                Snackbar snackbar = Snackbar.make(v, "Вход...", Snackbar.LENGTH_LONG);
+                snackbar.setBackgroundTint(0XFFffffff);
+                snackbar.setTextColor(0XFF601C80);
+                snackbar.show();
                 signIn(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
     }
 
-    private void setOnClick(){
-        View.OnClickListener BTNs = new View.OnClickListener(){
+    private void setOnClick() {
+        View.OnClickListener BTNs = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch(v.getId()){
+                switch (v.getId()) {
                     case R.id.registration:
                         //переход в экран регистрации
                         startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
@@ -151,10 +155,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Вход успешен", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        } else
-                            Toast.makeText(LoginActivity.this, "Взод провален", Toast.LENGTH_SHORT).show();
+                        } else {
+                            View parentLayout = findViewById(android.R.id.content);
+                            Snackbar snackbar = Snackbar.make(parentLayout, "Вход провален.", Snackbar.LENGTH_LONG);
+                            snackbar.setBackgroundTint(0XFF601C80);
+                            snackbar.setTextColor(0XFFffffff);
+                            snackbar.show();
+                        }
                     }
                 });
 
@@ -164,7 +172,8 @@ public class LoginActivity extends AppCompatActivity {
                 showError(password, "Введите пароль");
             }
 
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
     }
 
     private void showError(EditText ed, String errorText) {

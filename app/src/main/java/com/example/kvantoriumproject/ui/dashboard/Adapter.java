@@ -22,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kvantoriumproject.Chat.ImageActivity;
 import com.example.kvantoriumproject.CommentsAndDetails.DetailActivity;
-import com.example.kvantoriumproject.Items.Friends;
-import com.example.kvantoriumproject.Items.Item;
+import com.example.kvantoriumproject.Moduls.Friends;
+import com.example.kvantoriumproject.Moduls.Item;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.example.kvantoriumproject.notificationPack.APIService;
 import com.example.kvantoriumproject.notificationPack.Client;
 import com.example.kvantoriumproject.notificationPack.Data;
@@ -281,7 +281,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             friends.setDateToFinish(parseItem.getDateToFinish());
             friends.setMyEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-            User user = new User();
+            Users users = new Users();
             ValueEventListener valTask = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

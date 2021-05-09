@@ -30,10 +30,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kvantoriumproject.Items.FinishTask;
+import com.example.kvantoriumproject.Moduls.FinishTask;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -199,8 +199,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private void status(String status) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        User user = new User();
-        user.setStatus(status);
+        Users users = new Users();
+        users.setStatus(status);
         ref.child("status").setValue(status);
     }
 
@@ -451,15 +451,15 @@ public class ChatActivity extends AppCompatActivity {
                                                         FirebaseDatabase.getInstance().getReference("Tokens").child(getIntent().getStringExtra("anotherId")).removeValue();
                                                         FirebaseDatabase.getInstance().getReference("Tokens").child(id).removeValue();
 
-                                                        User user = new User();
-                                                        user.setPoints(priceTitle);
+                                                        Users users = new Users();
+                                                        users.setPoints(priceTitle);
 
                                                         ValueEventListener valUser = new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                                 String points = snapshot.child("points").getValue(String.class);
                                                                 String howMuchTasksDone = snapshot.child("howMuchTasksDone").getValue(String.class);
-                                                                int getPoints = Integer.parseInt(user.getPoints());
+                                                                int getPoints = Integer.parseInt(users.getPoints());
                                                                 int getHowMuchTasksDone = Integer.parseInt(howMuchTasksDone);
                                                                 int getPointsUser = Integer.parseInt(points);
                                                                 int result = getPoints + getPointsUser;

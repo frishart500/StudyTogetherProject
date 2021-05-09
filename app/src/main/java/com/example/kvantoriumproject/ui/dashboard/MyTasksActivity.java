@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,10 +16,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.example.kvantoriumproject.Items.Item;
+import com.example.kvantoriumproject.Moduls.Item;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -171,8 +170,8 @@ public class MyTasksActivity extends AppCompatActivity {
 
     private void status(String status){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        User user = new User();
-        user.setStatus(status);
+        Users users = new Users();
+        users.setStatus(status);
         ref.child("status").setValue(status);
     }
 

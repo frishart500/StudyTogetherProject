@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject.Items;
+package com.example.kvantoriumproject.Moduls;
 
 public class ItemChat {
     private String name, img, email, desc, classText, nameOfTask, nameAnotherPerson;

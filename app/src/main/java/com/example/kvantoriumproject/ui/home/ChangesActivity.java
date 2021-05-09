@@ -16,7 +16,8 @@ import android.widget.ImageView;
 
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,7 +59,10 @@ public class ChangesActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Snackbar snackbar = Snackbar.make(v, "Профиль корректно изменен!", Snackbar.LENGTH_LONG);
+                snackbar.setBackgroundTint(0XFFffffff);
+                snackbar.setTextColor(0XFF601C80);
+                snackbar.show();
                 changes();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
@@ -89,26 +93,26 @@ public class ChangesActivity extends AppCompatActivity {
         ValueEventListener vChangeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = new User();
+                Users users = new Users();
                 if (!nameS.isEmpty()) {
-                    user.setName(nameS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(user.getName());
+                    users.setName(nameS);
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(users.getName());
                 }
                 if (!subjectS.isEmpty()) {
-                    user.setSubject(subjectS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("subject").setValue(user.getSubject());
+                    users.setSubject(subjectS);
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("subject").setValue(users.getSubject());
                 }
                 if (!describtionS.isEmpty()) {
-                    user.setDescribtion(describtionS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("describtion").setValue(user.getDescribtion());
+                    users.setDescribtion(describtionS);
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("describtion").setValue(users.getDescribtion());
                 }
                 if (!phoneS.isEmpty()) {
-                    user.setPhone(phoneS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("phone").setValue(user.getPhone());
+                    users.setPhone(phoneS);
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("phone").setValue(users.getPhone());
                 }
                 if (!dataS.isEmpty()) {
-                    user.setData(dataS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("data").setValue(user.getData());
+                    users.setData(dataS);
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("data").setValue(users.getData());
                 }
 
             }
@@ -118,6 +122,7 @@ public class ChangesActivity extends AppCompatActivity {
 
             }
         };
+
         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(vChangeListener);
 
 
@@ -165,8 +170,8 @@ public class ChangesActivity extends AppCompatActivity {
 
     private void status(String status){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        User user = new User();
-        user.setStatus(status);
+        Users users = new Users();
+        users.setStatus(status);
         ref.child("status").setValue(status);
     }
 

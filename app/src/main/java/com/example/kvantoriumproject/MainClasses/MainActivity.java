@@ -16,21 +16,14 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
 import com.example.kvantoriumproject.notificationPack.APIService;
 import com.example.kvantoriumproject.notificationPack.Client;
 import com.example.kvantoriumproject.notificationPack.Token;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

@@ -13,10 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import com.example.kvantoriumproject.Items.ChooseInf;
+import com.example.kvantoriumproject.Moduls.ChooseInf;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +51,8 @@ public class ChooseActivity extends AppCompatActivity {
 
     private void status(String status){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        User user = new User();
-        user.setStatus(status);
+        Users users = new Users();
+        users.setStatus(status);
         ref.child("status").setValue(status);
     }
 

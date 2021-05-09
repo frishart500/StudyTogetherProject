@@ -13,10 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kvantoriumproject.Chat.ChatActivity;
-import com.example.kvantoriumproject.Items.FinishTask;
-import com.example.kvantoriumproject.Items.Friends;
+import com.example.kvantoriumproject.Moduls.FinishTask;
+import com.example.kvantoriumproject.Moduls.Friends;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.example.kvantoriumproject.CommentsAndDetails.DetailActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,7 +81,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(), arrayList.size());
 
-                    User user = new User();
+                    Users users = new Users();
                     ValueEventListener valUser = new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,8 +89,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                             int parserCounter = Integer.parseInt(howMuchNotifications);
                             if(parserCounter > 0){
                                 parserCounter = parserCounter - 1;
-                                user.setHowMuchNotifications(parserCounter + "");
-                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchNotifications").setValue(user.getHowMuchNotifications());
+                                users.setHowMuchNotifications(parserCounter + "");
+                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchNotifications").setValue(users.getHowMuchNotifications());
                             }
                         }
 
@@ -164,7 +164,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     finishTask.setIdOfTask(justId);
                     FirebaseDatabase.getInstance().getReference("FinishTask").push().setValue(finishTask);
 
-                    User user = new User();
+                    Users users = new Users();
                     ValueEventListener valUser = new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -172,8 +172,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                             int parserCounter = Integer.parseInt(howMuchNotifications);
                             if(parserCounter > 0){
                                 parserCounter = parserCounter - 1;
-                                user.setHowMuchNotifications(parserCounter + "");
-                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchNotifications").setValue(user.getHowMuchNotifications());
+                                users.setHowMuchNotifications(parserCounter + "");
+                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchNotifications").setValue(users.getHowMuchNotifications());
                             }
                         }
 

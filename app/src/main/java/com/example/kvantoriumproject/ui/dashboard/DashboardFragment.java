@@ -28,7 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kvantoriumproject.Items.Item;
+import com.example.kvantoriumproject.Moduls.Item;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
 import com.google.firebase.auth.FirebaseAuth;

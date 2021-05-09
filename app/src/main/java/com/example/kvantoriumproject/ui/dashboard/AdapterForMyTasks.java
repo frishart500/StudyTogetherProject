@@ -19,7 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kvantoriumproject.Chat.ImageActivity;
-import com.example.kvantoriumproject.Items.Item;
+import com.example.kvantoriumproject.Moduls.Item;
 import com.example.kvantoriumproject.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;

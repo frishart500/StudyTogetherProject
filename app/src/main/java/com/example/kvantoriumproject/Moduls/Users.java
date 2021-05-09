@@ -1,12 +1,12 @@
-package com.example.kvantoriumproject.Items;
+package com.example.kvantoriumproject.Moduls;
 
-public class User {
+public class Users {
 
     private String name, email, data, describtion, phone, subject, imgUri, points;
     private String countOfHowMuchTasksCreated, id, average, howMuchNotifications, howMuchTasksDone, gender, status;
 
-    public User(){}
-    public User(String email, String name, String data, String describtion, String phone, String subject, String imgUri, String points, String countOfHowMuchTasksCreated, String average, String howMuchNotifications, String howMuchTasksDone, String gender, String status){
+    public Users(){}
+    public Users(String email, String name, String data, String describtion, String phone, String subject, String imgUri, String points, String countOfHowMuchTasksCreated, String average, String howMuchNotifications, String howMuchTasksDone, String gender, String status){
         this.email = email;
         this.name = name;
         this.data = data;

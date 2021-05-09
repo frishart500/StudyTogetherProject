@@ -2,16 +2,21 @@ package com.example.kvantoriumproject.MainClasses;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,17 +40,25 @@ public class ChooseGenderActivity extends AppCompatActivity {
         getExtras();
 
         View.OnClickListener images = new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                Snackbar snackbar = Snackbar.make(v, "Загрузка...", Snackbar.LENGTH_LONG);
                 switch (v.getId()) {
                     case R.id.back:
                         startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
                         break;
                     case R.id.mail:
                         registrationMail();
+                        snackbar.setBackgroundTint(0XFFffffff);
+                        snackbar.setTextColor(0XFF601C80);
+                        snackbar.show();
                         break;
                     case R.id.femail:
                         registrationFemail();
+                        snackbar.setBackgroundTint(0XFFffffff);
+                        snackbar.setTextColor(0XFF601C80);
+                        snackbar.show();
                         break;
                 }
             }
@@ -59,16 +72,16 @@ public class ChooseGenderActivity extends AppCompatActivity {
 
     private void registrationMail(){
         try {
-            //регистрация
+            //регистрация для мальчика
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         //объект User
-                        User user = new User(email, name, data, describtion, phone, subject,
+                        Users users = new Users(email, name, data, describtion, phone, subject,
                                 "boy1", "500", "0", "5.0", "0", "0", "mail", "online");
-                        user.setId(mAuth.getCurrentUser().getUid());
-                        FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        users.setId(mAuth.getCurrentUser().getUid());
+                        FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {//если успешно
@@ -86,15 +99,16 @@ public class ChooseGenderActivity extends AppCompatActivity {
 
 
     private void registrationFemail(){
+        //регистрация для девушки
         try {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        User user = new User(email, name, data, describtion, phone, subject,
+                        Users users = new Users(email, name, data, describtion, phone, subject,
                                 "girl1", "500", "0", "5.0", "0", "0", "femail", "online");
-                        user.setId(mAuth.getCurrentUser().getUid());
-                        FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        users.setId(mAuth.getCurrentUser().getUid());
+                        FirebaseDatabase.getInstance().getReference("User").child(mAuth.getCurrentUser().getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

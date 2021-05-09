@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -105,8 +105,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private void status(String status) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        User user = new User();
-        user.setStatus(status);
+        Users users = new Users();
+        users.setStatus(status);
         ref.child("status").setValue(status);
     }
 
@@ -128,7 +128,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 id_string = getIntent().getStringExtra("id");
-                User user = new User();
+                Users users = new Users();
                 double total = 0.0;
                 double count = 0.0;
                 double average = 0.0;
@@ -148,7 +148,7 @@ public class DetailActivity extends AppCompatActivity {
                 average = total / count;
                 System.out.println(average + " --average");
                 double roundOff = (double) Math.round(average * 100) / 100;
-                user.setAverage(String.valueOf(roundOff));
+                users.setAverage(String.valueOf(roundOff));
                 if (roundOff < 1 && roundOff > 0) {
                     stars.setImageResource(R.drawable.zero_five);
                 } else if (roundOff <= 1.5 && roundOff > 0 && roundOff > 1) {
@@ -172,7 +172,7 @@ public class DetailActivity extends AppCompatActivity {
                 } else if (roundOff == 0) {
                     stars.setImageResource(R.drawable.zero);
                 }
-                FirebaseDatabase.getInstance().getReference("User").child(id_string).child("average").setValue(user.getAverage());
+                FirebaseDatabase.getInstance().getReference("User").child(id_string).child("average").setValue(users.getAverage());
             }
 
             @Override

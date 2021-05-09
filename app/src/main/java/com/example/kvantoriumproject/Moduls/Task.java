@@ -1,4 +1,4 @@
-package com.example.kvantoriumproject.Items;
+package com.example.kvantoriumproject.Moduls;
 
 public class Task {
     private String subject, describe, name, email, points, img, phone, nameOfTask, dateToFinish, classText, subjectOfUser, describtionOfUser, idOfUser, idOfTask, imgUri1;

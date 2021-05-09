@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.kvantoriumproject.MainClasses.LoginActivity;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.example.kvantoriumproject.CommentsAndDetails.CommentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -91,9 +91,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        User user = new User();
-                        user.setStatus("offline");
-                        ref.child("status").setValue(user.getStatus());
+                        Users users = new Users();
+                        users.setStatus("offline");
+                        ref.child("status").setValue(users.getStatus());
                         mAuth.signOut();
                         startActivity(new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
@@ -302,7 +302,7 @@ public class HomeFragment extends Fragment {
         ValueEventListener valRating = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = new User();
+                Users users = new Users();
                 double total = 0.0;
                 double count = 0.0;
 
@@ -319,7 +319,7 @@ public class HomeFragment extends Fragment {
                     }
                     average = total / count;
                     double roundOff = (double) Math.round(average * 100) / 100;
-                    user.setAverage(roundOff + "");
+                    users.setAverage(roundOff + "");
                     if(roundOff < 1 && roundOff > 0){
                         stars.setImageResource(R.drawable.zero_five);
                     }else if(roundOff <= 1.5 && roundOff > 0 && roundOff > 1){
@@ -344,7 +344,7 @@ public class HomeFragment extends Fragment {
                         stars.setImageResource(R.drawable.zero);
                     }
 
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("average").setValue(user.getAverage());
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("average").setValue(users.getAverage());
 
 
                 }

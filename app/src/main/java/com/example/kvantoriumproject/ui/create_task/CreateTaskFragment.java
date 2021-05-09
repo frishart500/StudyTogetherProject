@@ -24,8 +24,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.kvantoriumproject.R;
-import com.example.kvantoriumproject.Items.Task;
-import com.example.kvantoriumproject.Items.User;
+import com.example.kvantoriumproject.Moduls.Task;
+import com.example.kvantoriumproject.Moduls.Users;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -116,9 +116,10 @@ public class CreateTaskFragment extends Fragment {
 
                         if (pointsCount < countPoint) {
                             postTask.setEnabled(false);
+
                             Snackbar snackbar = Snackbar.make(v, "У вас недостаточно баллов, чтобы опубликовать задание.", Snackbar.LENGTH_LONG);
-                            snackbar.setBackgroundTint(0XFFffffff);
-                            snackbar.setTextColor(0XFF601C80);
+                            snackbar.setBackgroundTint(0XFF601C80);
+                            snackbar.setTextColor(0XFFffffff);
                             snackbar.show();
                         } else {
                             if (countPoint >= 100) {
@@ -126,12 +127,12 @@ public class CreateTaskFragment extends Fragment {
                                 int count = pointsCount - countPoint;
                                 int counterForTasks = counterTasksCreated + 1;
                                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
-                                User user = new User();
+                                Users users = new Users();
                                 int rounded = (int) Math.round(count / 100.0) * 100;
-                                user.setPoints(rounded + "");
+                                users.setPoints(rounded + "");
                                 FirebaseDatabase.getInstance().getReference("User")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .child("points").setValue(user.getPoints());
+                                        .child("points").setValue(users.getPoints());
 
                                 getUser();
                                 if(!classText.getText().toString().isEmpty() && !nameOfTask.getText().toString().isEmpty() && !points.getText().toString().isEmpty() && !subject.getText().toString().trim().isEmpty() && !dateToFinish.getText().toString().isEmpty() && !describtionOfTask.getText().toString().isEmpty()) {
@@ -163,9 +164,9 @@ public class CreateTaskFragment extends Fragment {
 
 
                             } else {
-                                Snackbar snackbar = Snackbar.make(v, "Цена за задние должна быть не меньше 100 и не больше 500 баллов.", Snackbar.LENGTH_SHORT);
-                                snackbar.setBackgroundTint(0XFFffffff);
-                                snackbar.setTextColor(0XFF601C80);
+                                Snackbar snackbar = Snackbar.make(v, "Цена за задние должна быть не меньше 100 и не больше 500 баллов.", Snackbar.LENGTH_LONG);
+                                snackbar.setBackgroundTint(0XFF601C80);
+                                snackbar.setTextColor(0XFFffffff);
                                 snackbar.show();
                             }
                         }
