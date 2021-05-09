@@ -13,9 +13,10 @@
     <TextView
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="16dp"
+        android:layout_weight="30"
         android:padding="10dp"
         android:text="Вы уверены, что хотите выйти из приложения?"
         android:textColor="#601C80"
@@ -26,7 +27,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
+        android:layout_weight="30"
         android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         >
 
         <Button

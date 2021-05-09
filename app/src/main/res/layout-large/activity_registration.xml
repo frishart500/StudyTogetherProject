@@ -29,6 +29,7 @@
                 android:id="@+id/constraintLayout6"
                 android:layout_width="355dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +57,7 @@
                 android:id="@+id/constraintLayout2"
                 android:layout_width="355dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
@@ -84,6 +86,7 @@
                 android:id="@+id/cs"
                 android:layout_width="355dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
@@ -112,6 +115,7 @@
                 android:id="@+id/constraintLayout3"
                 android:layout_width="355dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
@@ -140,13 +144,14 @@
                 android:id="@+id/constraintLayout4"
                 android:layout_width="355dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cs"
                 app:layout_constraintHorizontal_bias="0.388"
                 app:layout_constraintStart_toStartOf="@+id/cs"
                 app:layout_constraintTop_toBottomOf="@+id/cs"
-                app:layout_constraintVertical_bias="0.013">
+                app:layout_constraintVertical_bias="0.0">
 
 
                 <EditText
@@ -180,13 +185,14 @@
                 android:id="@+id/constraintLayout5"
                 android:layout_width="355dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
                 app:layout_constraintHorizontal_bias="0.388"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-                app:layout_constraintVertical_bias="0.004">
+                app:layout_constraintVertical_bias="0.0">
 
 
                 <EditText
@@ -210,21 +216,22 @@
                 android:id="@+id/cs6"
                 android:layout_width="355dp"
                 android:layout_height="169dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
                 app:layout_constraintHorizontal_bias="0.388"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
-                app:layout_constraintVertical_bias="0.022">
+                app:layout_constraintVertical_bias="0.0">
 
 
                 <EditText
                     android:id="@+id/describe"
                     android:layout_width="315dp"
                     android:layout_height="104dp"
-                    android:gravity="left"
                     android:background="@android:color/transparent"
+                    android:gravity="left"
                     android:hint="@string/describeString"
                     android:inputType="text|textMultiLine|textCapSentences"
                     android:textColor="@color/main"
@@ -248,6 +255,7 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cs6"
                 app:layout_constraintStart_toStartOf="@+id/cs6"
@@ -256,8 +264,8 @@
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/back_cross"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -265,8 +273,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.002" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -279,7 +285,8 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/registr"
         android:textColor="#601C80"
-        android:textSize="30dp"
+        android:textSize="26dp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"
         app:layout_constraintVertical_bias="0.055"
         app:layout_constraintBottom_toBottomOf="parent"

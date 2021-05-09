@@ -45,11 +45,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Intent intent;
                 if(mAuth.getCurrentUser() != null){
                     intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     startActivity(intent);
                 }else{
                     intent = new Intent(getApplicationContext(), IntroActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     startActivity(intent);
                 }
                 finish();

@@ -22,7 +22,6 @@ public class Slide1Fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_slide1, container, false);
-        TextView textView35 = view.findViewById(R.id.textView35);
         TextView btnSkip = view.findViewById(R.id.btnSkip);
 
         btnSkip.setOnClickListener(new View.OnClickListener() {
@@ -32,11 +31,7 @@ public class Slide1Fragment extends Fragment {
             }
         });
 
-        textView35.setText("- По окончании туториала вам дадут 200 баллов \uD83D\uDC8E\n" +
-                "- Чтобы получать, баллы нужно выполнять задания \uD83D\uDCC8\n" +
-                "- Чтобы выложить, задание нужно их тратить \uD83D\uDCC9\n" +
-                "- За выполнение заданий эксперту ставится оценка, которая влияет на рейтинг \uD83D\uDD25");
-        return view;
+       return view;
 
     }
 }

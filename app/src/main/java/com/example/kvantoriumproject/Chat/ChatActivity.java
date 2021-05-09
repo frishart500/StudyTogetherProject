@@ -89,38 +89,29 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        getSupportActionBar().hide();//базавая насройка(убрать action bar)
 
-        nameTitle = getIntent().getStringExtra("name");
-        describeTitle = getIntent().getStringExtra("describeTask");
-        classTextTitle = getIntent().getStringExtra("classText");
-        recipientUserId = getIntent().getStringExtra("email");
-        phoneTitle = getIntent().getStringExtra("phone");
-        priceTitle = getIntent().getStringExtra("price");
-        id = getIntent().getStringExtra("userId");
-        id_from_chats = getIntent().getStringExtra("id");
-        dateToFinishTitle = getIntent().getStringExtra("dateToFinish");
-        nameOfTaskTitle = getIntent().getStringExtra("nameOfTask");
-        justId = getIntent().getStringExtra("justId");
-        id_str = getIntent().getStringExtra("id");
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class); //получение клиента
 
-        init();
+        init(); // иницилизация
+        getIntentExtra(); // получение intent
 
-        describe.setText(describeTitle);
-        price.setText(priceTitle);
-        dateToFinish.setText(dateToFinishTitle);
-        nameInChats.setText(nameTitle);
-
-        getSupportActionBar().hide();
-        List<AwesomeMessage> awesomeMessages = new ArrayList<>();
+        List<AwesomeMessage> awesomeMessages = new ArrayList<>(); // списиок
         adapter = new AwesomeMessageAdapter(this, R.layout.message_item, awesomeMessages);
         messageListView.setAdapter(adapter);
         classTextInChats.setText(classTextTitle + " класс ↓");
 
+        setChatAdapter();
+
+        onClick();
+        UpdateToken();
+        createNotificationChannel();
+    }
+
+    private void setChatAdapter(){
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-
 
                 AwesomeMessage message = dataSnapshot.getValue(AwesomeMessage.class);
                 nameTitle = getIntent().getStringExtra("name");
@@ -165,33 +156,27 @@ public class ChatActivity extends AppCompatActivity {
         };
 
         dr.addChildEventListener(childEventListener);
-
-        onClick();
-        UpdateToken();
-        createNotificationChannel();
     }
 
+    private void getIntentExtra(){
+        nameTitle = getIntent().getStringExtra("name");
+        describeTitle = getIntent().getStringExtra("describeTask");
+        classTextTitle = getIntent().getStringExtra("classText");
+        recipientUserId = getIntent().getStringExtra("email");
+        phoneTitle = getIntent().getStringExtra("phone");
+        priceTitle = getIntent().getStringExtra("price");
+        id = getIntent().getStringExtra("userId");
+        id_from_chats = getIntent().getStringExtra("id");
+        dateToFinishTitle = getIntent().getStringExtra("dateToFinish");
+        nameOfTaskTitle = getIntent().getStringExtra("nameOfTask");
+        justId = getIntent().getStringExtra("justId");
+        id_str = getIntent().getStringExtra("id");
 
-
-    private void status(String status) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        User user = new User();
-        user.setStatus(status);
-        ref.child("status").setValue(status);
+        describe.setText(describeTitle);
+        price.setText(priceTitle);
+        dateToFinish.setText(dateToFinishTitle);
+        nameInChats.setText(nameTitle);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        status("online");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        status("offline");
-    }
-
 
     private void init() {
 
@@ -210,6 +195,25 @@ public class ChatActivity extends AppCompatActivity {
         nameInChats = findViewById(R.id.nameInChats);
         classTextInChats = findViewById(R.id.classTextInChats);
         dr = FirebaseDatabase.getInstance().getReference("YourMessages");
+    }
+
+    private void status(String status) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        User user = new User();
+        user.setStatus(status);
+        ref.child("status").setValue(status);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 
     private void onClick() {
@@ -265,7 +269,6 @@ public class ChatActivity extends AppCompatActivity {
                             message.setIdOfTask(justId);
                             message.setRecipient(id);
 
-
                             if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(id)) {
                                 String anotherId = getIntent().getStringExtra("anotherId");
                                 message.setRecipient(anotherId);
@@ -278,16 +281,18 @@ public class ChatActivity extends AppCompatActivity {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String status = snapshot.child("status").getValue(String.class);
-                                                if(status.equals("offline")){
+                                                if (status.equals("offline")) {
                                                     String usertoken = dataSnapshot.getValue(String.class);
                                                     sendNotifications(usertoken, name, message.getText());
                                                 }
                                             }
+
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
 
                                             }
-                                        };FirebaseDatabase.getInstance().getReference().child("User").child(anotherId).addListenerForSingleValueEvent(valStatus);
+                                        };
+                                        FirebaseDatabase.getInstance().getReference().child("User").child(anotherId).addListenerForSingleValueEvent(valStatus);
 
 
                                     }
@@ -310,16 +315,18 @@ public class ChatActivity extends AppCompatActivity {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String status = snapshot.child("status").getValue(String.class);
-                                                if(status.equals("offline")){
+                                                if (status.equals("offline")) {
                                                     String usertoken = dataSnapshot.getValue(String.class);
                                                     sendNotifications(usertoken, name, message.getText());
                                                 }
                                             }
+
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
 
                                             }
-                                        };FirebaseDatabase.getInstance().getReference().child("User").child(id).addListenerForSingleValueEvent(valStatus);
+                                        };
+                                        FirebaseDatabase.getInstance().getReference().child("User").child(id).addListenerForSingleValueEvent(valStatus);
                                     }
 
                                     @Override
@@ -419,13 +426,13 @@ public class ChatActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                                 String key = "";
-                                                                for(DataSnapshot ds : snapshot.getChildren()){
+                                                                for (DataSnapshot ds : snapshot.getChildren()) {
                                                                     String sender = ds.child("sender").getValue(String.class);
                                                                     String recipient = ds.child("recipient").getValue(String.class);
                                                                     String idOfTask = ds.child("idOfTask").getValue(String.class);
                                                                     key = ds.getKey();
-                                                                    if(recipient.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) || sender.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                                                                        if(idOfTask.equals(justId)){
+                                                                    if (recipient.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) || sender.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                                                        if (idOfTask.equals(justId)) {
                                                                             FirebaseDatabase.getInstance().getReference("YourMessages").child(key).removeValue();
                                                                         }
                                                                     }
@@ -589,8 +596,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void makePhoneCall() {
-
-
         if (ContextCompat.checkSelfPermission(ChatActivity.this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ChatActivity.this,
@@ -599,8 +604,6 @@ public class ChatActivity extends AppCompatActivity {
             String dial = "tel:" + phoneTitle;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
         }
-
-
     }
 
     private void UpdateToken() {

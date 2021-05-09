@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainClasses.LoginActivity">
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -13,14 +14,14 @@
         android:fontFamily="@font/montserrat"
         android:text="Вход в систему"
         android:textColor="#601C80"
-        android:textSize="30sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
-
+        app:layout_constraintVertical_bias="0.234" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -29,10 +30,10 @@
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364">
+        app:layout_constraintVertical_bias="0.342">
 
 
         <EditText
@@ -41,6 +42,7 @@
             android:layout_height="32dp"
             android:background="@android:color/transparent"
             android:hint="E-mail"
+            android:textColor="@color/main"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,10 +58,10 @@
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447">
+        app:layout_constraintVertical_bias="0.454">
 
 
         <EditText
@@ -87,11 +89,11 @@
         android:textColor="#fff"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintVertical_bias="0.565" />
 
     <TextView
         android:id="@+id/forgetPassword"

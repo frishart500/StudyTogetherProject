@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +14,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +34,11 @@
                 android:fontFamily="@font/montserrat"
                 android:text="Name, "
                 android:textColor="@color/main"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/classTextInChats"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.075"
+                app:layout_constraintHorizontal_bias="0.072"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
@@ -46,14 +47,14 @@
                 android:id="@+id/classTextInChats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat"
                 android:text="11 класс ↓"
                 android:textColor="@color/main"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.086"
+                app:layout_constraintHorizontal_bias="0.095"
                 app:layout_constraintStart_toEndOf="@+id/nameInChats"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +62,7 @@
                 android:id="@+id/cl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +78,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Цена:"
                     android:textColor="@color/main"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="22sp"                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,8 +92,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="100"
                     android:textColor="@color/main"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="22sp"                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.063"
@@ -102,12 +101,12 @@
                     app:layout_constraintVertical_bias="0.044" />
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="25dp"
+                    android:layout_height="27dp"
                     android:src="@drawable/znak"
                     app:layout_constraintBottom_toBottomOf="@+id/priceInChat"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
+                    app:layout_constraintHorizontal_bias="0.036"
                     app:layout_constraintStart_toEndOf="@+id/priceInChat"
                     app:layout_constraintTop_toTopOf="@+id/priceInChat"
                     app:layout_constraintVertical_bias="0.5" />
@@ -119,8 +118,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Срок:"
                     android:textColor="@color/main"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="22sp"                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
@@ -134,8 +132,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="07.03.21"
                     android:textColor="@color/main"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="22sp"                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.063"
@@ -151,8 +148,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Описание:"
                     android:textColor="@color/main"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="22sp"                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.054"
@@ -162,59 +158,59 @@
 
                 <ImageView
                     android:id="@+id/callToSm"
-                    android:layout_width="56dp"
-                    android:layout_height="52dp"
+                    android:layout_width="36dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/call"
                     app:layout_constraintBottom_toTopOf="@+id/describtionInChat"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.844"
+                    app:layout_constraintHorizontal_bias="0.899"
                     app:layout_constraintStart_toEndOf="@+id/textView34"
                     app:layout_constraintTop_toBottomOf="@+id/dateToFinishInChat"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/describtionInChat"
-                    android:layout_width="486dp"
+                    android:layout_width="614dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:text="Чтобы накачать в бак 117 л воды, требуется на 5 минут больше времени, чем на то, чтобы выкачать из него 96 л воды. За одну минуту можно выкачать на 3 л воды больше, чем накачать. Сколько литров воды накачивается в бак за минуту? Помогите решить, пожалуйста.💜"
                     android:textColor="@color/main"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView34"
                     app:layout_constraintTop_toBottomOf="@+id/textView34"
-                    app:layout_constraintVertical_bias="0.152" />
+                    app:layout_constraintVertical_bias="0.014" />
 
                 <Button
                     android:id="@+id/btnFinishInChat"
-                    android:layout_width="242dp"
-                    android:layout_height="50dp"
+                    android:layout_width="190dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/btn"
+                    android:backgroundTint="@color/main"
                     android:text="Закончить!"
                     android:textAllCaps="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/describtionInChat"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="52dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/back_cross"
                 app:layout_constraintBottom_toBottomOf="@id/classTextInChats"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintHorizontal_bias="0.843"
                 app:layout_constraintStart_toEndOf="@+id/classTextInChats"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.666" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -224,14 +220,16 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="830dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:layout_above="@+id/lin"
         android:divider="@android:color/transparent"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintBottom_toTopOf="@+id/lin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.938"
-        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="8dp"
+        android:stackFromBottom="true"
         tools:listitem="@layout/message_item" />
 
     <LinearLayout
@@ -240,6 +238,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -248,32 +247,31 @@
 
         <Button
             android:id="@+id/addPhoto"
-            android:layout_width="41dp"
-            android:layout_height="41dp"
+            android:layout_width="42dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:background="@drawable/add_photo"
-            android:backgroundTint="#AD32E6" />
+            android:background="@drawable/add_photo" />
 
 
         <EditText
             android:id="@+id/messageEditText"
-            android:layout_width="692dp"
-            android:layout_height="67dp"
+            android:layout_width="712dp"
+            android:layout_height="58dp"
             android:layout_weight="1"
-            android:backgroundTint="#AD32E6"
+            android:backgroundTint="@color/main"
             android:hint="Напишите сообщение"
             android:padding="10dp"
-            android:textColor="#AD32E6"
-            android:textColorHint="#AD32E6" />
+            android:textColor="@color/main"
+            android:textColorHint="@color/main" />
 
         <Button
             android:id="@+id/sendMessage"
-            android:layout_width="40dp"
-            android:layout_height="44dp"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
             android:layout_gravity="center"
             android:background="@drawable/send"
-            android:backgroundTint="#AD32E6"
             android:enabled="false" />
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

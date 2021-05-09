@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +14,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,10 +168,10 @@
                     android:src="@drawable/call"
                     app:layout_constraintBottom_toTopOf="@+id/describtionInChat"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.844"
+                    app:layout_constraintHorizontal_bias="0.89"
                     app:layout_constraintStart_toEndOf="@+id/textView34"
                     app:layout_constraintTop_toBottomOf="@+id/dateToFinishInChat"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/describtionInChat"
@@ -224,7 +225,8 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="592dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:layout_above="@+id/lin"
         android:divider="@android:color/transparent"
         android:transcriptMode="alwaysScroll"
@@ -278,4 +280,4 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

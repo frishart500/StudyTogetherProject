@@ -28,32 +28,32 @@
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/back_cross"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.914"
+                app:layout_constraintHorizontal_bias="0.955"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.447" />
+                app:layout_constraintVertical_bias="0.135" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs"
-                android:layout_width="201dp"
-                android:layout_height="58dp"
+                android:layout_width="254dp"
+                android:layout_height="70dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView23"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.376">
 
 
                 <EditText
                     android:id="@+id/subject"
-                    android:layout_width="176dp"
+                    android:layout_width="208dp"
                     android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:textColor="@color/main"
@@ -72,13 +72,14 @@
                 android:layout_height="wrap_content"
                 android:text="Имя:"
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.048"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout3"
-                app:layout_constraintVertical_bias="0.542" />
+                app:layout_constraintVertical_bias="0.38" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -86,9 +87,9 @@
                 android:layout_height="wrap_content"
                 android:text="Дата рождения:"
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout4"
@@ -100,9 +101,9 @@
                 android:layout_height="wrap_content"
                 android:text="Специализация:"
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/cs"
-                app:layout_constraintEnd_toStartOf="@+id/cs"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView21"
                 app:layout_constraintTop_toTopOf="@+id/cs"
@@ -114,9 +115,9 @@
                 android:layout_height="wrap_content"
                 android:text="Телефон:"
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout5"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView23"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout5" />
@@ -127,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:text="Описание:"
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -137,41 +138,41 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
-                android:layout_width="284dp"
-                android:layout_height="60dp"
+                android:layout_width="394dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.806"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView22"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.175">
 
 
                 <EditText
                     android:id="@+id/name"
-                    android:layout_width="257dp"
-                    android:layout_height="29dp"
+                    android:layout_width="359dp"
+                    android:layout_height="32dp"
                     android:background="@android:color/transparent"
                     android:textColor="@color/main"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.39"
+                    app:layout_constraintHorizontal_bias="0.457"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
-                android:layout_width="201dp"
-                android:layout_height="58dp"
+                android:layout_width="254dp"
+                android:layout_height="70dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.274">
 
@@ -206,21 +207,21 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout5"
-                android:layout_width="251dp"
-                android:layout_height="65dp"
+                android:layout_width="311dp"
+                android:layout_height="70dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cs"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.484">
 
 
                 <EditText
                     android:id="@+id/phone"
-                    android:layout_width="213dp"
-                    android:layout_height="35dp"
+                    android:layout_width="249dp"
+                    android:layout_height="31dp"
                     android:background="@android:color/transparent"
                     android:inputType="phone"
                     android:textColor="@color/main"
@@ -236,8 +237,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs6"
-                android:layout_width="338dp"
-                android:layout_height="147dp"
+                android:layout_width="399dp"
+                android:layout_height="164dp"
                 android:background="@drawable/edit_find"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -249,8 +250,8 @@
 
                 <EditText
                     android:id="@+id/describe"
-                    android:layout_width="295dp"
-                    android:layout_height="86dp"
+                    android:layout_width="331dp"
+                    android:layout_height="85dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:gravity="left"
@@ -272,9 +273,9 @@
                 android:layout_height="67dp"
                 android:backgroundTint="@color/main"
                 android:text="Сохранить!"
-                android:textSize="16sp"
                 android:textAllCaps="false"
                 android:textColor="#fff"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.544"

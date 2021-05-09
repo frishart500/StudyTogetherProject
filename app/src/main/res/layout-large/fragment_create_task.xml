@@ -16,7 +16,7 @@
         android:fontFamily="@font/montserrat"
         android:text="Создание задания"
         android:textColor="#601C80"
-        android:textSize="30sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,13 +30,14 @@
         android:id="@+id/constraintLayout9"
         android:layout_width="355dp"
         android:layout_height="65dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20"
-        app:layout_constraintVertical_bias="0.036">
+        app:layout_constraintVertical_bias="0.044">
 
 
         <EditText
@@ -60,12 +61,13 @@
         android:layout_width="355dp"
         android:layout_height="65dp"
         android:background="@drawable/edit_find"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
-        app:layout_constraintVertical_bias="0.001">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <EditText
@@ -88,13 +90,14 @@
         android:id="@+id/constraintLayout8"
         android:layout_width="355dp"
         android:layout_height="65dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-        app:layout_constraintVertical_bias="0.003">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <EditText
@@ -117,6 +120,8 @@
         android:id="@+id/constraintLayout7"
         android:layout_width="355dp"
         android:layout_height="65dp"
+        android:layout_marginTop="10dp"
+
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,12 +165,13 @@
         android:layout_width="355dp"
         android:layout_height="180dp"
         android:background="@drawable/edit_find"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
-        app:layout_constraintVertical_bias="0.009">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <EditText
@@ -234,13 +240,14 @@
         android:id="@+id/constraintLayout10"
         android:layout_width="355dp"
         android:layout_height="65dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
-        app:layout_constraintVertical_bias="0.005">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <EditText
@@ -264,6 +271,7 @@
         android:id="@+id/postTask"
         android:layout_width="284dp"
         android:layout_height="61dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/main"
         android:text="Готово!"
         android:textAllCaps="false"
@@ -271,7 +279,6 @@
         app:layout_constraintEnd_toEndOf="@+id/cs6"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/cs6"
-        app:layout_constraintTop_toBottomOf="@+id/cs6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/cs6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

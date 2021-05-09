@@ -60,7 +60,7 @@
             android:text="@string/main_tasks"
             android:textColor="@color/main"
             android:id="@+id/textMainAct"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:fontFamily="@font/montserrat"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
@@ -68,7 +68,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
-            android:layout_width="460dp"
+            android:layout_width="430dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="50"

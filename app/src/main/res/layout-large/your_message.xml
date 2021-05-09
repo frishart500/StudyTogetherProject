@@ -31,7 +31,7 @@
         android:layout_marginTop="3dp"
         android:layout_toRightOf="@+id/photoOfUser"
         android:background="@drawable/background_another_user"
-        android:maxWidth="200dp"
+        android:maxWidth="300dp"
         android:textSize="20dp"
         android:padding="8dp"
         android:text="hello"
