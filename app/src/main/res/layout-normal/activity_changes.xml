@@ -268,8 +268,8 @@
 
             <Button
                 android:id="@+id/change"
-                android:layout_width="264dp"
-                android:layout_height="58dp"
+                android:layout_width="288dp"
+                android:layout_height="56dp"
                 android:backgroundTint="@color/main"
                 android:text="Сохранить!"
                 android:textAllCaps="false"

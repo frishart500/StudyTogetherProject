@@ -253,8 +253,8 @@
 
             <Button
                 android:id="@+id/registrBtn"
-                android:layout_width="245dp"
-                android:layout_height="51dp"
+                android:layout_width="298dp"
+                android:layout_height="57dp"
                 android:backgroundTint="@color/main"
                 android:text="Готово!"
                 android:textAllCaps="false"

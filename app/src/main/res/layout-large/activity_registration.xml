@@ -248,14 +248,14 @@
 
             <Button
                 android:id="@+id/registrBtn"
-                android:layout_width="295dp"
-                android:layout_height="61dp"
+                android:layout_width="320dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="10dp"
                 android:backgroundTint="@color/main"
                 android:text="Готово!"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:layout_marginTop="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cs6"
                 app:layout_constraintStart_toStartOf="@+id/cs6"

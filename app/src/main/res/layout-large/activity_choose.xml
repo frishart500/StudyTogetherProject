@@ -93,10 +93,11 @@
 
         <Button
             android:id="@+id/btn_send"
-            android:layout_width="246dp"
-            android:layout_height="64dp"
+            android:layout_width="370dp"
+            android:layout_height="75dp"
             android:backgroundTint="@color/main"
             android:text="Готово!"
+            android:padding="5dp"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
