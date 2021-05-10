@@ -34,11 +34,6 @@ public class ChangesActivity extends AppCompatActivity {
     private Button change;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    private String USER_KEY = "User";
-    private DatabaseReference myRef;
-    private FirebaseDatabase mFirebaseDatabase;
-    private boolean isReached = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +73,6 @@ public class ChangesActivity extends AppCompatActivity {
         describtion = findViewById(R.id.describe);
         dataImg = findViewById(R.id.dataImg);
         change = findViewById(R.id.change);
-
-        myRef = FirebaseDatabase.getInstance().getReference("User");
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
     }
 
     private void changes() {
@@ -136,7 +128,6 @@ public class ChangesActivity extends AppCompatActivity {
                 String date = day + "." + month + "." + year;
                 String m = String.valueOf(month);
                 String d = String.valueOf(day);
-                System.out.println("MONTH " + month);
                 if (String.valueOf(day).length() == 1) {
                     d = ("0" + day);
                 }

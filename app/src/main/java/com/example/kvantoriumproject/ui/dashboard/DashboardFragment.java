@@ -80,7 +80,6 @@ public class DashboardFragment extends Fragment {
 
 
         readUser();
-        dates();
         return root;
     }
 
@@ -199,36 +198,6 @@ public class DashboardFragment extends Fragment {
             }
         });
         dialog.show();
-    }
-
-
-    private void dates() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-
-        ValueEventListener val = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String dateToFinish_string = ds.child("dateToFinish").getValue(String.class);
-                    String currentDate = sdf.format(new Date());
-                    try {
-                        Date currentDate_date = sdf.parse(currentDate);
-                        Date dateToFinish_date = sdf.parse(dateToFinish_string);
-                        if (currentDate_date.before(dateToFinish_date)) {
-                            System.out.println("current date before");
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        FirebaseDatabase.getInstance().getReference("Task").addListenerForSingleValueEvent(val);
     }
 
     private void readUser() {

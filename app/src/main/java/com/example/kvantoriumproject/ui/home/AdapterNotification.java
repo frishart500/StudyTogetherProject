@@ -116,7 +116,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra("title", item.getName());
                     intent.putExtra("email", item.getMyEmail());
-                    //intent.putExtra("id", item.getUserId());
                     intent.putExtra("id", item.getAnotherId());
                     intent.putExtra("describe", item.getDescribtionOfUser());
                     intent.putExtra("subjectToDetail", item.getSubjectOfUser());
@@ -229,7 +228,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                                     String sUser = "";
                                     for (DataSnapshot ds : snapshot.getChildren()) {
                                         sUser = ds.getKey();
-                                        System.out.println(sUser);
                                         friends.setUserId(sUser);
 
                                         ValueEventListener val = new ValueEventListener() {
@@ -239,7 +237,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                                                 String imgUri = snapshot.child("imgUri").getValue(String.class);
                                                 String subject = snapshot.child("subject").getValue(String.class);
                                                 String describtionOfUser = snapshot.child("describtion").getValue(String.class);
-                                                System.out.println(name + " => name");
                                                 friends.setName(name);
                                                 friends.setImgUri1(imgUri);
                                                 friends.setSubjectOfUser(subject);
@@ -345,9 +342,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(), arrayList.size());
 
-                    //допилить
                     FirebaseDatabase.getInstance().getReference("Task").child(item.getIdOfTask()).removeValue();
-                    //допилить
 
                     context.startActivity(intent);
                 }

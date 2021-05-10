@@ -80,7 +80,6 @@ public class MyTasksActivity extends AppCompatActivity {
         ValueEventListener eventListenerUser = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String subjectUser = snapshot.child("subject").getValue(String.class);
                 ValueEventListener valueEventTask = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,9 +100,6 @@ public class MyTasksActivity extends AppCompatActivity {
                             String describeToDetail = ds.child("describtionOfUser").getValue(String.class);
                             String idOfTask = ds.child("idOfTask").getValue(String.class);
                             String imgUri1 = ds.child("imgUri1").getValue(String.class);
-
-                            System.out.println(emailTask);
-                            System.out.println(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
                             if(FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(emailTask)){
                                 if (subjectTask != null) {

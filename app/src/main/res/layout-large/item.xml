@@ -31,11 +31,11 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.219"
+                app:layout_constraintEnd_toStartOf="@+id/beginToTask"
+                app:layout_constraintHorizontal_bias="0.601"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.083" />
+                app:layout_constraintVertical_bias="0.088" />
 
             <ImageView
                 android:id="@+id/goToProfile"
@@ -47,7 +47,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/nameOfTask"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.133" />
 
             <TextView
                 android:id="@+id/subject"
@@ -74,7 +74,7 @@
                 android:textColor="#601C80"
                 android:textSize="18sp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/textView17"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/nameOfTask"
@@ -122,7 +122,7 @@
                 android:textColor="#601C80"
                 android:textSize="18sp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
@@ -255,7 +255,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.88"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/nameOfTask"
                 app:layout_constraintVertical_bias="0.513" />
 
             <Button

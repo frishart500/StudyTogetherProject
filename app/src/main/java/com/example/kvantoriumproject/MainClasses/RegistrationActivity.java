@@ -31,16 +31,11 @@ import java.util.Calendar;
 
 public class RegistrationActivity extends AppCompatActivity {
     //переменные
-    private FirebaseAuth mAuth;
     private ImageView dataImg, back;
-    private TextView regText, textOfImage;
     private Button reg;
     private EditText email, password, name, phone, data, describtion, subject;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private DatabaseReference mDataBase;
-    private Uri uploadUri = null;
-    private StorageReference mStorageRef;
-    private boolean isReached = false;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,10 +92,6 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mAuth = FirebaseAuth.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference("ImageDB");
-
-        regText = findViewById(R.id.textView2);
         back = findViewById(R.id.back);
         reg = findViewById(R.id.registrBtn);
         email = findViewById(R.id.email);

@@ -79,8 +79,6 @@ public class NotificationActivity extends AppCompatActivity {
                     String mUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                     if(email.equals(mUserEmail)){
                         my_notifications.setVisibility(View.GONE);
-                        //String subject, String describe, String name, String email, String points, String img, String phone, String nameOfTask, String dateToFinish,
-                        // String classText, String myEmail, String id, String subjectOfUser, String describtionOfUser, String userId
                         arrayList.add(new Friends(subject, describe, name, email, points, "", phone, nameOfTask, dateToFinish, classText, myEmail, id, subjectOfUser, describtionOfUser, userId, idOfTask, anotherId, imgUri, imgUri2));
                         rv.setAdapter(adapter);
                     }

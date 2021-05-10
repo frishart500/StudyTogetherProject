@@ -2,49 +2,49 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="390dp"
-    android:layout_height="250dp"
+    android:layout_width="440dp"
+    android:layout_height="300dp"
     android:id="@+id/preview"
     android:background="@drawable/back_for_card"
     android:layout_margin="15dp"
     android:layout_gravity="center"
     android:scaleType = "centerCrop">
 
-     <TextView
+    <TextView
         android:layout_width="307dp"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:textStyle="bold"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="55dp"
         android:text="Выход"
         android:textColor="#601C80"
-        android:textSize="22sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="307dp"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="24dp"
         android:padding="3dp"
         android:text="Вы уверены, что хотите выйти из приложения?"
         android:textColor="#601C80"
-        android:textSize="20sp" />
+        android:textSize="22sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="10dp"
         >
 
         <Button
             android:id="@+id/yes"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="103dp"
+            android:layout_height="61dp"
             android:layout_marginRight="15dp"
             android:backgroundTint="@color/main"
             android:text="Да"
@@ -53,8 +53,8 @@
 
         <Button
             android:id="@+id/no"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="103dp"
+            android:layout_height="61dp"
             android:backgroundTint="@color/main"
             android:text="Нет"
             android:textColor="#fff"

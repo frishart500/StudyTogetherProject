@@ -192,7 +192,6 @@ public class CreateTaskFragment extends Fragment {
                 String date = day + "." + month + "." + year;
                 String m = String.valueOf(month);
                 String d = String.valueOf(day);
-                System.out.println("MONTH " + month);
                 if (String.valueOf(day).length() == 1) {
                     d = ("0" + day);
                 }
@@ -277,7 +276,6 @@ public class CreateTaskFragment extends Fragment {
                             String s = "";
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 s = ds.getKey();
-                                System.out.println(s);
                                 task.setIdOfTask(s);
                             }
 

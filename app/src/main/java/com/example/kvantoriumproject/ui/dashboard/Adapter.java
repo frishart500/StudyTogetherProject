@@ -131,9 +131,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                             Date currentDate_date = sdf.parse(currentDate);
                             Date dateToFinish_date = sdf.parse(dateToFinish_string);
                             if (currentDate_date.after(dateToFinish_date)) {
-                                System.out.println(currentDate + " current date");
-                                System.out.println(dateToFinish_date + " date to fisish date");
-                                System.out.println("current date before");
                                 Item item = arrayList.get(getAdapterPosition());
                                 if (item.getIdOfTask().equals(idOfTask)) {
                                     ValueEventListener userVal = new ValueEventListener() {
@@ -281,7 +278,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             friends.setDateToFinish(parseItem.getDateToFinish());
             friends.setMyEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-            Users users = new Users();
             ValueEventListener valTask = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -310,7 +306,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     String s = "";
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         s = ds.getKey();
-                        System.out.println(s);
                         friends.setId(s);
                     }
                     dr.child(s).child("id").setValue(friends.getId());
@@ -323,8 +318,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                             String sUser = "";
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 sUser = ds.getKey();
-                                System.out.println(sUser);
-                                //friends.setUserId(sUser);
 
                                 ValueEventListener val = new ValueEventListener() {
                                     @Override
@@ -333,7 +326,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                                         String subject = snapshot.child("subject").getValue(String.class);
                                         String describtionOfUser = snapshot.child("describtion").getValue(String.class);
                                         String imgUri2 = snapshot.child("imgUri").getValue(String.class);
-                                        System.out.println(name + " => name");
                                         friends.setName(name);
                                         friends.setImgUri2(imgUri2);
                                         friends.setSubjectOfUser(subject);

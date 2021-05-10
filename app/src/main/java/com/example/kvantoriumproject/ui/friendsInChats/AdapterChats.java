@@ -46,8 +46,6 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name = snapshot.child("name").getValue(String.class);
-                //holder.img.setImageResource(item.getImg());
-
                 ValueEventListener val = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -159,10 +157,8 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
         };
         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(valUser);
 
-        //holder.name.setText(item.getName() + ", ");
         holder.classText.setText(item.getClassText());
         holder.nameOfTask.setText(item.getNameOfTask());
-//        Picasso.get().load(item.getImg()).into(holder.img);
     }
 
     @Override

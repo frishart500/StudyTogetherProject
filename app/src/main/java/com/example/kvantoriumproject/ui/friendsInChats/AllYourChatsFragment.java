@@ -30,7 +30,6 @@ public class AllYourChatsFragment extends Fragment {
     private ArrayList<ItemChat> arrayList = new ArrayList<>();
     private RecyclerView rv;
     private EditText edit_find;
-    private int countOfUsersInChats;
     private TextView my_chats;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -91,14 +90,11 @@ public class AllYourChatsFragment extends Fragment {
         ValueEventListener valUser = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String emailUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                System.out.println(emailUser);
                 ValueEventListener val = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         for (DataSnapshot ds : snapshot.getChildren()) {
-
                             String name = ds.child("name").getValue(String.class);
                             String nameAnotherUser = ds.child("nameAnotherUser").getValue(String.class);
                             String email = ds.child("email").getValue(String.class);
@@ -119,7 +115,6 @@ public class AllYourChatsFragment extends Fragment {
                             String imgUri1 = ds.child("imgUri1").getValue(String.class);
                             String imgUri2 = ds.child("imgUri2").getValue(String.class);
 
-                            System.out.println(myEmail + " myEmails");
                             if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userId)) {
                                 arrayList.add(new ItemChat(name, img, email, desc, subject, classText, nameOfTask, nameAnotherUser, phone, price, describe, dateToFinish, myEmail, userId, anotherId, idOfTask, id, imgUri1));
                                 adapter = new AdapterChats(getContext(), arrayList);

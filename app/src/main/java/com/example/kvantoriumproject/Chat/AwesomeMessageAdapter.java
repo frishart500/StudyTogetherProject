@@ -38,14 +38,11 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
         int layoutResources = 0;
         int viewType = getItemViewType(position);
 
-
         if (viewType == 0) {
             layoutResources = R.layout.mine_message;
-
         } else {
             layoutResources = R.layout.your_message;
         }
-
 
         if (convertView != null) {
             viewHolder = (ViewHolder) convertView.getTag();

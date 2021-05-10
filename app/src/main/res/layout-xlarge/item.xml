@@ -30,17 +30,18 @@
                 android:textColor="#601C80"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.219"
+                app:layout_constraintBottom_toBottomOf="@+id/goToProfile"
+                app:layout_constraintEnd_toStartOf="@+id/beginToTask"
+                app:layout_constraintHorizontal_bias="0.604"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.083" />
+                app:layout_constraintTop_toTopOf="@+id/goToProfile"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/goToProfile"
                 android:layout_width="36dp"
                 android:layout_height="35dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/profile_for_card"
                 app:layout_constraintBottom_toTopOf="@+id/beginToTask"
                 app:layout_constraintEnd_toEndOf="@+id/beginToTask"
@@ -74,7 +75,7 @@
                 android:textColor="#601C80"
                 android:textSize="22sp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/textView17"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/nameOfTask"
@@ -122,7 +123,7 @@
                 android:textColor="#601C80"
                 android:textSize="22sp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
@@ -256,7 +257,7 @@
                 app:layout_constraintHorizontal_bias="0.88"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.513" />
+                app:layout_constraintVertical_bias="0.586" />
 
             <Button
                 android:id="@+id/checkAllTask"

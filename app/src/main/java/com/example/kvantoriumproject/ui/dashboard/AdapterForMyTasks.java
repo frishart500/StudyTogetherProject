@@ -55,7 +55,6 @@ public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = arrayList.get(position);
-        //holder.name.setText(item.getName());
         holder.subject.setText(item.getSubject());
         holder.points.setText(item.getPoints());
         holder.describe.setText(item.getDescribe());
@@ -113,9 +112,6 @@ public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.Vi
                             Date currentDate_date = sdf.parse(currentDate);
                             Date dateToFinish_date = sdf.parse(dateToFinish_string);
                             if (currentDate_date.after(dateToFinish_date)) {
-                                System.out.println(currentDate + " current date");
-                                System.out.println(dateToFinish_date + " date to fisish date");
-                                System.out.println("current date before");
                                 Item item = arrayList.get(getAdapterPosition());
                                 if(item.getIdOfTask().equals(idOfTask)){
 
@@ -177,7 +173,6 @@ public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.Vi
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     Item item = arrayList.get(position);
-                    System.out.println(item.getIdOfTask());
 
                     ValueEventListener userVal = new ValueEventListener() {
                         @Override
@@ -226,9 +221,6 @@ public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.Vi
                     }
                 }
             });
-        }
-
-        private void getUserInfo(){
         }
 
     }

@@ -78,19 +78,11 @@ public class CommentActivity extends AppCompatActivity {
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-/*                User user = new User();
-                double total = 0.0;
-                double count = 0.0;
-                double average = 0.0;
-                double ratingInDoubleVar;*/
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String name = ds.child("name").getValue(String.class);
                     String email = ds.child("email").getValue(String.class);
-                    String myEmail = ds.child("myEmail").getValue(String.class);
                     String raiting = ds.child("raiting").getValue(String.class);
                     String comment = ds.child("comment").getValue(String.class);
-                    //ratingInDoubleVar = Double.parseDouble(raiting);
-
                     getEmail = getIntent().getStringExtra("email");
                     FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
                     if (getEmail != null) {
@@ -109,11 +101,7 @@ public class CommentActivity extends AppCompatActivity {
                             rvComment.setAdapter(adapterForComments);
                         }
                     }
-
                 }
-/*                average = total / count;
-                System.out.println(average);
-                user.setAverage(String.valueOf(average));*/
 
             }
 

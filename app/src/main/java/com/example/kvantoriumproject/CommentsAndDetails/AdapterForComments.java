@@ -52,8 +52,6 @@ public class AdapterForComments extends RecyclerView.Adapter<AdapterForComments.
                     String ratingPoints = ds.child("raiting").getValue(String.class);
                     Double val = Double.parseDouble(ratingPoints);
 
-
-
                     count += Double.parseDouble(ratingPoints);
 
                 }

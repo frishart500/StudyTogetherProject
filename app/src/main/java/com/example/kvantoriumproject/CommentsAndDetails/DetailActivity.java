@@ -137,7 +137,7 @@ public class DetailActivity extends AppCompatActivity {
                     String email = ds.child("email").getValue(String.class);
 
                     email_string = getIntent().getStringExtra("email");
-                    System.out.println(email_string + " = email");
+
                     if (email.equals(id_string)) {
                         String raiting = ds.child("raiting").getValue(String.class);
                         ratingInDoubleVar = Double.parseDouble(raiting);
@@ -146,7 +146,6 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 }
                 average = total / count;
-                System.out.println(average + " --average");
                 double roundOff = (double) Math.round(average * 100) / 100;
                 users.setAverage(String.valueOf(roundOff));
                 if (roundOff < 1 && roundOff > 0) {

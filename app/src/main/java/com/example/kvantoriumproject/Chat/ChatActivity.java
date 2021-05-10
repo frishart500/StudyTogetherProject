@@ -70,7 +70,8 @@ public class ChatActivity extends AppCompatActivity {
     private Button sendBtn, addPhotoBtn, btnFinish;
     private EditText messageEditText;
     private DatabaseReference dr;
-    private String nameTitle, phoneTitle, classTextTitle, describeTitle, priceTitle, dateToFinishTitle, emailTitle, nameOfTaskTitle, emailMine, id_str;
+    private String nameTitle, phoneTitle, classTextTitle, describeTitle, priceTitle,
+            dateToFinishTitle, emailTitle, nameOfTaskTitle, emailMine, id_str;
     private String recipientUserId, id, id_from_chats, justId;
     private ChildEventListener childEventListener;
     private ImageView back, callImage;
@@ -78,8 +79,6 @@ public class ChatActivity extends AppCompatActivity {
     private ConstraintLayout cl;
     private CardView cardView;
 
-
-    boolean notify = false;
     private APIService apiService;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -108,20 +107,20 @@ public class ChatActivity extends AppCompatActivity {
         createNotificationChannel();
     }
 
-    private void setChatAdapter(){
+    private void setChatAdapter() {
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-
                 AwesomeMessage message = dataSnapshot.getValue(AwesomeMessage.class);
                 nameTitle = getIntent().getStringExtra("name");
+                //если полученный предмет равен предмету в YourMessages
                 if (message.getIdOfTask().equals(justId)) {
                     if (message.getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             && message.getRecipient().equals(id) || message.getSender().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) &&
                             message.getRecipient().equals(getIntent().getStringExtra("anotherId"))) {
                         message.setMine(true);
+                        //добавлть items в adapter
                         adapter.add(message);
-
                     }
                     if (message.getRecipient().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             && message.getSender().equals(id) || message.getRecipient().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) &&
@@ -158,7 +157,7 @@ public class ChatActivity extends AppCompatActivity {
         dr.addChildEventListener(childEventListener);
     }
 
-    private void getIntentExtra(){
+    private void getIntentExtra() {
         nameTitle = getIntent().getStringExtra("name");
         describeTitle = getIntent().getStringExtra("describeTask");
         classTextTitle = getIntent().getStringExtra("classText");
@@ -171,7 +170,7 @@ public class ChatActivity extends AppCompatActivity {
         nameOfTaskTitle = getIntent().getStringExtra("nameOfTask");
         justId = getIntent().getStringExtra("justId");
         id_str = getIntent().getStringExtra("id");
-
+        //измение текста
         describe.setText(describeTitle);
         price.setText(priceTitle);
         dateToFinish.setText(dateToFinishTitle);
@@ -179,7 +178,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void init() {
-
         describe = findViewById(R.id.describtionInChat);
         dateToFinish = findViewById(R.id.dateToFinishInChat);
         price = findViewById(R.id.priceInChat);
@@ -194,10 +192,13 @@ public class ChatActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         nameInChats = findViewById(R.id.nameInChats);
         classTextInChats = findViewById(R.id.classTextInChats);
+        //получение ветки БД
         dr = FirebaseDatabase.getInstance().getReference("YourMessages");
     }
 
+    //изменение статуса пользователя
     private void status(String status) {
+        //получение из ветки User из уникального id пользователя, статус
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         Users users = new Users();
         users.setStatus(status);
@@ -207,36 +208,31 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        status("online");
+        status("online");//при возобновлении работы приложения статус меняется на online
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        status("offline");
+        status("offline");//при остановке работы приложения статус меняется на offline
     }
 
     private void onClick() {
-
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().trim().length() > 0) {
+                if (s.toString().trim().length() > 0) {//если символов в сообщении больше 0 то кнопка активна
                     sendBtn.setEnabled(true);
                 } else {
-                    sendBtn.setEnabled(false);
+                    sendBtn.setEnabled(false);//если символов в сообщении меньше или = 0 то кнопка пассивна
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         messageEditText.setFilters(new InputFilter[]{
@@ -249,30 +245,30 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (v.getId() == R.id.sendMessage) {
 
-                    notify = true;
-
+                    //при отправке сообщения
                     final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                    //из ветки User получаем уникальный ключ текущего пользвателя
                     final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
 
                     ValueEventListener eventListener = new ValueEventListener() {
-
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //с помощью метода ValueEventListener получаем имя текущего польователя
                             String name = snapshot.child("name").getValue(String.class);
-
-                            System.out.println(name);
+                            //объект message и его изменение
                             AwesomeMessage message = new AwesomeMessage();
                             message.setText(messageEditText.getText().toString().trim());
                             message.setName(name);
                             message.setSender(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             message.setIdOfTask(justId);
                             message.setRecipient(id);
-
+                            //id текущего равен id полученного то
                             if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(id)) {
+                                //получить другой id пользователя и отправить ему уведомление
                                 String anotherId = getIntent().getStringExtra("anotherId");
                                 message.setRecipient(anotherId);
-
+                                //получение из ветки Tokens token по которому забит пользователь
                                 FirebaseDatabase.getInstance().getReference().child("Tokens").child(anotherId).child("token").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -280,8 +276,8 @@ public class ChatActivity extends AppCompatActivity {
                                         ValueEventListener valStatus = new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                String status = snapshot.child("status").getValue(String.class);
-                                                if (status.equals("offline")) {
+                                                String status = snapshot.child("status").getValue(String.class);//получение статуса
+                                                if (status.equals("offline")) {//если статус пользователя offline то отправить уведомление с сообщением
                                                     String usertoken = dataSnapshot.getValue(String.class);
                                                     sendNotifications(usertoken, name, message.getText());
                                                 }
@@ -303,9 +299,11 @@ public class ChatActivity extends AppCompatActivity {
                                     }
                                 });
 
-                            } else if (getIntent().getStringExtra("anotherId").equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            }
+                            //если пользователь равен полученному anotherId то
+                            else if (getIntent().getStringExtra("anotherId").equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                //меняем получателя на полученный id
                                 message.setRecipient(id);
-
                                 FirebaseDatabase.getInstance().getReference().child("Tokens").child(id).child("token").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -334,8 +332,8 @@ public class ChatActivity extends AppCompatActivity {
 
                                     }
                                 });
-
                             }
+                            //дополняем ветку YourMessages
                             dr.push().setValue(message)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -343,7 +341,7 @@ public class ChatActivity extends AppCompatActivity {
 
                                         }
                                     });
-
+                            //сразу после отправки сообщения editText меняет текст на ""
                             messageEditText.setText("");
 
                         }
@@ -363,15 +361,19 @@ public class ChatActivity extends AppCompatActivity {
                 }
 
                 if (v.getId() == R.id.back) {
+                    //при переходе на другой activity анимация
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 if (v.getId() == R.id.card) {
+                    //при нажатии на cardView constraintLayout котрый содержит в себе описание задания
                     if (cl.getVisibility() == View.GONE) {
+                        //становиться видимым
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.VISIBLE);
                         classTextInChats.setText(classTextTitle + " класс ↑");
                     } else {
+                        //становиться невидимым
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.GONE);
                         classTextInChats.setText(classTextTitle + " класс ↓");
@@ -399,9 +401,7 @@ public class ChatActivity extends AppCompatActivity {
                                     String uid2 = ds.child("uid2").getValue(String.class);
                                     s1 = ds.getKey();
                                     String idOfTask = ds.child("idOfTask").getValue(String.class);
-                                    System.out.println(uidForCompare + " UID");
-                                    System.out.println(finishTask.getUID1() + " UID1");
-                                    System.out.println(finishTask.getUID2() + " UID2");
+
                                     if (idOfTask.equals(justId)) {
                                         if (uid1.equals("")) {
                                             finishTask.setUID1(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -487,7 +487,6 @@ public class ChatActivity extends AppCompatActivity {
                                             }
                                         }
                                     }
-                                    System.out.println(s1 + " print id");
                                 }
 
                             }
@@ -533,7 +532,7 @@ public class ChatActivity extends AppCompatActivity {
 
             uploadTask = imageReference.putFile(selectedItem);
 
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if (!task.isSuccessful()) {
@@ -574,7 +573,6 @@ public class ChatActivity extends AppCompatActivity {
                         } else {
                             message.setRecipient(id);
                         }
-                        System.out.println(message.getImgUrl());
                         dr.push().setValue(message);
                     }
                 }
@@ -589,13 +587,12 @@ public class ChatActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makePhoneCall();
-            } else {
-
-            }
+            } else {}
         }
     }
 
     private void makePhoneCall() {
+        //переход на activity звонка
         if (ContextCompat.checkSelfPermission(ChatActivity.this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ChatActivity.this,
@@ -607,12 +604,14 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void UpdateToken() {
+        //обновление token'а
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
         Token token = new Token(refreshToken);
         FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
     }
 
     public void sendNotifications(String usertoken, String title, String message) {
+        //отправка уведомления
         Data data = new Data(title, message);
         NotificationSender sender = new NotificationSender(data, usertoken);
         apiService.sendNotifcation(sender).enqueue(new Callback<MyResponse>() {
@@ -620,7 +619,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                 if (response.code() == 200) {
                     if (response.body().success != 1) {
-                        Toast.makeText(ChatActivity.this, "NOOOOOOOOOOOOOO", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChatActivity.this, "notification was crashed", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -633,6 +632,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void createNotificationChannel() {
+        //создание какнала для уведолений
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
