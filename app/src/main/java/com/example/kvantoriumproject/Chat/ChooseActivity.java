@@ -49,25 +49,6 @@ public class ChooseActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    private void status(String status){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Users users = new Users();
-        users.setStatus(status);
-        ref.child("status").setValue(status);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        status("online");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        status("offline");
-    }
-
     private void sendInformation(){
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override

@@ -4,15 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
@@ -28,10 +34,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 public class ChangesActivity extends AppCompatActivity {
-    private EditText name, data, subject, phone, describtion;
+    private EditText name, data, phone, describtion;
     private ImageView back;
     private ImageView dataImg;
     private Button change;
+    private TextView subject;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
@@ -40,16 +47,15 @@ public class ChangesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_changes);
         init();
         getDataPicker();
-
+        createListOfTheSubjects();
         getSupportActionBar().hide();
-        back = findViewById(R.id.back);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-
 
         change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +71,47 @@ public class ChangesActivity extends AppCompatActivity {
 
     }
 
+    private void createListOfTheSubjects(){
+        subject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(ChangesActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.list_of_subject);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(false);
+
+                ListView list = dialog.findViewById(R.id.list);
+                ImageView close = dialog.findViewById(R.id.close);
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                String[] countryArray = {"Алгебра", "Англ. яз.", "Биология", "География",
+                        "Геометрия", "Информатика", "Искусство", "История", "Литература", "Немецкий язык", "ОБЖ", "Обществознание",
+                        "Русский язык", "Физика", "Физкультура", "Химия"};
+                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_for_list, R.id.textSubject, countryArray);
+                list.setAdapter(adapter);
+
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        dialog.dismiss();
+                        subject.setText(countryArray[position]);
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+    }
+
     private void init() {
+        back = findViewById(R.id.back);
         name = findViewById(R.id.name);
         data = findViewById(R.id.editData);
         subject = findViewById(R.id.subject);
@@ -90,7 +136,7 @@ public class ChangesActivity extends AppCompatActivity {
                     users.setName(nameS);
                     FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(users.getName());
                 }
-                if (!subjectS.isEmpty()) {
+                if (!subjectS.equals("")) {
                     users.setSubject(subjectS);
                     FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("subject").setValue(users.getSubject());
                 }
@@ -159,23 +205,5 @@ public class ChangesActivity extends AppCompatActivity {
         });
     }
 
-    private void status(String status){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Users users = new Users();
-        users.setStatus(status);
-        ref.child("status").setValue(status);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        status("online");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        status("offline");
-    }
 
 }

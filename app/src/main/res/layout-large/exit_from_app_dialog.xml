@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="390dp"
-    android:layout_height="250dp"
+    android:layout_width="410dp"
+    android:layout_height="270dp"
     android:id="@+id/preview"
-    android:background="@drawable/back_for_card"
+    android:background="@drawable/for_dialog"
     android:layout_margin="15dp"
     android:layout_gravity="center"
     android:scaleType = "centerCrop">
 
-     <TextView
+    <TextView
+        android:id="@+id/textView54"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:textStyle="bold"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="35dp"
         android:text="Выход"
         android:textColor="#601C80"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
 
     <TextView
         android:layout_width="307dp"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="18dp"
         android:padding="3dp"
         android:text="Вы уверены, что хотите выйти из приложения?"
         android:textColor="#601C80"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView54"
+        app:layout_constraintTop_toBottomOf="@+id/textView54"
+        app:layout_constraintVertical_bias="0.617" />
 
     <LinearLayout
+        android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="10dp"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/yes"
@@ -57,10 +69,10 @@
             android:layout_height="50dp"
             android:backgroundTint="@color/main"
             android:text="Нет"
-            android:textColor="#fff"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="#fff" />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

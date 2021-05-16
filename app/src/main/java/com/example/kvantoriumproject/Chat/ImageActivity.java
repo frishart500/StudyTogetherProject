@@ -44,23 +44,4 @@ public class ImageActivity extends AppCompatActivity {
         }
 
     }
-    private void status(String status){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Users users = new Users();
-        users.setStatus(status);
-        ref.child("status").setValue(status);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        status("online");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        status("offline");
-    }
-
 }

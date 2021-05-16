@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -15,10 +16,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kvantoriumproject.R;
@@ -27,13 +32,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class RegistrationActivity extends AppCompatActivity {
     //переменные
     private ImageView dataImg, back;
     private Button reg;
-    private EditText email, password, name, phone, data, describtion, subject;
+    private EditText email, password, name, phone, data, describtion;
+    private TextView subject;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
@@ -44,6 +51,42 @@ public class RegistrationActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         init();
+        subject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(RegistrationActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.list_of_subject);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(false);
+
+                ListView list = dialog.findViewById(R.id.list);
+                ImageView close = dialog.findViewById(R.id.close);
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                String[] countryArray = {"Алгебра", "Англ. яз.", "Биология", "География",
+                        "Геометрия", "Информатика", "Искусство", "История", "Литература", "Немецкий язык", "ОБЖ", "Обществознание",
+                        "Русский язык", "Физика", "Физкультура", "Химия"};
+                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_for_list, R.id.textSubject, countryArray);
+                list.setAdapter(adapter);
+
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        dialog.dismiss();
+                        subject.setText(countryArray[position]);
+                    }
+                });
+
+                dialog.show();
+            }
+        });
         setOnClickReg();
         getDataPicker();
 
@@ -62,14 +105,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (String.valueOf(day).length() == 1) {
                     d = ("0" + day);
                 }
-
                 if (String.valueOf(month).length() == 1) {
                     m = ("0" + month);
                 }
-
                 date = d + "." + m + "." + year;
-
-
                 data.setText(date);
             }
         };
@@ -121,8 +160,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void registration(String emailS, String passwordS) {
 
-        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().trim().isEmpty() && !phone.getText().toString().isEmpty()) {
-
+        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().equals("Твоя специализация") && !phone.getText().toString().isEmpty()) {
             Intent intent = new Intent(getApplicationContext(), ChooseGenderActivity.class);
             intent.putExtra("email", email.getText().toString());
             intent.putExtra("password", passwordS);
@@ -139,12 +177,12 @@ public class RegistrationActivity extends AppCompatActivity {
             showError(describtion, "Введите описание, которое должно содержать менее 60 символов");
         } else if (phone.getText().toString().isEmpty()) {
             showError(phone, "Введите номер телефона");
-        } else if (subject.getText().toString().isEmpty()) {
+        } else if (subject.getText().toString().equals("Твоя специализация")) {
             showError(subject, "Введите предмет");
         }
     }
 
-    private void putIntent(Intent intent){
+    private void putIntent(Intent intent) {
         intent.putExtra("name", name.getText().toString());
         intent.putExtra("data", data.getText().toString());
         intent.putExtra("describtion", describtion.getText().toString());
@@ -162,4 +200,10 @@ public class RegistrationActivity extends AppCompatActivity {
         ed.setError(error);
         ed.requestFocus();
     }
+
+    private void showError(TextView ed, String error) {
+        ed.setError(error);
+        ed.requestFocus();
+    }
+
 }

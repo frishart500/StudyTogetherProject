@@ -209,15 +209,11 @@ public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.Vi
                 @Override
                 public void onClick(View v) {
                     if (cl.getVisibility() == View.GONE) {
-
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.VISIBLE);
-
                     } else {
-
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.GONE);
-
                     }
                 }
             });

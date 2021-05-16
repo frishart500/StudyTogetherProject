@@ -70,15 +70,14 @@
         app:layout_constraintVertical_bias="0.0">
 
 
-        <EditText
+        <TextView
             android:id="@+id/subjectProblem"
             android:layout_width="359dp"
             android:layout_height="32dp"
             android:background="@android:color/transparent"
-            android:hint="Предмет"
-            android:inputType="textEmailAddress"
+            android:text="Предмет"
+            android:textSize="18sp"
             android:textColor="@color/main"
-            android:textColorHint="#601C80"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.509"

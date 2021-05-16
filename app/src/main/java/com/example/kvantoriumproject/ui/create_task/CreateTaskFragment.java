@@ -18,11 +18,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.kvantoriumproject.MainClasses.RegistrationActivity;
 import com.example.kvantoriumproject.R;
 import com.example.kvantoriumproject.Moduls.Task;
 import com.example.kvantoriumproject.Moduls.Users;
@@ -41,13 +47,15 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
 
 public class CreateTaskFragment extends Fragment {
-    private EditText subject, describtionOfTask, nameOfTask, dateToFinish, classText, points;
+    private EditText describtionOfTask, nameOfTask, dateToFinish, classText, points;
     private Button postTask;
     private String phone;
     private ImageView calendar, addPhotoForTask, taskImage, deleteImg;
@@ -56,27 +64,22 @@ public class CreateTaskFragment extends Fragment {
     private StorageReference storageReference;
     private Uri imgUri;
     private Uri downloadUri;
+    private TextView subject;
+    private Snackbar snackbar;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_create_task, container, false);
-
-        addPhotoForTask = root.findViewById(R.id.addPhotoForTask);
-        taskImage = root.findViewById(R.id.taskImage);
-
-        classText = root.findViewById(R.id.classOfUserInTask);
-        calendar = root.findViewById(R.id.calendar);
-        nameOfTask = root.findViewById(R.id.nameOfTask);
-        postTask = root.findViewById(R.id.postTask);
-        points = root.findViewById(R.id.points);
-        subject = root.findViewById(R.id.subjectProblem);
-        describtionOfTask = root.findViewById(R.id.describe);
-        dateToFinish = root.findViewById(R.id.dateToFinish);
-        deleteImg = root.findViewById(R.id.deleteImg);
+        init(root);
+        createListOfTheSubjects();
         calendarBuilder();
+        onClicks();
+        return root;
+    }
 
+    private void onClicks() {
         addPhotoForTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,102 +90,152 @@ public class CreateTaskFragment extends Fragment {
             }
         });
 
-        deleteImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
         postTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!describtionOfTask.getText().toString().isEmpty() && !nameOfTask.getText().toString().isEmpty()
+                        && !dateToFinish.getText().toString().isEmpty() && !classText.getText().toString().isEmpty() && !points.getText().toString().isEmpty()
+                        && !subject.getText().toString().equals("Предмет")) {
+                    postingTask(v);
+                    snackbar = Snackbar.make(v, "Опубликовано!", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFFffffff);
+                    snackbar.setTextColor(0XFF601C80);
+                    snackbar.show();
+                } else {
+                    snackbar = Snackbar.make(v, "Введите всю информацию в пункты,чтобы опубликовать задание.", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFF601C80);
+                    snackbar.setTextColor(0XFFffffff);
+                    snackbar.show();
+                }
+                int countPoint = Integer.parseInt(points.getText().toString());
+                if (countPoint < 100) {
+                    snackbar = Snackbar.make(v, "Цена за задние должна быть не меньше 100 и не больше 500 баллов.", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFF601C80);
+                    snackbar.setTextColor(0XFFffffff);
+                    snackbar.show();
+                }
 
-                final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-                final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
-
-                ValueEventListener val = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String pointsUser = snapshot.child("points").getValue(String.class);
-                        String counterUser = snapshot.child("countOfHowMuchTasksCreated").getValue(String.class);
-
-                        int counterTasksCreated = Integer.parseInt(counterUser);
-                        int pointsCount = Integer.parseInt(pointsUser);
-                        int countPoint = Integer.parseInt(points.getText().toString());
-
-
-                        if (pointsCount < countPoint) {
-                            postTask.setEnabled(false);
-
-                            Snackbar snackbar = Snackbar.make(v, "У вас недостаточно баллов, чтобы опубликовать задание.", Snackbar.LENGTH_LONG);
-                            snackbar.setBackgroundTint(0XFF601C80);
-                            snackbar.setTextColor(0XFFffffff);
-                            snackbar.show();
-                        } else {
-                            if (countPoint >= 100) {
-                                postTask.setEnabled(true);
-                                int count = pointsCount - countPoint;
-                                int counterForTasks = counterTasksCreated + 1;
-                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
-                                Users users = new Users();
-                                int rounded = (int) Math.round(count / 100.0) * 100;
-                                users.setPoints(rounded + "");
-                                FirebaseDatabase.getInstance().getReference("User")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .child("points").setValue(users.getPoints());
-
-                                getUser();
-                                if(!classText.getText().toString().isEmpty() && !nameOfTask.getText().toString().isEmpty() && !points.getText().toString().isEmpty() && !subject.getText().toString().trim().isEmpty() && !dateToFinish.getText().toString().isEmpty() && !describtionOfTask.getText().toString().isEmpty()) {
-                                    Snackbar snackbar = Snackbar.make(v, "Вы опубликовали задание!", Snackbar.LENGTH_LONG);
-                                    snackbar.setBackgroundTint(0XFFffffff);
-                                    snackbar.setTextColor(0XFF601C80);
-                                    snackbar.show();
-                                }
-                                if (counterForTasks == 1) {
-                                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
-                                    Dialog dialog;
-                                    dialog = new Dialog(getContext());
-                                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                    dialog.setContentView(R.layout.dialog_first_task);
-                                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                    dialog.setCancelable(false);
-
-                                    Button ok = dialog.findViewById(R.id.ok);
-                                    ok.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            dialog.dismiss();
-                                            FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(String.valueOf((pointsCount - countPoint) + 100));
-                                        }
-                                    });
-
-                                    dialog.show();
-                                }
-
-
-                            } else {
-                                Snackbar snackbar = Snackbar.make(v, "Цена за задние должна быть не меньше 100 и не больше 500 баллов.", Snackbar.LENGTH_LONG);
-                                snackbar.setBackgroundTint(0XFF601C80);
-                                snackbar.setTextColor(0XFFffffff);
-                                snackbar.show();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                };
-                uidRefGetUid.addListenerForSingleValueEvent(val);
             }
         });
-        return root;
+    }
+    private void postingTask(View v) {
+        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
+
+        ValueEventListener val = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String pointsUser = snapshot.child("points").getValue(String.class);
+                String counterUser = snapshot.child("countOfHowMuchTasksCreated").getValue(String.class);
+
+                int counterTasksCreated = Integer.parseInt(counterUser);
+                int pointsCount = Integer.parseInt(pointsUser);
+                int countPoint = Integer.parseInt(points.getText().toString());
+
+                if (pointsCount < countPoint) {
+                    snackbar = Snackbar.make(v, "У вас недостаточно баллов, чтобы опубликовать задание.", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFF601C80);
+                    snackbar.setTextColor(0XFFffffff);
+                    snackbar.show();
+                } else {
+                    if (countPoint >= 100) {
+                        postTask.setEnabled(true);
+                        int count = pointsCount - countPoint;
+                        int counterForTasks = counterTasksCreated + 1;
+                        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
+                        Users users = new Users();
+                        int rounded = (int) Math.round(count / 100.0) * 100;
+                        users.setPoints(rounded + "");
+                        FirebaseDatabase.getInstance().getReference("User")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child("points").setValue(users.getPoints());
+
+                        getUser();
+                        if (counterForTasks == 1) {
+                            FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
+                            Dialog dialog;
+                            dialog = new Dialog(getContext());
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_first_task);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.setCancelable(false);
+
+                            Button ok = dialog.findViewById(R.id.ok);
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(String.valueOf((pointsCount - countPoint) + 100));
+                                }
+                            });
+
+                            dialog.show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        uidRefGetUid.addListenerForSingleValueEvent(val);
     }
 
+    private void init(View root) {
+        addPhotoForTask = root.findViewById(R.id.addPhotoForTask);
+        taskImage = root.findViewById(R.id.taskImage);
+        classText = root.findViewById(R.id.classOfUserInTask);
+        calendar = root.findViewById(R.id.calendar);
+        nameOfTask = root.findViewById(R.id.nameOfTask);
+        postTask = root.findViewById(R.id.postTask);
+        points = root.findViewById(R.id.points);
+        subject = root.findViewById(R.id.subjectProblem);
+        describtionOfTask = root.findViewById(R.id.describe);
+        dateToFinish = root.findViewById(R.id.dateToFinish);
+        deleteImg = root.findViewById(R.id.deleteImg);
+    }
+
+    private void createListOfTheSubjects() {
+        subject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.list_of_subject);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(false);
+
+                ListView list = dialog.findViewById(R.id.list);
+                ImageView close = dialog.findViewById(R.id.close);
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                String[] countryArray = {"Алгебра", "Англ. яз.", "Биология", "География",
+                        "Геометрия", "Информатика", "Искусство", "История", "Литература", "Немецкий язык", "ОБЖ", "Обществознание",
+                        "Русский язык", "Физика", "Физкультура", "Химия"};
+                ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.item_for_list, R.id.textSubject, countryArray);
+                list.setAdapter(adapter);
+
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        dialog.dismiss();
+                        subject.setText(countryArray[position]);
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+    }
 
     private void calendarBuilder() {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -225,7 +278,6 @@ public class CreateTaskFragment extends Fragment {
     }
 
     private void getUser() {
-
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
@@ -243,12 +295,14 @@ public class CreateTaskFragment extends Fragment {
                 String img = snapshot.child("imgUri").getValue(String.class);
                 String classTextS = classText.getText().toString();
 
-                if (subjectS.isEmpty()) {
-                    showError(subject, "Введите предмет");
-                }
-                if (discribtionS.isEmpty()) {
-                    showError(describtionOfTask, "Введите описание задания");
-                } else if (!subjectS.isEmpty() && !pointsForTask.isEmpty() && !discribtionS.isEmpty()) {
+                if (!subjectS.equals("Предмет") && !pointsForTask.isEmpty() && !discribtionS.isEmpty()) {
+
+                    int countPointsForTask = Integer.parseInt(pointsForTask);
+                    int rounded = (int) Math.round(countPointsForTask / 100.0) * 100;
+
+                    String subject = snapshot.child("subject").getValue(String.class);
+                    String describe = snapshot.child("describtion").getValue(String.class);
+
                     Task task = new Task(subjectS, discribtionS);
                     task.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     task.setName(name);
@@ -256,17 +310,14 @@ public class CreateTaskFragment extends Fragment {
                     task.setPhone(phone);
                     task.setId(id);
                     task.setImgUri1(imgUri1);
-                    int countPointsForTask = Integer.parseInt(pointsForTask);
-                    int rounded = (int) Math.round(countPointsForTask / 100.0) * 100;
                     task.setPoints(rounded + "");
                     task.setNameOfTask(nameOfTask.getText().toString());
                     task.setDateToFinish(dateToFinish.getText().toString());
                     task.setClassText(classTextS);
-                    String subject = snapshot.child("subject").getValue(String.class);
-                    String describe = snapshot.child("describtion").getValue(String.class);
                     task.setSubjectOfUser(subject);
                     task.setImg(String.valueOf(downloadUri));
                     task.setDescribtionOfUser(describe);
+
                     DatabaseReference dr = FirebaseDatabase.getInstance().getReference("Task");
                     dr.push().setValue(task);
                     ValueEventListener valTask = new ValueEventListener() {
@@ -288,7 +339,6 @@ public class CreateTaskFragment extends Fragment {
                         }
                     };
                     FirebaseDatabase.getInstance().getReference("Task").addListenerForSingleValueEvent(valTask);
-
                 }
             }
 
@@ -298,11 +348,6 @@ public class CreateTaskFragment extends Fragment {
             }
         };
         uidRefGetUid.addListenerForSingleValueEvent(eventListener);
-    }
-
-    private void showError(EditText ed, String s) {
-        ed.requestFocus();
-        ed.setError(s);
     }
 
     @Override
@@ -326,7 +371,6 @@ public class CreateTaskFragment extends Fragment {
                     }
 
 
-
                     return imageReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -345,7 +389,7 @@ public class CreateTaskFragment extends Fragment {
                                 photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Snackbar snackbar = Snackbar.make(v, "Вы удалили картинку.", Snackbar.LENGTH_SHORT);
+                                        snackbar = Snackbar.make(v, "Вы удалили картинку.", Snackbar.LENGTH_SHORT);
                                         snackbar.setBackgroundTint(0XFFffffff);
                                         snackbar.setTextColor(0XFF601C80);
                                         snackbar.show();
