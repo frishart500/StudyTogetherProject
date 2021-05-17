@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -20,9 +21,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.kvantoriumproject.Chat.ChooseActivity;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
 import com.example.kvantoriumproject.Moduls.Users;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +50,8 @@ public class ChangesActivity extends AppCompatActivity {
     private ImageView dataImg;
     private Button change;
     private TextView subject;
+    private InterstitialAd mInterstitialAd;
+    private final String TAG = "---AdMob";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
@@ -50,6 +63,12 @@ public class ChangesActivity extends AppCompatActivity {
         createListOfTheSubjects();
         getSupportActionBar().hide();
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                createAd();
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,10 +84,60 @@ public class ChangesActivity extends AppCompatActivity {
                 snackbar.setTextColor(0XFF601C80);
                 snackbar.show();
                 changes();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(ChangesActivity.this);
+                } else {
+                    Log.d("TAG", "The interstitial ad wasn't ready yet.");
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
             }
         });
 
+    }
+
+    private void createAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        createIntertitialAd(adRequest);
+    }
+
+    private void createIntertitialAd(AdRequest adRequest){
+        InterstitialAd.load(this,"ca-app-pub-1029213395711583/9528832398", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                mInterstitialAd = interstitialAd;
+                Log.d(TAG, "onAdLoaded");
+
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        Log.d("TAG", "The ad was dismissed.");
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }
+
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                        Log.d("TAG", "The ad failed to show.");
+                    }
+
+                    @Override
+                    public void onAdShowedFullScreenContent() {
+                        mInterstitialAd = null;
+                        Log.d("TAG", "The ad was shown.");
+                    }
+                });
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                Log.d(TAG, loadAdError.getMessage());
+                mInterstitialAd = null;
+            }
+        });
     }
 
     private void createListOfTheSubjects(){

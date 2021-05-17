@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,17 @@ import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
 import com.example.kvantoriumproject.Moduls.Users;
 import com.example.kvantoriumproject.CommentsAndDetails.CommentActivity;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,9 +45,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class HomeFragment extends Fragment {
     private ImageView userImg, notification, stars;
-    private TextView email, phone, points, data, name, subject, exit, goToComments, describeInProfile, textHowMuchNotifications;
+    private TextView email, phone, points, data, name, subject, exit, goToComments, describeInProfile, textHowMuchNotifications, addPoints;
     private FirebaseAuth mAuth;
     private Button changeBtn;
+    private RewardedAd mRewardedAd;
+    private final String TAG = "--->AdMob";
     private double average = 0.0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,6 +60,13 @@ public class HomeFragment extends Fragment {
         readUser();
         getRatingAndSetAverage();
 
+
+        addPoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRewardAd();
+            }
+        });
 
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +132,17 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private void initView(View root){
+    private void initView(View root) {
+
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                loadRewardedAd();
+            }
+        });
+
         exit = root.findViewById(R.id.exit);
+        addPoints = root.findViewById(R.id.addPoints);
         textHowMuchNotifications = root.findViewById(R.id.text_how_much);
         notification = root.findViewById(R.id.notification);
         changeBtn = root.findViewById(R.id.changeBtn);
@@ -126,6 +156,81 @@ public class HomeFragment extends Fragment {
         points = root.findViewById(R.id.points);
         goToComments = root.findViewById(R.id.goToComments);
         describeInProfile = root.findViewById(R.id.describeInProfile);
+    }
+
+    private void loadRewardedAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        RewardedAd.load(getContext(), "ca-app-pub-1029213395711583/5657035996",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        Log.d(TAG, loadAdError.getMessage());
+                        mRewardedAd = null;
+                        Log.d(TAG, "Ad was falilure.");
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                        mRewardedAd = rewardedAd;
+                        Log.d(TAG, "Ad was loaded.");
+
+                        mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                Log.d(TAG, "Ad was shown.");
+                                mRewardedAd = null;
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                Log.d(TAG, "Ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                Log.d(TAG, "Ad was dismissed.");
+                                loadRewardedAd();
+                            }
+                        });
+
+                    }
+                });
+    }
+
+
+    private void showRewardAd() {
+        if (mRewardedAd != null) {
+            Activity activityContext = getActivity();
+            mRewardedAd.show((Activity) getContext(), new OnUserEarnedRewardListener() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    // Handle the reward.
+                    Log.d(TAG, "The user earned the reward.");
+                    int rewardAmount = rewardItem.getAmount();
+                    String rewardType = rewardItem.getType();
+
+                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String points_getting = snapshot.child("points").getValue(String.class);
+                            int pointsInteger = Integer.parseInt(points_getting);
+                            int result = pointsInteger + 10;
+                            points.setText( result + "");
+                            FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(result + "");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            });
+        } else {
+            Log.d(TAG, "The rewarded ad wasn't ready yet.");
+        }
     }
 
     private void readUser() {
@@ -155,10 +260,10 @@ public class HomeFragment extends Fragment {
 
 
                 int counterOfNotifications = Integer.parseInt(howMuchNotifications);
-                if(counterOfNotifications == 0){
+                if (counterOfNotifications == 0) {
                     textHowMuchNotifications.setVisibility(View.GONE);
                     notification.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     textHowMuchNotifications.setVisibility(View.VISIBLE);
                     textHowMuchNotifications.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -185,13 +290,13 @@ public class HomeFragment extends Fragment {
         uidRef.addListenerForSingleValueEvent(eventListener);
     }
 
-    private void getGender(String gender, String howMuchTasksDone){
-        if(gender.equals("mail")){
+    private void getGender(String gender, String howMuchTasksDone) {
+        if (gender.equals("mail")) {
 
             userImg.setImageResource(R.drawable.boy1);
 
             int counterHowMuchTasksDone = Integer.parseInt(howMuchTasksDone);
-            if(counterHowMuchTasksDone == 20){
+            if (counterHowMuchTasksDone == 20) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -215,7 +320,7 @@ public class HomeFragment extends Fragment {
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("boy2");
                 userImg.setImageResource(R.drawable.boy2);
-            }else if(counterHowMuchTasksDone == 50){
+            } else if (counterHowMuchTasksDone == 50) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -241,11 +346,11 @@ public class HomeFragment extends Fragment {
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
             }
 
-        }else{
+        } else {
             userImg.setImageResource(R.drawable.girl1);
 
             int counterHowMuchTasksDone = Integer.parseInt(howMuchTasksDone);
-            if(counterHowMuchTasksDone == 20){
+            if (counterHowMuchTasksDone == 20) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -269,7 +374,7 @@ public class HomeFragment extends Fragment {
                 counterHowMuchTasksDone += 1;
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("girl2");
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
-            }else if(counterHowMuchTasksDone == 50){
+            } else if (counterHowMuchTasksDone == 50) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -319,27 +424,27 @@ public class HomeFragment extends Fragment {
                     average = total / count;
                     double roundOff = (double) Math.round(average * 100) / 100;
                     users.setAverage(roundOff + "");
-                    if(roundOff < 1 && roundOff > 0){
+                    if (roundOff < 1 && roundOff > 0) {
                         stars.setImageResource(R.drawable.zero_five);
-                    }else if(roundOff <= 1.5 && roundOff > 0 && roundOff > 1){
+                    } else if (roundOff <= 1.5 && roundOff > 0 && roundOff > 1) {
                         stars.setImageResource(R.drawable.one_five);
-                    }else if(roundOff > 0.5 && roundOff > 0 && roundOff < 1.5){
+                    } else if (roundOff > 0.5 && roundOff > 0 && roundOff < 1.5) {
                         stars.setImageResource(R.drawable.one);
-                    }else if(roundOff > 1.5 && roundOff > 0 && roundOff < 2.5){
+                    } else if (roundOff > 1.5 && roundOff > 0 && roundOff < 2.5) {
                         stars.setImageResource(R.drawable.two);
-                    }else if(roundOff >= 2 && roundOff > 0 && roundOff <= 2.5){
+                    } else if (roundOff >= 2 && roundOff > 0 && roundOff <= 2.5) {
                         stars.setImageResource(R.drawable.two_five);
-                    }else if(roundOff > 2.5 && roundOff > 0 && roundOff <= 3){
+                    } else if (roundOff > 2.5 && roundOff > 0 && roundOff <= 3) {
                         stars.setImageResource(R.drawable.three);
-                    }else if(roundOff > 3 && roundOff > 0 && roundOff <= 3.5){
+                    } else if (roundOff > 3 && roundOff > 0 && roundOff <= 3.5) {
                         stars.setImageResource(R.drawable.three_five);
-                    }else if(roundOff > 3.5 && roundOff > 0 && roundOff <= 4){
+                    } else if (roundOff > 3.5 && roundOff > 0 && roundOff <= 4) {
                         stars.setImageResource(R.drawable.four);
-                    }else if(roundOff > 4 && roundOff > 0 && roundOff <= 4.5){
+                    } else if (roundOff > 4 && roundOff > 0 && roundOff <= 4.5) {
                         stars.setImageResource(R.drawable.four_five);
-                    }else if(roundOff > 4.5 && roundOff > 0 && roundOff <= 5){
+                    } else if (roundOff > 4.5 && roundOff > 0 && roundOff <= 5) {
                         stars.setImageResource(R.drawable.five);
-                    }else if(roundOff == 0){
+                    } else if (roundOff == 0) {
                         stars.setImageResource(R.drawable.zero);
                     }
 

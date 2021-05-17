@@ -91,7 +91,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return arrayList.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgUri, imageGoToProfile;
         TextView classText, subject, describe, points, dateToFinish, nameOfTask;
