@@ -110,7 +110,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
-            android:layout_width="430dp"
+            android:layout_width="454dp"
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 

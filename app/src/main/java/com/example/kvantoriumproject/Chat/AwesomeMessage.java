@@ -2,6 +2,9 @@ package com.example.kvantoriumproject.Chat;
 
 public class AwesomeMessage {
     private String text;
+    private boolean seen;
+    private String date;
+    private String time;
     private String name;
     private String imgUrl;
     private String sender;
@@ -9,6 +12,30 @@ public class AwesomeMessage {
     private boolean isMine;
 
     public AwesomeMessage() {
+    }
+
+    public boolean getSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getIdOfTask() {
@@ -74,4 +101,5 @@ public class AwesomeMessage {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
 }

@@ -69,5 +69,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
 
     implementation 'com.google.android.gms:play-services-ads:20.1.0'
-
 }

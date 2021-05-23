@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/photoOfUser"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:padding="8dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:padding="5dp"
         android:background="@drawable/background_another_user"
         android:src="@mipmap/ic_launcher"/>
 
@@ -22,19 +22,65 @@
         android:text="name"
         android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/bubbleText"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nameOfUser"
-        android:layout_marginTop="3dp"
-        android:layout_toRightOf="@+id/photoOfUser"
-        android:background="@drawable/background_another_user"
+        android:layout_alignParentLeft="true"
         android:maxWidth="400dp"
-        android:textSize="20dp"
-        android:padding="8dp"
-        android:text="hello"
-        android:textColor="@color/white" />
+        android:minWidth="90dp"
+        android:background="@drawable/background_another_user">
 
+
+        <TextView
+            android:id="@+id/bubbleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_another_user"
+            android:maxWidth="190dp"
+            android:padding="8dp"
+            android:text="hello"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bubbleText"
+            android:padding="4dp"
+            android:text="12:09"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bubbleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bubbleText"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cs"
+        android:text="20.02.03"
+        android:textSize="14dp" />
+
+
+    <ImageView
+        android:id="@+id/img_seen"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_below="@id/cs"
+        android:layout_toEndOf="@+id/cs"
+        android:layout_toRightOf="@+id/cs"
+        android:src="@drawable/circle" />
 
 </RelativeLayout>

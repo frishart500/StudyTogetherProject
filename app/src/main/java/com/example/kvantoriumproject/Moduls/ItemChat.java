@@ -2,10 +2,11 @@ package com.example.kvantoriumproject.Moduls;
 
 public class ItemChat {
     private String name, img, email, desc, classText, nameOfTask, nameAnotherPerson;
-    private String subject, phone, price, describe, dateToFinish, myEmail, userId, anotherId, justId, id, imgUri;
+    private String subject, phone, price, describe, dateToFinish, myEmail, userId, anotherId, justId, id, imgUri, img1, img2;//тут
     public ItemChat(){}
     public ItemChat(String name, String img, String email,String desc, String subject, String classText, String nameOfTask, String nameAnotherPerson,
-                    String phone, String price, String describe, String dateToFinish, String myEmail, String userId, String anotherId, String justId, String id, String imgUri){
+                    String phone, String price, String describe, String dateToFinish, String myEmail,
+                    String userId, String anotherId, String justId, String id, String imgUri, String img1, String img2){
         this.email = email;
         this.myEmail = myEmail;
         this.phone = phone;
@@ -24,6 +25,24 @@ public class ItemChat {
         this.justId = justId;
         this.imgUri = imgUri;
         this.id = id;
+        this.img1 = img1;
+        this.img2 = img2;
+    }
+
+    public String getImg1() {
+        return img1;
+    }
+
+    public void setImg1(String img1) {
+        this.img1 = img1;
+    }
+
+    public String getImg2() {
+        return img2;
+    }
+
+    public void setImg2(String img2) {
+        this.img2 = img2;
     }
 
     public String getImgUri() {

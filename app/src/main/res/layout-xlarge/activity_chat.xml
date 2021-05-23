@@ -27,6 +27,18 @@
             android:padding="15dp"
             android:background="@drawable/back_for_card">
 
+            <ImageView
+                android:id="@+id/imgUserChat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/boy1"
+                app:layout_constraintBottom_toBottomOf="@+id/classTextInChats"
+                app:layout_constraintEnd_toStartOf="@+id/nameInChats"
+                app:layout_constraintHorizontal_bias="0.64"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
             <TextView
                 android:id="@+id/nameInChats"
                 android:layout_width="wrap_content"
@@ -36,25 +48,25 @@
                 android:textColor="@color/main"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/classTextInChats"
+                app:layout_constraintBottom_toBottomOf="@+id/imgUserChat"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintHorizontal_bias="0.256"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="@+id/classTextInChats"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/classTextInChats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat"
                 android:text="11 класс ↓"
                 android:textColor="@color/main"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.095"
+                app:layout_constraintHorizontal_bias="0.11"
                 app:layout_constraintStart_toEndOf="@+id/nameInChats"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -231,6 +243,15 @@
         tools:layout_editor_absoluteX="8dp"
         android:stackFromBottom="true"
         tools:listitem="@layout/message_item" />
+
+    <TextView
+        android:id="@+id/typing_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main"
+        android:textStyle="italic"
+        android:textSize="19dp"
+        android:text="Печатает..."/>
 
     <LinearLayout
         android:id="@+id/lin"

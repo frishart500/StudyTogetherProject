@@ -204,6 +204,24 @@ public class ChangesActivity extends AppCompatActivity {
                 if (!nameS.isEmpty()) {
                     users.setName(nameS);
                     FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(users.getName());
+                    FirebaseDatabase.getInstance().getReference("FriendsInChats").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String s = "";
+                            for(DataSnapshot ds : snapshot.getChildren()){
+                                String name = ds.child("name").getValue(String.class);
+                                s = ds.getKey();
+                                if(!name.equals(nameS)){
+                                    FirebaseDatabase.getInstance().getReference("FriendsInChats").child(s).child("name").setValue(nameS);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
                 if (!subjectS.equals("")) {
                     users.setSubject(subjectS);
@@ -232,6 +250,10 @@ public class ChangesActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(vChangeListener);
 
+
+    }
+
+    private void checking(){
 
     }
 

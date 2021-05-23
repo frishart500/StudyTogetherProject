@@ -14,6 +14,11 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.kvantoriumproject.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -35,6 +40,7 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
         LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         AwesomeMessage awesomeMessage = getItem(position);
+        AwesomeMessage chat = messages.get(position);
         int layoutResources = 0;
         int viewType = getItemViewType(position);
 
@@ -57,10 +63,28 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
         if (isText) {
             viewHolder.messageTextView.setVisibility(View.VISIBLE);
             viewHolder.nameOfUser.setVisibility(View.VISIBLE);
+            viewHolder.date.setVisibility(View.VISIBLE);
+            viewHolder.time.setVisibility(View.VISIBLE);
+
             viewHolder.nameOfUser.setText(awesomeMessage.getName());
+            viewHolder.date.setText(awesomeMessage.getDate());
+            viewHolder.time.setText(awesomeMessage.getTime());
             viewHolder.imageView.setVisibility(View.GONE);
             viewHolder.messageTextView.setText(awesomeMessage.getText());
+
+            if(position == messages.size() - 1){
+                if(chat.getSeen()){
+                    viewHolder.img_seen.setVisibility(View.GONE);
+                }else{
+                    viewHolder.img_seen.setVisibility(View.VISIBLE);
+                }
+            }else{
+                viewHolder.img_seen.setVisibility(View.GONE);
+            }
         } else {
+            viewHolder.date.setVisibility(View.GONE);
+            viewHolder.time.setVisibility(View.GONE);
+            viewHolder.img_seen.setVisibility(View.GONE);
             viewHolder.nameOfUser.setVisibility(View.VISIBLE);
             viewHolder.nameOfUser.setText(awesomeMessage.getName());
             viewHolder.messageTextView.setVisibility(View.GONE);
@@ -78,6 +102,8 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
                     .load(awesomeMessage.getImgUrl())
                     .into(viewHolder.imageView);
         }
+
+
 
         return convertView;
     }
@@ -100,11 +126,14 @@ public class AwesomeMessageAdapter extends ArrayAdapter<AwesomeMessage> {
     }
 
     private class ViewHolder {
-        private TextView messageTextView, nameOfUser, seen;
-        private ImageView imageView;
+        private TextView messageTextView, nameOfUser, date, time;
+        private ImageView imageView, img_seen;
 
         public ViewHolder(View v) {
             imageView = v.findViewById(R.id.photoOfUser);
+            img_seen = v.findViewById(R.id.img_seen);
+            date = v.findViewById(R.id.date);
+            time = v.findViewById(R.id.time);
             messageTextView = v.findViewById(R.id.bubbleText);
             nameOfUser = v.findViewById(R.id.nameOfUser);
         }

@@ -115,13 +115,13 @@ public class AllYourChatsFragment extends Fragment {
                             String imgUri1 = ds.child("imgUri1").getValue(String.class);
                             String imgUri2 = ds.child("imgUri2").getValue(String.class);
 
-                            if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userId)) {
-                                arrayList.add(new ItemChat(name, img, email, desc, subject, classText, nameOfTask, nameAnotherUser, phone, price, describe, dateToFinish, myEmail, userId, anotherId, idOfTask, id, imgUri1));
+                            if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userId) && !anotherId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                arrayList.add(new ItemChat(name, img, email, desc, subject, classText, nameOfTask, nameAnotherUser, phone, price, describe, dateToFinish, myEmail, userId, anotherId, idOfTask, id, imgUri1, imgUri1, imgUri2));
                                 adapter = new AdapterChats(getContext(), arrayList);
                                 rv.setAdapter(adapter);
                                 my_chats.setVisibility(View.GONE);
-                            } else if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(anotherId)) {
-                                arrayList.add(new ItemChat(name, img, email, desc, subject, classText, nameOfTask, nameAnotherUser, phone, price, describe, dateToFinish, myEmail, userId, anotherId, idOfTask, id, imgUri2));
+                            } else if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(anotherId) && !FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userId)) {
+                                arrayList.add(new ItemChat(name, img, email, desc, subject, classText, nameOfTask, nameAnotherUser, phone, price, describe, dateToFinish, myEmail, userId, anotherId, idOfTask, id, imgUri2, imgUri1, imgUri2));
                                 adapter = new AdapterChats(getContext(), arrayList);
                                 rv.setAdapter(adapter);
                                 my_chats.setVisibility(View.GONE);

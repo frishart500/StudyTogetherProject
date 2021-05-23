@@ -146,7 +146,9 @@ public class CreateTaskFragment extends Fragment {
                         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
                         Users users = new Users();
                         int rounded = (int) Math.round(count / 100.0) * 100;
-                        users.setPoints(rounded + "");
+                        int remainder = count - rounded;
+                        int result = remainder + rounded;
+                        users.setPoints(result + "");
                         FirebaseDatabase.getInstance().getReference("User")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .child("points").setValue(users.getPoints());

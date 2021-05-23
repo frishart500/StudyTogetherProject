@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +36,15 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.time.chrono.ThaiBuddhistEra;
 
 
 public class HomeFragment extends Fragment {
@@ -57,16 +61,12 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         initView(root);
-        readUser();
+        ReadUsersThread readUsersThread = new ReadUsersThread();
+        readUsersThread.start();
         getRatingAndSetAverage();
-
-
-        addPoints.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRewardAd();
-            }
-        });
+        ShowAdThread thread = new ShowAdThread();
+        thread.initilisationAd();
+        thread.start();
 
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,13 +134,6 @@ public class HomeFragment extends Fragment {
 
     private void initView(View root) {
 
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-                loadRewardedAd();
-            }
-        });
-
         exit = root.findViewById(R.id.exit);
         addPoints = root.findViewById(R.id.addPoints);
         textHowMuchNotifications = root.findViewById(R.id.text_how_much);
@@ -157,82 +150,6 @@ public class HomeFragment extends Fragment {
         goToComments = root.findViewById(R.id.goToComments);
         describeInProfile = root.findViewById(R.id.describeInProfile);
     }
-
-    private void loadRewardedAd() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        RewardedAd.load(getContext(), "ca-app-pub-1029213395711583/5657035996",
-                adRequest, new RewardedAdLoadCallback() {
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        Log.d(TAG, loadAdError.getMessage());
-                        mRewardedAd = null;
-                        Log.d(TAG, "Ad was falilure.");
-                    }
-
-                    @Override
-                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
-                        mRewardedAd = rewardedAd;
-                        Log.d(TAG, "Ad was loaded.");
-
-                        mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                Log.d(TAG, "Ad was shown.");
-                                mRewardedAd = null;
-                            }
-
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                Log.d(TAG, "Ad failed to show.");
-                            }
-
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                Log.d(TAG, "Ad was dismissed.");
-                                loadRewardedAd();
-                            }
-                        });
-
-                    }
-                });
-    }
-
-
-    private void showRewardAd() {
-        if (mRewardedAd != null) {
-            Activity activityContext = getActivity();
-            mRewardedAd.show((Activity) getContext(), new OnUserEarnedRewardListener() {
-                @Override
-                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                    // Handle the reward.
-                    Log.d(TAG, "The user earned the reward.");
-                    int rewardAmount = rewardItem.getAmount();
-                    String rewardType = rewardItem.getType();
-
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String points_getting = snapshot.child("points").getValue(String.class);
-                            int pointsInteger = Integer.parseInt(points_getting);
-                            int result = pointsInteger + 10;
-                            points.setText( result + "");
-                            FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(result + "");
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }
-            });
-        } else {
-            Log.d(TAG, "The rewarded ad wasn't ready yet.");
-        }
-    }
-
     private void readUser() {
 
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -244,17 +161,35 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String nameS = dataSnapshot.child("name").getValue(String.class);
                 String emailString = dataSnapshot.child("email").getValue(String.class);
-                String pointsString = dataSnapshot.child("points").getValue(String.class);
-                email.setText(emailString);
-                name.setText(nameS);
-                String expertSubjectString = dataSnapshot.child("subject").getValue(String.class);
-                subject.setText(expertSubjectString);
-                String phoneString = dataSnapshot.child("phone").getValue(String.class);
-                phone.setText(phoneString);
                 String dataString = dataSnapshot.child("data").getValue(String.class);
                 String howMuchTasksDone = dataSnapshot.child("howMuchTasksDone").getValue(String.class);
                 String howMuchNotifications = dataSnapshot.child("howMuchNotifications").getValue(String.class);
                 String gender = dataSnapshot.child("gender").getValue(String.class);
+                String pointsString = dataSnapshot.child("points").getValue(String.class);
+                String phoneString = dataSnapshot.child("phone").getValue(String.class);
+                String expertSubjectString = dataSnapshot.child("subject").getValue(String.class);
+                String imgUri = dataSnapshot.child("imgUri").getValue(String.class);
+
+                email.setText(emailString);
+                name.setText(nameS);
+                subject.setText(expertSubjectString);
+                phone.setText(phoneString);
+
+                if(imgUri.equals("boy1")){
+                    userImg.setBackgroundResource(R.drawable.boy1);
+                }else if(imgUri.equals("boy2")){
+                    userImg.setBackgroundResource(R.drawable.boy2);
+                }else if(imgUri.equals("boy3")){
+                    userImg.setBackgroundResource(R.drawable.boy3);
+                }
+
+                if(imgUri.equals("girl1")){
+                    userImg.setBackgroundResource(R.drawable.girl1);
+                }else if(imgUri.equals("girl2")){
+                    userImg.setBackgroundResource(R.drawable.girl2);
+                }else if(imgUri.equals("girl3")){
+                    userImg.setBackgroundResource(R.drawable.girl3);
+                }
 
                 getGender(gender, howMuchTasksDone);
 
@@ -293,8 +228,6 @@ public class HomeFragment extends Fragment {
     private void getGender(String gender, String howMuchTasksDone) {
         if (gender.equals("mail")) {
 
-            userImg.setImageResource(R.drawable.boy1);
-
             int counterHowMuchTasksDone = Integer.parseInt(howMuchTasksDone);
             if (counterHowMuchTasksDone == 20) {
                 Dialog dialog;
@@ -306,7 +239,7 @@ public class HomeFragment extends Fragment {
 
                 TextView text = dialog.findViewById(R.id.text_how_much_tasks_youve_done);
                 String textCounter = text.getText().toString() + " " + 20;
-                text.setText(textCounter);
+                text.setText(textCounter + "");
                 Button ok = dialog.findViewById(R.id.ok);
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -317,9 +250,9 @@ public class HomeFragment extends Fragment {
 
                 dialog.show();
                 counterHowMuchTasksDone += 1;
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("boy2");
-                userImg.setImageResource(R.drawable.boy2);
             } else if (counterHowMuchTasksDone == 50) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
@@ -340,10 +273,10 @@ public class HomeFragment extends Fragment {
                 });
 
                 dialog.show();
-                userImg.setImageResource(R.drawable.boy3);
                 counterHowMuchTasksDone += 1;
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("boy3");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             }
 
         } else {
@@ -370,10 +303,10 @@ public class HomeFragment extends Fragment {
                 });
 
                 dialog.show();
-                userImg.setImageResource(R.drawable.girl2);
                 counterHowMuchTasksDone += 1;
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("girl2");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             } else if (counterHowMuchTasksDone == 50) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
@@ -394,10 +327,10 @@ public class HomeFragment extends Fragment {
                 });
 
                 dialog.show();
-                userImg.setImageResource(R.drawable.girl3);
                 counterHowMuchTasksDone += 1;
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("girl3");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone);
+                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             }
         }
     }
@@ -463,5 +396,129 @@ public class HomeFragment extends Fragment {
 
     }
 
+    class ShowAdThread extends Thread{
+
+        public void initilisationAd(){
+            MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                    loadRewardedAd();
+                }
+            });
+        }
+
+        private void loadRewardedAd() {
+            AdRequest adRequest = new AdRequest.Builder().build();
+
+            RewardedAd.load(getContext(), "ca-app-pub-1029213395711583/5657035996",
+                    adRequest, new RewardedAdLoadCallback() {
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            Log.d(TAG, loadAdError.getMessage());
+                            mRewardedAd = null;
+                            Log.d(TAG, "Ad was falilure.");
+                        }
+
+                        @Override
+                        public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                            mRewardedAd = rewardedAd;
+                            Log.d(TAG, "Ad was loaded.");
+
+                            mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdShowedFullScreenContent() {
+                                    Log.d(TAG, "Ad was shown.");
+                                    mRewardedAd = null;
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                    Log.d(TAG, "Ad failed to show.");
+                                }
+
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    Log.d(TAG, "Ad was dismissed.");
+                                    loadRewardedAd();
+                                }
+                            });
+
+                        }
+                    });
+        }
+
+
+        private void showRewardAd(View v) {
+            if (mRewardedAd != null) {
+                Activity activityContext = getActivity();
+                mRewardedAd.show((Activity) getContext(), new OnUserEarnedRewardListener() {
+                    @Override
+                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                        // Handle the reward.
+                        Log.d(TAG, "The user earned the reward.");
+                        int rewardAmount = rewardItem.getAmount();
+                        String rewardType = rewardItem.getType();
+
+                        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String points_getting = snapshot.child("points").getValue(String.class);
+                                int pointsInteger = Integer.parseInt(points_getting);
+                                int result = pointsInteger + 10;
+                                points.setText( result + "");
+                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(result + "");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+                });
+            } else {
+                Snackbar snackbar = Snackbar.make(v, "Реклама не загружена. Попробуйте снова.", Snackbar.LENGTH_LONG);
+                snackbar.setBackgroundTint(0XFF601C80);
+                snackbar.setTextColor(0XFFffffff);
+                snackbar.show();
+            }
+        }
+
+        @Override
+        public void run() {
+            super.run();
+
+            points.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showRewardAd(v);
+                    Snackbar snackbar = Snackbar.make(v, "Дождитесь пока загрузиться реклама...", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFFffffff);
+                    snackbar.setTextColor(0XFF601C80);
+                    snackbar.show();
+                }
+            });
+
+            addPoints.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showRewardAd(v);
+                    Snackbar snackbar = Snackbar.make(v, "Дождитесь пока загрузиться реклама...", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFFffffff);
+                    snackbar.setTextColor(0XFF601C80);
+                    snackbar.show();
+                }
+            });
+        }
+    }
+
+    class ReadUsersThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            readUser();
+        }
+    }
 
 }

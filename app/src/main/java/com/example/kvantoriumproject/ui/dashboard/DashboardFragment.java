@@ -3,6 +3,7 @@ package com.example.kvantoriumproject.ui.dashboard;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -10,7 +11,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -31,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kvantoriumproject.Moduls.Item;
 import com.example.kvantoriumproject.MainClasses.MainActivity;
 import com.example.kvantoriumproject.R;
+import com.google.android.gms.common.internal.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +50,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements GestureDetector.OnGestureListener {
     private Adapter adapter;
     private ImageView filters;
     private ArrayList<Item> arrayList = new ArrayList<>();
@@ -56,23 +62,17 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().hide();
-        rv = root.findViewById(R.id.rv);
+
+        initView(root);
         recyclerBuilder();
 
-        edit_find = root.findViewById(R.id.edit_find);
-        filters = root.findViewById(R.id.filters);
-        myTasks = root.findViewById(R.id.my_tasks);
-        all_tasks = root.findViewById(R.id.all_tasks);
-        textMainAct = root.findViewById(R.id.textMainAct);
-        textMainAct.setVisibility(View.VISIBLE);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getGestureDetectore(root);
+        getScreenSize();
 
         myTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myTasks.setTextSize(19);
-                all_tasks.setTextSize(16);
+                getScreenSizeForClick();
                 startActivity(new Intent(getContext(), MyTasksActivity.class));
                 ((Activity) getContext()).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
@@ -83,6 +83,94 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
+    private void initView(View root){
+
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        rv = root.findViewById(R.id.rv);
+        edit_find = root.findViewById(R.id.edit_find);
+        filters = root.findViewById(R.id.filters);
+        myTasks = root.findViewById(R.id.my_tasks);
+        all_tasks = root.findViewById(R.id.all_tasks);
+        textMainAct = root.findViewById(R.id.textMainAct);
+        textMainAct.setVisibility(View.VISIBLE);
+        rv.setVisibility(View.GONE);
+    }
+
+    private void getGestureDetectore(View root){
+        GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                                   float velocityY) {
+                final int SWIPE_MIN_DISTANCE = 120;
+                final int SWIPE_MAX_OFF_PATH = 250;
+                final int SWIPE_THRESHOLD_VELOCITY = 200;
+                try {
+                    if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+                        return false;
+                    //right
+                    if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        startActivity(new Intent(getContext(), MyTasksActivity.class));
+                        ((Activity) getContext()).overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
+                    }
+                } catch (Exception e) {
+                    // nothing
+                }
+                return super.onFling(e1, e2, velocityX, velocityY);
+            }
+        });
+
+        root.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+    }
+
+    private void getScreenSize(){
+        if ((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_LARGE) {
+            myTasks.setTextSize(18);
+            all_tasks.setTextSize(21);
+        }else if((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_XLARGE){
+            myTasks.setTextSize(20);
+            all_tasks.setTextSize(23);
+        }else if((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_NORMAL){
+            myTasks.setTextSize(16);
+            all_tasks.setTextSize(19);
+        }
+    }
+
+    private void getScreenSizeForClick(){
+        if ((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_LARGE) {
+            myTasks.setTextSize(21);
+            all_tasks.setTextSize(18);
+        }else if((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_XLARGE){
+            myTasks.setTextSize(23);
+            all_tasks.setTextSize(20);
+        }else if((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_NORMAL){
+            myTasks.setTextSize(19);
+            all_tasks.setTextSize(16);
+        }
+    }
 
     private void recyclerBuilder() {
         rv.setHasFixedSize(true);
@@ -258,7 +346,7 @@ public class DashboardFragment extends Fragment {
                                     adapter = new Adapter(getContext(), arrayList);
                                     rv.setAdapter(adapter);
                                     textMainAct.setVisibility(View.GONE);
-
+                                    rv.setVisibility(View.VISIBLE);
                                     filters.setOnClickListener(new View.OnClickListener() {
                                         @RequiresApi(api = Build.VERSION_CODES.O)
                                         @Override
@@ -317,5 +405,35 @@ public class DashboardFragment extends Fragment {
             }
         }
         adapter.filterList(array);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
     }
 }

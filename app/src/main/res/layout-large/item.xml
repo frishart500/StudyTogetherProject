@@ -24,18 +24,19 @@
 
             <TextView
                 android:id="@+id/nameOfTask"
-                android:layout_width="319dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:text="Квадратное уравнение"
                 android:textColor="#601C80"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:layout_marginLeft="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/beginToTask"
-                app:layout_constraintHorizontal_bias="0.601"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.287"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.088" />
+                app:layout_constraintVertical_bias="0.128" />
 
             <ImageView
                 android:id="@+id/goToProfile"
@@ -47,7 +48,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/nameOfTask"
-                app:layout_constraintVertical_bias="0.133" />
+                app:layout_constraintVertical_bias="0.125" />
 
             <TextView
                 android:id="@+id/subject"
@@ -253,10 +254,10 @@
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@+id/dateForFinish"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.88"
+                app:layout_constraintHorizontal_bias="0.864"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/nameOfTask"
-                app:layout_constraintVertical_bias="0.513" />
+                app:layout_constraintVertical_bias="0.532" />
 
             <Button
                 android:id="@+id/checkAllTask"

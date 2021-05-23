@@ -7,7 +7,7 @@
 
 
         <RelativeLayout
-            android:layout_width="400dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true">
@@ -17,10 +17,10 @@
                     android:id="@+id/photoOfUser"
                     android:layout_width="100dp"
                     android:layout_height="150dp"
+                    android:padding="5dp"
+                    android:background="@drawable/background_another_user"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/background_another_user"
-                    android:padding="5dp"
                     android:src="@mipmap/ic_launcher"
                     android:visibility="gone" />
 
@@ -35,20 +35,70 @@
                     android:text="name"
                     android:textSize="16dp" />
 
+
+
+
                 <TextView
-                    android:id="@+id/bubbleText"
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cs"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="21.09.1"
+                    android:textSize="14dp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/nameOfUser"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/background_another_user"
-                    android:maxWidth="400dp"
-                    android:padding="8dp"
-                    android:text="hello"
-                    android:textSize="20dp"
-                    android:textColor="#000" />
+                    android:maxWidth="300dp"
+                    android:minWidth="90dp"
+                    android:background="@drawable/background_another_user">
 
+                        <TextView
+                            android:id="@+id/bubbleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:padding="8dp"
+                            android:text="hello"
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="1dp"
+                            android:padding="4dp"
+                            android:text="12:20"
+                            android:textSize="14dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/bubbleText"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/img_seen"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/cs"
+                    android:layout_toStartOf="@+id/cs"
+                    android:layout_toLeftOf="@+id/cs"
+                    android:src="@drawable/circle" />
 
         </RelativeLayout>
 
