@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KvantoriumProject</string>
+    <string name="app_name">StudyTogetherProject</string>
     <string name="enter">Вход</string>
     <string name="enterBtn">Войти</string>
     <string name="password">Пароль</string>

@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.kvantoriumproject.ui.home.HomeFragment"
+        android:name="com.example.studytogetherproject.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.kvantoriumproject.ui.dashboard.DashboardFragment"
+        android:name="com.example.studytogetherproject.ui.dashboard.DashboardFragment"
         android:label="Список заданий"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.kvantoriumproject.ui.friendsInChats.AllYourChatsFragment"
+        android:name="com.example.studytogetherproject.ui.friendsInChats.AllYourChatsFragment"
         android:label="Чаты"
         tools:layout="@layout/fragment_all_chats" />
 
     <fragment
         android:id="@+id/navigation_create_task"
-        android:name="com.example.kvantoriumproject.ui.create_task.CreateTaskFragment"
+        android:name="com.example.studytogetherproject.ui.create_task.CreateTaskFragment"
         android:label="Создать задание"
         tools:layout="@layout/fragment_create_task" />
 </navigation>
