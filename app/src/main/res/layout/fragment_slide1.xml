@@ -9,19 +9,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/btnSkip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Пропустить"
-        android:textColor="#D091EC"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView28"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
 
     <TextView
         android:id="@+id/textView28"
@@ -92,19 +79,25 @@
 
     <TextView
         android:id="@+id/textView35"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:gravity="left"
         android:padding="10dp"
-        android:text="- По окончании туториала вам дадут 200 баллов \uD83D\uDC8E\n- Чтобы получать, баллы нужно выполнять задания \uD83D\uDCC8\n- Чтобы выложить, задание нужно их тратить \uD83D\uDCC9\n- За выполнение заданий эксперту ставится оценка, которая влияет на рейтинг \uD83D\uDD25"
+        android:text="- По окончании туториала вам дадут 200 баллов 💎\n
+- Чтобы получать, баллы нужно выполнять задания 📈\n
+- Чтобы выложить, задание нужно их тратить 📉\n
+- За выполнение заданий эксперту ставится оценка, которая влияет на рейтинг 🔥"
         android:textColor="@color/main"
-        android:textSize="15sp"
+        android:textSize="20sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView49"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView48"
         app:layout_constraintTop_toBottomOf="@+id/textView48"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintVertical_bias="0.127" />
 
     <LinearLayout
         android:layout_width="match_parent"

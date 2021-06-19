@@ -4,75 +4,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="400dp"
-    android:layout_height="300dp"
+    android:layout_width="390dp"
+    android:layout_height="240dp"
     android:id="@+id/preview"
-    android:background="@drawable/for_dialog"
     android:layout_margin="15dp"
     android:layout_gravity="center"
     android:scaleType = "centerCrop">
 
-    <TextView
-        android:id="@+id/textView56"
-        android:layout_width="307dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="left"
-        android:padding="10dp"
-        android:text="Выход"
-        android:textColor="#601C80"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="307dp"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:padding="10dp"
-        android:text="Вы уверены, что хотите выйти из своего аккаунта?"
-        android:textColor="#601C80"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView56"
-        app:layout_constraintTop_toBottomOf="@+id/textView56"
-        app:layout_constraintVertical_bias="0.263" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout12"
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="16dp">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/yes"
-            android:layout_width="100dp"
-            android:layout_height="59dp"
-            android:layout_marginRight="15dp"
-            android:backgroundTint="@color/main"
-            android:text="Да"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/no"
-            android:layout_width="100dp"
-            android:layout_height="59dp"
-            android:backgroundTint="@color/main"
-            android:text="Нет"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:gravity="left"
+                android:padding="5dp"
+                android:text="Выход"
+                android:textColor="#601C80"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="10dp"
+                android:text="Вы уверены, что хотите выйти из своего аккаунта?"
+                android:textColor="#601C80"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/textView55"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/main"
+                android:text="Да"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.091"
+                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView26"
+                app:layout_constraintVertical_bias="0.589" />
+
+            <Button
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/main"
+                android:text="Нет"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="@+id/yes"
+                app:layout_constraintEnd_toEndOf="@+id/textView26"
+                app:layout_constraintHorizontal_bias="0.897"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/yes"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

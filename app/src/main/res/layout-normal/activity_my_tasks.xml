@@ -7,42 +7,6 @@
     android:orientation="vertical"
     tools:context=".ui.dashboard.MyTasksActivity">
 
-
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/all_tasks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Все задания"
-            android:textColor="#D091EC"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginRight="20dp"/>
-
-        <TextView
-            android:id="@+id/my_tasks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Мои задания"
-            android:textColor="@color/main"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.322"
-            app:layout_constraintStart_toEndOf="@+id/all_tasks"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.553" />
-
-    </LinearLayout>
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -64,7 +28,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="40"
         android:orientation="vertical"
@@ -75,7 +39,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
-            android:layout_width="348dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="50"

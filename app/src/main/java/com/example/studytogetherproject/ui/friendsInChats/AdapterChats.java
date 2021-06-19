@@ -57,14 +57,13 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                             String id = ds.child("anotherId").getValue(String.class);
                             String id1 = ds.child("userId").getValue(String.class);
                             if (id1.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-
                                 ValueEventListener valAnotherUIDStatus = new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String status = snapshot.child("status").getValue(String.class);
                                         if (status.equals("online")) {
                                             holder.status.setImageResource(R.drawable.open_eye);
-                                        } else {
+                                        } else if(status.equals("offline")){
                                             holder.status.setImageResource(R.drawable.close_eye);
                                         }
                                     }
@@ -75,7 +74,7 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                                     }
                                 };
                                 FirebaseDatabase.getInstance().getReference("User").child(id).addListenerForSingleValueEvent(valAnotherUIDStatus);
-                            } else {
+                            } else if(id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                                 ValueEventListener valAnotherUIDStatus = new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,22 +98,22 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
 
                                 if (name.equals(nameInChats)) {
                                     holder.name.setText(arrayList.get(position).getNameAnotherPerson() + ", ");
-                                    if (arrayList.get(position).getImg2().equals("boy1")) {
+                                    if (image2.equals("boy1")) {
                                         holder.img.setImageResource(R.drawable.boy1);
                                     }
-                                    else if (image2.equals(arrayList.get(position).getImg2().equals("boy2"))) {
+                                    else if (image2.equals("boy2")) {
                                         holder.img.setImageResource(R.drawable.boy2);
                                     }
-                                    else if (image2.equals(arrayList.get(position).getImg2().equals("boy3"))) {
+                                    else if (image2.equals("boy3")) {
                                         holder.img.setImageResource(R.drawable.boy3);
                                     }
-                                    else if (arrayList.get(position).getImg2().equals("girl1")) {
+                                    else if (image2.equals("girl1")) {
                                         holder.img.setImageResource(R.drawable.girl1);
                                     }
-                                    else if (image2.equals(arrayList.get(position).getImg2().equals("girl2"))) {
+                                    else if (image2.equals("girl2")) {
                                         holder.img.setImageResource(R.drawable.girl2);
                                     }
-                                    else if (image2.equals(arrayList.get(position).getImg2().equals("girl3"))) {
+                                    else if (image2.equals("girl3")) {
                                         holder.img.setImageResource(R.drawable.girl3);
                                     }
 
@@ -123,22 +122,22 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
 
                                 if (!name.equals(nameInChats)) {
                                     holder.name.setText(arrayList.get(position).getName() + ", ");
-                                    if (arrayList.get(position).getImg1().equals("boy1")) {
+                                    if (image.equals("boy1")) {
                                         holder.img.setImageResource(R.drawable.boy1);
                                     }
-                                    else if (image.equals(arrayList.get(position).getImg1().equals("boy2"))) {
+                                    else if (image.equals("boy2")) {
                                         holder.img.setImageResource(R.drawable.boy2);
                                     }
-                                    else if (image.equals(arrayList.get(position).getImg1().equals("boy3"))) {
+                                    else if (image.equals("boy3")) {
                                         holder.img.setImageResource(R.drawable.boy3);
                                     }
-                                    else if (arrayList.get(position).getImg1().equals("girl1")) {
+                                    else if (image.equals("girl1")) {
                                         holder.img.setImageResource(R.drawable.girl1);
                                     }
-                                    else if (image.equals(arrayList.get(position).getImg1().equals("girl2"))) {
+                                    else if (image.equals("girl2")) {
                                         holder.img.setImageResource(R.drawable.girl2);
                                     }
-                                    else if (image.equals(arrayList.get(position).getImg1().equals("girl3"))) {
+                                    else if (image.equals("girl3")) {
                                         holder.img.setImageResource(R.drawable.girl3);
                                     }
                                 }

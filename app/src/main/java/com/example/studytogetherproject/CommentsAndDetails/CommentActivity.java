@@ -3,14 +3,19 @@ package com.example.studytogetherproject.CommentsAndDetails;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.studytogetherproject.Moduls.ChooseInf;
 import com.example.studytogetherproject.MainClasses.MainActivity;
@@ -24,13 +29,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static java.security.AccessController.getContext;
+
 public class CommentActivity extends AppCompatActivity {
     private RecyclerView rvComment;
     private ArrayList<ChooseInf> arrayList = new ArrayList<>();
     private AdapterForComments adapterForComments;
     private ImageView back;
     private String getEmail = null;
-    private String getMyEmail = null;
+    private TextView noComment;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -38,6 +45,7 @@ public class CommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         back = findViewById(R.id.back);
+        noComment = findViewById(R.id.noComment);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +55,12 @@ public class CommentActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
         getRaiting();
+
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainLight));
+
     }
 
     private void getRaiting() {
@@ -77,6 +91,7 @@ public class CommentActivity extends AppCompatActivity {
                             arrayList.add(new ChooseInf(name, comment, raiting));
                             adapterForComments = new AdapterForComments(getApplicationContext(), arrayList);
                             rvComment.setAdapter(adapterForComments);
+
                         }
                     }
                 }

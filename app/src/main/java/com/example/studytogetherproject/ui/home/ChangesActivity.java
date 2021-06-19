@@ -1,17 +1,22 @@
 package com.example.studytogetherproject.ui.home;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,7 +49,7 @@ import java.util.Calendar;
 
 public class ChangesActivity extends AppCompatActivity {
     private EditText name, data, phone, describtion;
-    private ImageView back;
+    private ImageView back, userImg;
     private ImageView dataImg;
     private Button change;
     private TextView subject;
@@ -52,6 +57,7 @@ public class ChangesActivity extends AppCompatActivity {
     private final String TAG = "---AdMob";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,11 @@ public class ChangesActivity extends AppCompatActivity {
         getDataPicker();
         createListOfTheSubjects();
         getSupportActionBar().hide();
+
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainLight));
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -88,7 +99,6 @@ public class ChangesActivity extends AppCompatActivity {
                 } else {
                     Log.d("TAG", "The interstitial ad wasn't ready yet.");
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         });
@@ -112,7 +122,6 @@ public class ChangesActivity extends AppCompatActivity {
                     public void onAdDismissedFullScreenContent() {
                         Log.d("TAG", "The ad was dismissed.");
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
 
                     @Override
@@ -186,6 +195,37 @@ public class ChangesActivity extends AppCompatActivity {
         describtion = findViewById(R.id.describe);
         dataImg = findViewById(R.id.dataImg);
         change = findViewById(R.id.change);
+        userImg = findViewById(R.id.userImg);
+        getUserImg();
+    }
+
+    private void getUserImg(){
+        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String img = snapshot.child("imgUri").getValue(String.class);
+                if(img.equals("boy1")){
+                    userImg.setImageResource(R.drawable.boy1);
+                }else if(img.equals("boy2")){
+                    userImg.setImageResource(R.drawable.boy2);
+                }else if(img.equals("boy3")){
+                    userImg.setImageResource(R.drawable.boy3);
+                }
+
+                if(img.equals("girl1")){
+                    userImg.setImageResource(R.drawable.girl1);
+                }else if(img.equals("girl2")){
+                    userImg.setImageResource(R.drawable.girl2);
+                }else if(img.equals("girl3")){
+                    userImg.setImageResource(R.drawable.girl3);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void changes() {
@@ -248,10 +288,6 @@ public class ChangesActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(vChangeListener);
 
-
-    }
-
-    private void checking(){
 
     }
 

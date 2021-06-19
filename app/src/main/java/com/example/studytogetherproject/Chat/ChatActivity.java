@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.FragmentTransaction;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import com.example.studytogetherproject.Moduls.FinishTask;
 import com.example.studytogetherproject.MainClasses.MainActivity;
 import com.example.studytogetherproject.R;
 import com.example.studytogetherproject.Moduls.Users;
+import com.example.studytogetherproject.ui.friendsInChats.AllYourChatsFragment;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +47,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -477,7 +480,6 @@ public class ChatActivity extends AppCompatActivity {
                 if (v.getId() == R.id.back) {
                     //при переходе на другой activity анимация
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 if (v.getId() == R.id.card) {
                     //при нажатии на cardView constraintLayout котрый содержит в себе описание задания
@@ -591,7 +593,37 @@ public class ChatActivity extends AppCompatActivity {
                                                         });
 
                                                         FirebaseDatabase.getInstance().getReference("FinishTask").child(finalKey).removeValue();
-                                                        FirebaseDatabase.getInstance().getReference("FriendsInChats").child(id_str).removeValue();
+
+
+                                                        if(id_str.equals(null)){
+                                                            FirebaseDatabase.getInstance().getReference("FriendsInChats").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    for(DataSnapshot ds : snapshot.getChildren()){
+
+                                                                        String userId = ds.child("userId").getValue(String.class);
+                                                                        String anotherId = ds.child("anotherId").getValue(String.class);
+
+                                                                        if(mAuth.getCurrentUser().getUid().equals(userId) || mAuth.getCurrentUser().getUid().equals(anotherId)){
+                                                                            String id = ds.child("id").getValue(String.class);
+                                                                            FirebaseDatabase.getInstance().getReference("FriendsInChats").child(id).removeValue();
+                                                                        }
+
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }else{
+                                                            FirebaseDatabase.getInstance().getReference("FriendsInChats").child(id_str).removeValue();
+
+                                                        }
+
+
+
                                                         //delete token
                                                         FirebaseDatabase.getInstance().getReference("Tokens").child(getIntent().getStringExtra("anotherId")).removeValue();
                                                         FirebaseDatabase.getInstance().getReference("Tokens").child(id).removeValue();

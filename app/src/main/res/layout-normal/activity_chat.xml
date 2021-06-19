@@ -7,11 +7,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Chat.ChatActivity"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:id="@+id/chat">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
+        app:cardCornerRadius="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -24,8 +29,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:background="@drawable/back_for_card">
+            android:padding="15dp">
 
             <ImageView
                 android:id="@+id/imgUserChat"
@@ -207,6 +211,7 @@
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/main"
                     android:text="Закончить!"
+                    android:background="@drawable/button"
                     android:textAllCaps="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -239,6 +244,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_above="@+id/lin"
         android:divider="@android:color/transparent"
         android:transcriptMode="alwaysScroll"

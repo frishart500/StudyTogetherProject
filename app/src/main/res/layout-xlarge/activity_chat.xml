@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Chat.ChatActivity"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:context=".Chat.ChatActivity">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_weight="0"
+        app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +28,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:background="@drawable/back_for_card">
+            android:padding="15dp">
 
             <ImageView
                 android:id="@+id/imgUserChat"
@@ -90,7 +93,8 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Цена:"
                     android:textColor="@color/main"
-                    android:textSize="22sp"                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +108,8 @@
                     android:fontFamily="@font/montserrat"
                     android:text="100"
                     android:textColor="@color/main"
-                    android:textSize="22sp"                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.063"
@@ -130,7 +135,8 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Срок:"
                     android:textColor="@color/main"
-                    android:textSize="22sp"                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +150,8 @@
                     android:fontFamily="@font/montserrat"
                     android:text="07.03.21"
                     android:textColor="@color/main"
-                    android:textSize="22sp"                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.063"
@@ -160,7 +167,8 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Описание:"
                     android:textColor="@color/main"
-                    android:textSize="22sp"                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.054"
@@ -233,33 +241,26 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
         android:layout_above="@+id/lin"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="2"
         android:divider="@android:color/transparent"
+        android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintBottom_toTopOf="@+id/lin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="8dp"
-        android:stackFromBottom="true"
         tools:listitem="@layout/message_item" />
-
-    <TextView
-        android:id="@+id/typing_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/main"
-        android:textStyle="italic"
-        android:textSize="19dp"
-        android:text="Печатает..."/>
 
     <LinearLayout
         android:id="@+id/lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

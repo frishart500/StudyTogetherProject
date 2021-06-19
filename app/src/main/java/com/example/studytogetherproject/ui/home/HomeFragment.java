@@ -6,20 +6,25 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.studytogetherproject.MainClasses.LoginActivity;
+import com.example.studytogetherproject.MainClasses.LoginOrSignUpActivity;
 import com.example.studytogetherproject.MainClasses.MainActivity;
 import com.example.studytogetherproject.R;
 import com.example.studytogetherproject.Moduls.Users;
@@ -43,16 +48,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class HomeFragment extends Fragment {
-    private ImageView userImg, notification, stars;
-    private TextView email, phone, points, data, name, subject, exit, goToComments, describeInProfile, textHowMuchNotifications, addPoints;
+    private ImageView stars;
+    private CircleImageView userImg;
+    private TextView email, exit, goToComments, addPoints, points, phone, data, name, subject, describeInProfile;
     private FirebaseAuth mAuth;
     private Button changeBtn;
     private RewardedAd mRewardedAd;
     private final String TAG = "--->AdMob";
     private double average = 0.0;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -65,13 +74,10 @@ public class HomeFragment extends Fragment {
         thread.initilisationAd();
         thread.start();
 
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), NotificationActivity.class));
-                ((Activity) getContext()).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            }
-        });
+        Window window = ((Activity)getContext()).getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.mainLight));
 
         goToComments.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +94,6 @@ public class HomeFragment extends Fragment {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -112,7 +117,7 @@ public class HomeFragment extends Fragment {
                         users.setStatus("offline");
                         ref.child("status").setValue(users.getStatus());
                         mAuth.signOut();
-                        startActivity(new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        startActivity(new Intent(getContext(), LoginOrSignUpActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 });
 
@@ -130,11 +135,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView(View root) {
-
         exit = root.findViewById(R.id.exit);
         addPoints = root.findViewById(R.id.addPoints);
-        textHowMuchNotifications = root.findViewById(R.id.text_how_much);
-        notification = root.findViewById(R.id.notification);
         changeBtn = root.findViewById(R.id.changeBtn);
         stars = root.findViewById(R.id.stars);
         userImg = root.findViewById(R.id.userImg);
@@ -173,19 +175,19 @@ public class HomeFragment extends Fragment {
                 phone.setText(phoneString);
 
                 if(imgUri.equals("boy1")){
-                    userImg.setBackgroundResource(R.drawable.boy1);
+                    userImg.setImageResource(R.drawable.boy1);
                 }else if(imgUri.equals("boy2")){
-                    userImg.setBackgroundResource(R.drawable.boy2);
+                    userImg.setImageResource(R.drawable.boy2);
                 }else if(imgUri.equals("boy3")){
-                    userImg.setBackgroundResource(R.drawable.boy3);
+                    userImg.setImageResource(R.drawable.boy3);
                 }
 
                 if(imgUri.equals("girl1")){
-                    userImg.setBackgroundResource(R.drawable.girl1);
+                    userImg.setImageResource(R.drawable.girl1);
                 }else if(imgUri.equals("girl2")){
-                    userImg.setBackgroundResource(R.drawable.girl2);
+                    userImg.setImageResource(R.drawable.girl2);
                 }else if(imgUri.equals("girl3")){
-                    userImg.setBackgroundResource(R.drawable.girl3);
+                    userImg.setImageResource(R.drawable.girl3);
                 }
 
                 getGender(gender, howMuchTasksDone);
@@ -193,23 +195,9 @@ public class HomeFragment extends Fragment {
 
                 int counterOfNotifications = Integer.parseInt(howMuchNotifications);
                 if (counterOfNotifications == 0) {
-                    textHowMuchNotifications.setVisibility(View.GONE);
-                    notification.setVisibility(View.VISIBLE);
-                } else {
-                    textHowMuchNotifications.setVisibility(View.VISIBLE);
-                    textHowMuchNotifications.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(getContext(), NotificationActivity.class));
-                        }
-                    });
-                    notification.setVisibility(View.GONE);
                 }
-
                 String describeProfile = dataSnapshot.child("describtion").getValue(String.class);
                 describeInProfile.setText(describeProfile);
-
-                textHowMuchNotifications.setText("");
                 data.setText(dataString);
                 points.setText(pointsString);
 
@@ -276,9 +264,7 @@ public class HomeFragment extends Fragment {
                 FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             }
 
-        } else {
-            userImg.setImageResource(R.drawable.girl1);
-
+        } else if(gender.equals("femail")) {
             int counterHowMuchTasksDone = Integer.parseInt(howMuchTasksDone);
             if (counterHowMuchTasksDone == 20) {
                 Dialog dialog;

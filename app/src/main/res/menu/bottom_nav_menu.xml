@@ -7,15 +7,19 @@
         android:title="" />
 
     <item
-        android:id="@+id/navigation_create_task"
-        android:icon="@drawable/create_task_icon"
-        android:title="" />
-
-    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/chat"
         android:title="" />
 
+    <item
+        android:id="@+id/navigation_create_task"
+        android:title="" />
+
+
+    <item
+        android:id="@+id/navigation_notifications_"
+        android:icon="@drawable/kolokol"
+        android:title="" />
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/profile"

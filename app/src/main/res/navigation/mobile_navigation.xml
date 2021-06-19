@@ -28,4 +28,11 @@
         android:name="com.example.studytogetherproject.ui.create_task.CreateTaskFragment"
         android:label="Создать задание"
         tools:layout="@layout/fragment_create_task" />
+
+    <fragment
+        android:id="@+id/navigation_notifications_"
+        android:name="com.example.studytogetherproject.ui.Notifications.NotificationsFragment"
+        android:label="Уведомления"
+        tools:layout="@layout/fragment_notifications" />
+
 </navigation>

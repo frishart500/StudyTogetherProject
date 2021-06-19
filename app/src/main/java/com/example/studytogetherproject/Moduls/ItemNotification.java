@@ -1,7 +1,7 @@
 package com.example.studytogetherproject.Moduls;
 
 public class ItemNotification {
-    private String name, nameOfTask, id, subjectOfUser, describtionOfUser;
+    private String name, nameOfTask, id, subjectOfUser, describtionOfUser, image;
 
     public ItemNotification(){}
 
@@ -24,6 +24,14 @@ public class ItemNotification {
 
     public void setDescribtionOfUser(String describtionOfUser) {
         this.describtionOfUser = describtionOfUser;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getId() {

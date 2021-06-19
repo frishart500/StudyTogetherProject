@@ -15,43 +15,60 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
+
 import com.example.studytogetherproject.R;
 import com.example.studytogetherproject.notificationPack.APIService;
 import com.example.studytogetherproject.notificationPack.Client;
 import com.example.studytogetherproject.notificationPack.Token;
+import com.example.studytogetherproject.ui.create_task.CreateTaskActivity;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     public static final String CHANNEL_ID = "school";//какнал для уведомлений
     private APIService apiService;//api key
-
+    private FloatingActionButton fab;
+    private BottomAppBar bottomAppBar;
+    private BottomNavigationView navView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //иницилизация
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        fab = findViewById(R.id.fab);
+        bottomAppBar = findViewById(R.id.bottomAppBar);
         //переключения между фрагментами
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_create_task)
-                .build();
+        navView.setBackground(null);
+        navView.getMenu().getItem(2).setEnabled(false);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CreateTaskActivity.class));
+            }
+        });
+
         //проверка интеренет соединения
         checkInternetConection();
         //уведомления
         UpdateToken();
         createNotificationChannel();
-
+        howMuchNotifications();
     }
 
     private void UpdateToken() {
@@ -74,6 +91,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void howMuchNotifications() {
+        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String notifications = snapshot.child("howMuchNotifications").getValue(String.class);
+                int counterOfNotifications = Integer.parseInt(notifications);
+                if (counterOfNotifications == 0) {
+                    navView.getMenu().findItem(R.id.navigation_notifications_).setIcon(R.drawable.kolokol);
+                } else {
+                    navView.getMenu().findItem(R.id.navigation_notifications_).setIcon(R.drawable.active_kolokol);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {

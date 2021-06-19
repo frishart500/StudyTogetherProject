@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Chat.ChatActivity"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:id="@+id/chat">
 
 
     <androidx.cardview.widget.CardView
@@ -15,6 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        app:cardCornerRadius="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +29,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:background="@drawable/back_for_card">
+            android:padding="15dp">
 
             <ImageView
                 android:id="@+id/imgUserChat"
@@ -235,6 +239,8 @@
 
     <ListView
         android:id="@+id/list"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"

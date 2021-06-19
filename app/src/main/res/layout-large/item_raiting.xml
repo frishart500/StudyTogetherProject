@@ -6,8 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="446dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,8 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding = "15dp"
-            android:background="@drawable/back_for_card">
+            android:padding = "15dp">
 
             <TextView
                 android:id="@+id/textView12"
@@ -27,7 +30,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="Оценка:"
                 android:textColor="@color/main"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -38,15 +41,15 @@
 
             <ImageView
                 android:id="@+id/stars"
-                android:layout_width="94dp"
-                android:layout_height="27dp"
+                android:layout_width="83dp"
+                android:layout_height="24dp"
                 android:src="@drawable/zero"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.067"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/name"
@@ -55,7 +58,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="Имя:"
                 android:textColor="@color/main"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,11 +69,11 @@
 
             <TextView
                 android:id="@+id/comment"
-                android:layout_width="334dp"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/main"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

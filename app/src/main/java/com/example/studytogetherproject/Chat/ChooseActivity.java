@@ -83,7 +83,6 @@ public class ChooseActivity extends AppCompatActivity {
                     public void onAdDismissedFullScreenContent() {
                         Log.d("TAG", "The ad was dismissed.");
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
 
                     @Override
@@ -145,7 +144,6 @@ public class ChooseActivity extends AppCompatActivity {
                                 } else {
                                     Log.d("TAG", "The interstitial ad wasn't ready yet.");
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 }
                             }
                         });

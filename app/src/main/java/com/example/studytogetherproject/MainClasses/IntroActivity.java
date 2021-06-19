@@ -57,10 +57,15 @@ public class IntroActivity extends AppIntro {
 
     private void settings(){
         setTitleColor(Color.parseColor("#601C80"));
+        setColorSkipButton(Color.parseColor("#601C80"));
+        setSkipText("Пропустить");
+        setTitle("Начало работы");
+
+        setTitleColor(Color.parseColor("#601C80"));
         setNextArrowColor(Color.parseColor("#601C80"));
         setColorDoneText(Color.parseColor("#601C80"));
         setProgressButtonEnabled(true);
-        showSkipButton(false);
+        showSkipButton(true);
         setSeparatorColor(Color.parseColor("#FFFFFF"));
         setBarColor(Color.parseColor("#FFFFFF"));
         setIndicatorColor(Color.parseColor("#601C80"), Color.parseColor("#D091EC"));
@@ -70,7 +75,7 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        startActivity(new Intent(getApplicationContext(), LoginOrSignUpActivity.class));
     }
 
     @Override
@@ -80,5 +85,11 @@ public class IntroActivity extends AppIntro {
 
     @Override
     public void onNextPressed() {
+    }
+
+    @Override
+    public void onSkipPressed(Fragment currentFragment) {
+        super.onSkipPressed(currentFragment);
+        startActivity(new Intent(getApplicationContext(), LoginOrSignUpActivity.class));
     }
 }

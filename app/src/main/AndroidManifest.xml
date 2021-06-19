@@ -9,21 +9,27 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Study.together"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KvantoriumProject">
-        <activity android:name="com.example.studytogetherproject.MainClasses.IntroActivity"></activity>
-        <activity android:name="com.example.studytogetherproject.MainClasses.ChooseGenderActivity" />
+        <activity android:name=".ui.create_task.CreateTaskActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainClasses.LoginOrSignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainClasses.IntroActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainClasses.ChooseGenderActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name="com.example.studytogetherproject.MainClasses.SplashScreenActivity"
+            android:name=".MainClasses.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,41 +38,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.studytogetherproject.ui.home.NotificationActivity"
+            android:name=".CommentsAndDetails.DetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.CommentsAndDetails.DetailActivity"
+            android:name=".Chat.ChooseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.ui.dashboard.MyTasksActivity"
+            android:name=".Chat.ImageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.Chat.ChooseActivity"
+            android:name=".Chat.ChatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.Chat.ImageActivity"
+            android:name=".CommentsAndDetails.CommentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.Chat.ChatActivity"
+            android:name=".ui.home.ChangesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.CommentsAndDetails.CommentActivity"
+            android:name=".MainClasses.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.studytogetherproject.ui.home.ChangesActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.studytogetherproject.MainClasses.ForgetPasswordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.studytogetherproject.MainClasses.RegistrationActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.studytogetherproject.MainClasses.MainActivity"
+            android:name=".MainClasses.MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.studytogetherproject.MainClasses.LoginActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -74,7 +68,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name="com.example.studytogetherproject.notificationPack.MyFirebaseMessagingService"
+            android:name=".notificationPack.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -82,7 +76,7 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.example.studytogetherproject.notificationPack.MyFirebaseService"
+            android:name=".notificationPack.MyFirebaseService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -92,8 +86,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-1029213395711583~5672320199"/>
-
+            android:value="ca-app-pub-1029213395711583~5672320199" />
     </application>
 
 </manifest>
