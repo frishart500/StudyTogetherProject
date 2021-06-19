@@ -42,7 +42,7 @@
         android:padding="8dp"
         android:text="Добавление задания"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout14"
         app:layout_constraintEnd_toEndOf="parent"
