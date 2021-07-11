@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.studytogetherproject.MainClasses.LoginOrSignUpActivity;
 import com.example.studytogetherproject.MainClasses.MainActivity;
 import com.example.studytogetherproject.R;
@@ -52,6 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class HomeFragment extends Fragment {
+
     private ImageView stars;
     private CircleImageView userImg;
     private TextView email, exit, goToComments, addPoints, points, phone, data, name, subject, describeInProfile;
@@ -60,6 +65,8 @@ public class HomeFragment extends Fragment {
     private RewardedAd mRewardedAd;
     private final String TAG = "--->AdMob";
     private double average = 0.0;
+    private Dialog dialog;
+    private DatabaseReference uidRef = null;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,17 +74,14 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         initView(root);
+        mAuth = FirebaseAuth.getInstance();
+        uidRef = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid());
         ReadUsersThread readUsersThread = new ReadUsersThread();
         readUsersThread.start();
         getRatingAndSetAverage();
         ShowAdThread thread = new ShowAdThread();
         thread.initilisationAd();
         thread.start();
-
-        Window window = ((Activity)getContext()).getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.mainLight));
 
         goToComments.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,11 +94,10 @@ public class HomeFragment extends Fragment {
 
         exit.setPaintFlags(exit.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         goToComments.setPaintFlags(goToComments.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        mAuth = FirebaseAuth.getInstance();
+
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.exit_or_not);
@@ -112,10 +115,9 @@ public class HomeFragment extends Fragment {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                         Users users = new Users();
                         users.setStatus("offline");
-                        ref.child("status").setValue(users.getStatus());
+                        uidRef.child("status").setValue(users.getStatus());
                         mAuth.signOut();
                         startActivity(new Intent(getContext(), LoginOrSignUpActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
@@ -124,10 +126,24 @@ public class HomeFragment extends Fragment {
                 dialog.show();
             }
         });
+
+        Fade fade = new Fade();
+        View decor = ((Activity)getContext()).getWindow().getDecorView();
+        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ((Activity)getContext()).getWindow().setEnterTransition(fade);
+            ((Activity)getContext()).getWindow().setExitTransition(fade);
+        }
+
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ChangesActivity.class));
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        (Activity)getContext(), userImg, ViewCompat.getTransitionName(userImg));
+                startActivity(new Intent(getContext(), ChangesActivity.class), options.toBundle());
             }
         });
 
@@ -148,12 +164,11 @@ public class HomeFragment extends Fragment {
         points = root.findViewById(R.id.points);
         goToComments = root.findViewById(R.id.goToComments);
         describeInProfile = root.findViewById(R.id.describeInProfile);
+
+
+
     }
     private void readUser() {
-
-        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference uidRef = rootRef.child("User").child(uid);
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
@@ -162,7 +177,6 @@ public class HomeFragment extends Fragment {
                 String emailString = dataSnapshot.child("email").getValue(String.class);
                 String dataString = dataSnapshot.child("data").getValue(String.class);
                 String howMuchTasksDone = dataSnapshot.child("howMuchTasksDone").getValue(String.class);
-                String howMuchNotifications = dataSnapshot.child("howMuchNotifications").getValue(String.class);
                 String gender = dataSnapshot.child("gender").getValue(String.class);
                 String pointsString = dataSnapshot.child("points").getValue(String.class);
                 String phoneString = dataSnapshot.child("phone").getValue(String.class);
@@ -174,28 +188,10 @@ public class HomeFragment extends Fragment {
                 subject.setText(expertSubjectString);
                 phone.setText(phoneString);
 
-                if(imgUri.equals("boy1")){
-                    userImg.setImageResource(R.drawable.boy1);
-                }else if(imgUri.equals("boy2")){
-                    userImg.setImageResource(R.drawable.boy2);
-                }else if(imgUri.equals("boy3")){
-                    userImg.setImageResource(R.drawable.boy3);
-                }
-
-                if(imgUri.equals("girl1")){
-                    userImg.setImageResource(R.drawable.girl1);
-                }else if(imgUri.equals("girl2")){
-                    userImg.setImageResource(R.drawable.girl2);
-                }else if(imgUri.equals("girl3")){
-                    userImg.setImageResource(R.drawable.girl3);
-                }
+                Glide.with(getContext()).load(imgUri).into(userImg);
 
                 getGender(gender, howMuchTasksDone);
 
-
-                int counterOfNotifications = Integer.parseInt(howMuchNotifications);
-                if (counterOfNotifications == 0) {
-                }
                 String describeProfile = dataSnapshot.child("describtion").getValue(String.class);
                 describeInProfile.setText(describeProfile);
                 data.setText(dataString);
@@ -215,7 +211,6 @@ public class HomeFragment extends Fragment {
 
             int counterHowMuchTasksDone = Integer.parseInt(howMuchTasksDone);
             if (counterHowMuchTasksDone == 20) {
-                Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.how_much_was_done);
@@ -235,9 +230,9 @@ public class HomeFragment extends Fragment {
 
                 dialog.show();
                 counterHowMuchTasksDone += 1;
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("boy2");
+                uidRef.child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
+                uidRef.child("points").setValue("500");
+                uidRef.child("imgUri").setValue("https://firebasestorage.googleapis.com/v0/b/kvantoriumproject-552ef.appspot.com/o/avatars%2Fboy2.jpg?alt=media&token=d147e1f8-7fe7-434d-a890-4a936d4d1774");
             } else if (counterHowMuchTasksDone == 50) {
                 Dialog dialog;
                 dialog = new Dialog(getContext());
@@ -259,9 +254,9 @@ public class HomeFragment extends Fragment {
 
                 dialog.show();
                 counterHowMuchTasksDone += 1;
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("boy3");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
+                uidRef.child("points").setValue("500");
+                uidRef.child("imgUri").setValue("https://firebasestorage.googleapis.com/v0/b/kvantoriumproject-552ef.appspot.com/o/avatars%2Fboy3.jpg?alt=media&token=28112e80-9b62-4aeb-aed7-867c55eb9248");
+                uidRef.child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             }
 
         } else if(gender.equals("femail")) {
@@ -287,11 +282,10 @@ public class HomeFragment extends Fragment {
 
                 dialog.show();
                 counterHowMuchTasksDone += 1;
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("girl2");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
+                uidRef.child("points").setValue("500");
+                uidRef.child("imgUri").setValue("https://firebasestorage.googleapis.com/v0/b/kvantoriumproject-552ef.appspot.com/o/avatars%2Fgirl2.jpg?alt=media&token=8149ae87-1454-45ce-90ad-91a730e96a98");
+                uidRef.child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             } else if (counterHowMuchTasksDone == 50) {
-                Dialog dialog;
                 dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.how_much_was_done);
@@ -311,9 +305,9 @@ public class HomeFragment extends Fragment {
 
                 dialog.show();
                 counterHowMuchTasksDone += 1;
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue("500");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imgUri").setValue("girl3");
-                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
+                uidRef.child("points").setValue("500");
+                uidRef.child("imgUri").setValue("https://firebasestorage.googleapis.com/v0/b/kvantoriumproject-552ef.appspot.com/o/avatars%2Fgirl3.jpg?alt=media&token=980f2d56-b6f4-4195-8480-4171f759950d");
+                uidRef.child("howMuchTasksDone").setValue(counterHowMuchTasksDone + "");
             }
         }
     }
@@ -342,29 +336,29 @@ public class HomeFragment extends Fragment {
                     users.setAverage(roundOff + "");
                     if (roundOff < 1 && roundOff > 0) {
                         stars.setImageResource(R.drawable.zero_five);
-                    } else if (roundOff <= 1.5 && roundOff > 0 && roundOff > 1) {
+                    } else if (roundOff <= 1.5  && roundOff > 1) {
                         stars.setImageResource(R.drawable.one_five);
-                    } else if (roundOff > 0.5 && roundOff > 0 && roundOff < 1.5) {
+                    } else if (roundOff > 0.5  && roundOff < 1.5) {
                         stars.setImageResource(R.drawable.one);
-                    } else if (roundOff > 1.5 && roundOff > 0 && roundOff < 2.5) {
+                    } else if (roundOff > 1.5  && roundOff < 2.5) {
                         stars.setImageResource(R.drawable.two);
-                    } else if (roundOff >= 2 && roundOff > 0 && roundOff <= 2.5) {
+                    } else if (roundOff >= 2  && roundOff <= 2.5) {
                         stars.setImageResource(R.drawable.two_five);
-                    } else if (roundOff > 2.5 && roundOff > 0 && roundOff <= 3) {
+                    } else if (roundOff > 2.5  && roundOff <= 3) {
                         stars.setImageResource(R.drawable.three);
-                    } else if (roundOff > 3 && roundOff > 0 && roundOff <= 3.5) {
+                    } else if (roundOff > 3 && roundOff <= 3.5) {
                         stars.setImageResource(R.drawable.three_five);
-                    } else if (roundOff > 3.5 && roundOff > 0 && roundOff <= 4) {
+                    } else if (roundOff > 3.5  && roundOff <= 4) {
                         stars.setImageResource(R.drawable.four);
-                    } else if (roundOff > 4 && roundOff > 0 && roundOff <= 4.5) {
+                    } else if (roundOff > 4  && roundOff <= 4.5) {
                         stars.setImageResource(R.drawable.four_five);
-                    } else if (roundOff > 4.5 && roundOff > 0 && roundOff <= 5) {
+                    } else if (roundOff > 4.5  && roundOff <= 5) {
                         stars.setImageResource(R.drawable.five);
                     } else if (roundOff == 0) {
                         stars.setImageResource(R.drawable.zero);
                     }
 
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("average").setValue(users.getAverage());
+                    uidRef.child("average").setValue(users.getAverage());
 
 
                 }
@@ -439,17 +433,15 @@ public class HomeFragment extends Fragment {
                     public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                         // Handle the reward.
                         Log.d(TAG, "The user earned the reward.");
-                        int rewardAmount = rewardItem.getAmount();
-                        String rewardType = rewardItem.getType();
 
-                        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 String points_getting = snapshot.child("points").getValue(String.class);
                                 int pointsInteger = Integer.parseInt(points_getting);
                                 int result = pointsInteger + 10;
                                 points.setText( result + "");
-                                FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(result + "");
+                                uidRef.child("points").setValue(result + "");
                             }
 
                             @Override

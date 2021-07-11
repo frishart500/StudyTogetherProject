@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.studytogetherproject">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -16,18 +16,24 @@
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Study.together"
+        android:label="StudyTogether"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.KvantoriumProject">
-        <activity android:name=".ui.create_task.CreateTaskActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".MainClasses.LoginOrSignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainClasses.IntroActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainClasses.ChooseGenderActivity"
-            android:screenOrientation="portrait"/>
+        android:theme="@style/Theme.KvantoriumProject"
+        tools:replace="android:label">
+        <activity android:name=".Onboarding.IntroActivity"></activity>
+        <activity
+            android:name=".ui.create_task.CreateTaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainClasses.LoginOrSignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Onboarding.AppIntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainClasses.ChooseGenderActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainClasses.SplashScreenActivity"
             android:screenOrientation="portrait">
@@ -61,7 +67,8 @@
         <activity
             android:name=".MainClasses.MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <meta-data
             android:name="preloaded_fonts"

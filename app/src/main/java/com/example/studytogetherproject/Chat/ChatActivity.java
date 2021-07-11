@@ -22,6 +22,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.transition.AutoTransition;
+import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.studytogetherproject.Moduls.FinishTask;
 import com.example.studytogetherproject.MainClasses.MainActivity;
 import com.example.studytogetherproject.R;
@@ -100,6 +102,7 @@ public class ChatActivity extends AppCompatActivity {
     DateTimeFormatter dateFprmat, timeFormat;
     private AwesomeMessage message;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +128,20 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         getImages();
+        fading();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void fading(){
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(fade);
+            getWindow().setExitTransition(fade);
+        }
 
     }
 
@@ -183,21 +200,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String img = snapshot.child("imgUri").getValue(String.class);
-                    if(img.equals("boy1")){
-                        userImgChat.setBackgroundResource(R.drawable.boy1);
-                    }else if(img.equals("boy2")){
-                        userImgChat.setBackgroundResource(R.drawable.boy2);
-                    }else if(img.equals("boy3")){
-                        userImgChat.setBackgroundResource(R.drawable.boy3);
-                    }
-
-                    if(img.equals("girl1")){
-                        userImgChat.setBackgroundResource(R.drawable.girl1);
-                    }else if(img.equals("girl2")){
-                        userImgChat.setBackgroundResource(R.drawable.girl2);
-                    }else if(img.equals("girl3")){
-                        userImgChat.setBackgroundResource(R.drawable.girl3);
-                    }
+                    Glide.with(getApplicationContext()).load(img).into(userImgChat);
                 }
 
                 @Override
@@ -210,21 +213,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String img = snapshot.child("imgUri").getValue(String.class);
-                    if(img.equals("boy1")){
-                        userImgChat.setBackgroundResource(R.drawable.boy1);
-                    }else if(img.equals("boy2")){
-                        userImgChat.setBackgroundResource(R.drawable.boy2);
-                    }else if(img.equals("boy3")){
-                        userImgChat.setBackgroundResource(R.drawable.boy3);
-                    }
-
-                    if(img.equals("girl1")){
-                        userImgChat.setBackgroundResource(R.drawable.girl1);
-                    }else if(img.equals("girl2")){
-                        userImgChat.setBackgroundResource(R.drawable.girl2);
-                    }else if(img.equals("girl3")){
-                        userImgChat.setBackgroundResource(R.drawable.girl3);
-                    }
+                    Glide.with(getApplicationContext()).load(img).into(userImgChat);
                 }
 
                 @Override

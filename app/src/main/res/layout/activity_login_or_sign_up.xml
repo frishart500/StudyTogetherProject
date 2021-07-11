@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerInParent="true"
     tools:context=".MainClasses.LoginOrSignUpActivity">
 
     <ImageView
+        android:id="@+id/gradient_img"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#D091EC"
+        android:background="@color/main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".27"
@@ -23,28 +25,14 @@
         android:id="@+id/image"
         android:layout_width="107dp"
         android:layout_height="98dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/znak"
+        android:transitionName="example_transition"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018" />
-
-    <TextView
-        android:id="@+id/textView50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:padding="8dp"
-        android:text="StudyTogether"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"
-        app:layout_constraintVertical_bias="0.011" />
+        app:layout_constraintVertical_bias="0.048" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

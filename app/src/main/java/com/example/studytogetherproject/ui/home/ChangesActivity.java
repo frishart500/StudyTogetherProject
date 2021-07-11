@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -42,6 +43,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -56,6 +58,8 @@ public class ChangesActivity extends AppCompatActivity {
     private InterstitialAd mInterstitialAd;
     private final String TAG = "---AdMob";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private DatabaseReference uidRef = null;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -70,8 +74,8 @@ public class ChangesActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainLight));
-
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
+        fading();
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -102,6 +106,20 @@ public class ChangesActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void fading(){
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(fade);
+            getWindow().setExitTransition(fade);
+        }
 
     }
 
@@ -187,6 +205,7 @@ public class ChangesActivity extends AppCompatActivity {
     }
 
     private void init() {
+        uidRef = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         back = findViewById(R.id.back);
         name = findViewById(R.id.name);
         data = findViewById(R.id.editData);
@@ -241,7 +260,7 @@ public class ChangesActivity extends AppCompatActivity {
                 Users users = new Users();
                 if (!nameS.isEmpty()) {
                     users.setName(nameS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(users.getName());
+                    uidRef.child("name").setValue(users.getName());
                     FirebaseDatabase.getInstance().getReference("FriendsInChats").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -263,19 +282,19 @@ public class ChangesActivity extends AppCompatActivity {
                 }
                 if (!subjectS.equals("")) {
                     users.setSubject(subjectS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("subject").setValue(users.getSubject());
+                    uidRef.child("subject").setValue(users.getSubject());
                 }
                 if (!describtionS.isEmpty()) {
                     users.setDescribtion(describtionS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("describtion").setValue(users.getDescribtion());
+                    uidRef.child("describtion").setValue(users.getDescribtion());
                 }
                 if (!phoneS.isEmpty()) {
                     users.setPhone(phoneS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("phone").setValue(users.getPhone());
+                    uidRef.child("phone").setValue(users.getPhone());
                 }
                 if (!dataS.isEmpty()) {
                     users.setData(dataS);
-                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("data").setValue(users.getData());
+                    uidRef.child("data").setValue(users.getData());
                 }
 
             }
@@ -286,7 +305,7 @@ public class ChangesActivity extends AppCompatActivity {
             }
         };
 
-        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(vChangeListener);
+        uidRef.addListenerForSingleValueEvent(vChangeListener);
 
 
     }

@@ -1,8 +1,10 @@
 package com.example.studytogetherproject.ui.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +63,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.context = context;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     @Override
     public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,7 +74,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
         Item item = arrayList.get(position);
-        //holder.name.setText(item.getName());
         holder.subject.setText(item.getSubject());
         holder.points.setText(item.getPoints());
         holder.describe.setText(item.getDescribe());
@@ -97,6 +99,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         CardView cardView;
         ConstraintLayout cl, cl_all;
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageGoToProfile = itemView.findViewById(R.id.goToProfile);

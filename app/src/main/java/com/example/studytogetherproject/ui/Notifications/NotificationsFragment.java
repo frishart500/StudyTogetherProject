@@ -49,11 +49,6 @@ public class NotificationsFragment extends Fragment {
         my_notifications.setVisibility(View.VISIBLE);
         adapter = new AdapterNotification(getContext(), arrayList);
 
-        Window window = ((Activity)getContext()).getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.mainLight));
-
         ValueEventListener val = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

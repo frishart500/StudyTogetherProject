@@ -11,13 +11,13 @@
         android:id="@+id/back"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/back_cross"
+        android:src="@drawable/back_white"
         app:layout_constraintBottom_toTopOf="@+id/cardView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintVertical_bias="0.18" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView8"
@@ -28,6 +28,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:elevation="4dp"
+        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

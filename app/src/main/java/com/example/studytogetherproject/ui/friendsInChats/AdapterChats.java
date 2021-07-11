@@ -1,7 +1,11 @@
 package com.example.studytogetherproject.ui.friendsInChats;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.studytogetherproject.Chat.ChatActivity;
 import com.example.studytogetherproject.Moduls.ItemChat;
 import com.example.studytogetherproject.R;
@@ -19,8 +27,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> {
     private ArrayList<ItemChat> arrayList = new ArrayList<>();
@@ -51,8 +64,6 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds : snapshot.getChildren()) {
-                            String image = ds.child("imgUri1").getValue(String.class);
-                            String image2 = ds.child("imgUri2").getValue(String.class);
                             String nameInChats = ds.child("name").getValue(String.class);
                             String id = ds.child("anotherId").getValue(String.class);
                             String id1 = ds.child("userId").getValue(String.class);
@@ -63,7 +74,7 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                                         String status = snapshot.child("status").getValue(String.class);
                                         if (status.equals("online")) {
                                             holder.status.setImageResource(R.drawable.open_eye);
-                                        } else if(status.equals("offline")){
+                                        } else if (status.equals("offline")) {
                                             holder.status.setImageResource(R.drawable.close_eye);
                                         }
                                     }
@@ -74,7 +85,7 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                                     }
                                 };
                                 FirebaseDatabase.getInstance().getReference("User").child(id).addListenerForSingleValueEvent(valAnotherUIDStatus);
-                            } else if(id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                            } else if (id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 ValueEventListener valAnotherUIDStatus = new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,54 +105,15 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                                 FirebaseDatabase.getInstance().getReference("User").child(id1).addListenerForSingleValueEvent(valAnotherUIDStatus);
                             }
 
-
-
-                                if (name.equals(nameInChats)) {
-                                    holder.name.setText(arrayList.get(position).getNameAnotherPerson() + ", ");
-                                    if (image2.equals("boy1")) {
-                                        holder.img.setImageResource(R.drawable.boy1);
-                                    }
-                                    else if (image2.equals("boy2")) {
-                                        holder.img.setImageResource(R.drawable.boy2);
-                                    }
-                                    else if (image2.equals("boy3")) {
-                                        holder.img.setImageResource(R.drawable.boy3);
-                                    }
-                                    else if (image2.equals("girl1")) {
-                                        holder.img.setImageResource(R.drawable.girl1);
-                                    }
-                                    else if (image2.equals("girl2")) {
-                                        holder.img.setImageResource(R.drawable.girl2);
-                                    }
-                                    else if (image2.equals("girl3")) {
-                                        holder.img.setImageResource(R.drawable.girl3);
-                                    }
-
-                                }
-
-
-                                if (!name.equals(nameInChats)) {
-                                    holder.name.setText(arrayList.get(position).getName() + ", ");
-                                    if (image.equals("boy1")) {
-                                        holder.img.setImageResource(R.drawable.boy1);
-                                    }
-                                    else if (image.equals("boy2")) {
-                                        holder.img.setImageResource(R.drawable.boy2);
-                                    }
-                                    else if (image.equals("boy3")) {
-                                        holder.img.setImageResource(R.drawable.boy3);
-                                    }
-                                    else if (image.equals("girl1")) {
-                                        holder.img.setImageResource(R.drawable.girl1);
-                                    }
-                                    else if (image.equals("girl2")) {
-                                        holder.img.setImageResource(R.drawable.girl2);
-                                    }
-                                    else if (image.equals("girl3")) {
-                                        holder.img.setImageResource(R.drawable.girl3);
-                                    }
-                                }
+                            if (name.equals(nameInChats)) {
+                                holder.name.setText(arrayList.get(position).getNameAnotherPerson() + ", ");
+                                Glide.with(context).load(item.getImg2()).into(holder.img);
                             }
+                            if (!name.equals(nameInChats)) {
+                                holder.name.setText(arrayList.get(position).getName() + ", ");
+                                Glide.with(context).load(item.getImg1()).into(holder.img);
+                            }
+                        }
 
                     }
 
@@ -183,8 +155,17 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
             itemView.setOnClickListener(this);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         private void goToChat() {
-
+            Fade fade = new Fade();
+            View decor = ((Activity) context).getWindow().getDecorView();
+            fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ((Activity) context).getWindow().setEnterTransition(fade);
+                ((Activity) context).getWindow().setExitTransition(fade);
+            }
 
             ValueEventListener valUser = new ValueEventListener() {
                 @Override
@@ -219,7 +200,9 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
 
 
                             }
-                            context.startActivity(intent);
+                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                    (Activity) context, img, ViewCompat.getTransitionName(img));
+                            context.startActivity(intent, options.toBundle());
                         }
 
                         @Override
@@ -238,9 +221,11 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
             FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(valUser);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onClick(View v) {
             goToChat();
+
         }
     }
 
@@ -248,7 +233,6 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
         arrayList = filterList;
         notifyDataSetChanged();
     }
-
 
 }
 

@@ -26,11 +26,12 @@
             android:padding="15dp">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgItem"
                 android:layout_width="70dp"
                 android:layout_height="66dp"
                 android:src="@drawable/user_img"
+                android:transitionName="example_transition"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -99,14 +100,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameOfTask"
                 app:layout_constraintVertical_bias="0.128" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/yes"
                 android:layout_width="100dp"
                 android:layout_height="55dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/button"
                 android:backgroundTint="@color/main"
                 android:layout_marginTop="15dp"
+                app:cornerRadius="15dp"
                 android:text="Да"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -116,11 +117,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
                 app:layout_constraintVertical_bias="0.833" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/no"
                 android:layout_width="100dp"
                 android:layout_height="55dp"
-                android:background="@drawable/button"
+                app:cornerRadius="15dp"
                 android:backgroundTint="@color/main"
                 android:text="Нет"
                 android:textAllCaps="false"

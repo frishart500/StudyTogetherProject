@@ -9,6 +9,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,10 +17,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.example.studytogetherproject.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginOrSignUpActivity extends AppCompatActivity {
@@ -39,6 +43,23 @@ public class LoginOrSignUpActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Регистрация"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(), this, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -46,38 +67,15 @@ public class LoginOrSignUpActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainLight));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
 
         anim();
     }
+
     @Override
     public void onBackPressed() {
-        //диалоговое окно
-        Dialog dialog;
-        dialog = new Dialog(getApplicationContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.exit_from_app_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(false);
-        TextView textCancel = dialog.findViewById(R.id.no);
-        TextView yes = dialog.findViewById(R.id.yes);
-        textCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishAffinity();
-                System.exit(0);
-            }
-        });
-
-        dialog.show();
-
+        finishAffinity();
+        System.exit(0);
     }
 
     private void anim(){

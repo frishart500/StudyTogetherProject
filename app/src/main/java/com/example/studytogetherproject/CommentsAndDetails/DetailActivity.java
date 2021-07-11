@@ -10,12 +10,14 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.studytogetherproject.MainClasses.MainActivity;
 import com.example.studytogetherproject.R;
 import com.example.studytogetherproject.Moduls.Users;
@@ -43,8 +45,8 @@ public class DetailActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainLight));
-
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
+        fadding();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +63,20 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         getRatingOfUser();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void fadding(){
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(fade);
+            getWindow().setExitTransition(fade);
+        }
+
     }
 
     private void init() {
@@ -84,19 +100,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String imgUri = snapshot.child("imgUri").getValue(String.class);
-                if (imgUri.equals("boy1")) {
-                    userImg.setImageResource(R.drawable.boy1);
-                } else if (imgUri.equals("boy2")) {
-                    userImg.setImageResource(R.drawable.boy2);
-                } else if (imgUri.equals("boy3")) {
-                    userImg.setImageResource(R.drawable.boy3);
-                } else if (imgUri.equals("girl1")) {
-                    userImg.setImageResource(R.drawable.girl1);
-                } else if (imgUri.equals("girl2")) {
-                    userImg.setImageResource(R.drawable.girl2);
-                } else if (imgUri.equals("girl3")) {
-                    userImg.setImageResource(R.drawable.girl3);
-                }
+                Glide.with(getApplicationContext()).load(imgUri).into(userImg);
             }
 
             @Override
@@ -138,23 +142,23 @@ public class DetailActivity extends AppCompatActivity {
                 users.setAverage(String.valueOf(roundOff));
                 if (roundOff < 1 && roundOff > 0) {
                     stars.setImageResource(R.drawable.zero_five);
-                } else if (roundOff <= 1.5 && roundOff > 0 && roundOff > 1) {
+                } else if (roundOff <= 1.5 && roundOff > 1) {
                     stars.setImageResource(R.drawable.one_five);
-                } else if (roundOff > 0.5 && roundOff > 0 && roundOff < 1.5) {
+                } else if (roundOff > 0.5 && roundOff < 1.5) {
                     stars.setImageResource(R.drawable.one);
-                } else if (roundOff > 1.5 && roundOff > 0 && roundOff < 2.5) {
+                } else if (roundOff > 1.5 && roundOff < 2.5) {
                     stars.setImageResource(R.drawable.two);
-                } else if (roundOff >= 2 && roundOff > 0 && roundOff <= 2.5) {
+                } else if (roundOff >= 2&& roundOff <= 2.5) {
                     stars.setImageResource(R.drawable.two_five);
-                } else if (roundOff > 2.5 && roundOff > 0 && roundOff <= 3) {
+                } else if (roundOff > 2.5 && roundOff <= 3) {
                     stars.setImageResource(R.drawable.three);
-                } else if (roundOff > 3 && roundOff > 0 && roundOff <= 3.5) {
+                } else if (roundOff > 3  && roundOff <= 3.5) {
                     stars.setImageResource(R.drawable.three_five);
-                } else if (roundOff > 3.5 && roundOff > 0 && roundOff <= 4) {
+                } else if (roundOff > 3.5  && roundOff <= 4) {
                     stars.setImageResource(R.drawable.four);
-                } else if (roundOff > 4 && roundOff > 0 && roundOff <= 4.5) {
+                } else if (roundOff > 4  && roundOff <= 4.5) {
                     stars.setImageResource(R.drawable.four_five);
-                } else if (roundOff > 4.5 && roundOff > 0 && roundOff <= 5) {
+                } else if (roundOff > 4.5  && roundOff <= 5) {
                     stars.setImageResource(R.drawable.five);
                 } else if (roundOff == 0) {
                     stars.setImageResource(R.drawable.zero);
@@ -169,4 +173,5 @@ public class DetailActivity extends AppCompatActivity {
         };
         FirebaseDatabase.getInstance().getReference("Raiting").addListenerForSingleValueEvent(valRating);
     }
+
 }

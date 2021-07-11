@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +36,7 @@
                 android:id="@+id/imgUserChat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:transitionName="chat_img"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
@@ -204,14 +206,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView34"
                     app:layout_constraintVertical_bias="0.056" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnFinishInChat"
                     android:layout_width="184dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/main"
                     android:text="Закончить!"
-                    android:background="@drawable/button"
+                    app:cornerRadius="15dp"
                     android:textAllCaps="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -264,10 +265,11 @@
         android:textStyle="italic"
         android:text=""/>
 
-    <LinearLayout
-        android:id="@+id/lin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="15dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
@@ -275,36 +277,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975">
+        app:layout_constraintVertical_bias="0.975"
+        android:layout_width="match_parent"
+        android:minHeight="60dp"
+        app:layout_constraintHeight_max="120dp"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/addPhoto"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/add_photo"
-            />
+        <LinearLayout
+            android:id="@+id/lin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:layout_marginLeft="10dp"
+                android:id="@+id/addPhoto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/add_photo"
+                />
 
 
-        <EditText
-            android:id="@+id/messageEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Напишите сообщение"
-            android:padding="10dp"
-            android:textColor="@color/main"
-            android:textColorHint="@color/main"
-            android:backgroundTint="@color/main" />
+            <EditText
+                android:id="@+id/messageEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Напишите сообщение"
+                android:maxHeight="120dp"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/main"
+                android:textColorHint="@color/main"
+                android:backgroundTint="@color/main" />
 
-        <Button
-            android:id="@+id/sendMessage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/send"
-            android:enabled="false" />
+            <Button
+                android:id="@+id/sendMessage"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/send"
+                android:enabled="false" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>

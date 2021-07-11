@@ -7,13 +7,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.create_task.CreateTaskActivity"
     android:id="@+id/create"
-    android:background="@color/white">
+    >
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#D091EC"
+        android:background="@color/main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".27"
@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.275" />
 
     <TextView
         android:id="@+id/textView50"
@@ -42,14 +42,14 @@
         android:padding="8dp"
         android:text="Добавление задания"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout14"
@@ -57,7 +57,7 @@
         android:layout_height="0dp"
         android:background="@drawable/vw_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent=".78"
+        app:layout_constraintHeight_percent=".88"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
@@ -69,9 +69,10 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintVertical_bias="0.1"
             tools:layout_editor_absoluteX="15dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,6 +115,7 @@
             app:cardCornerRadius="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            app:cardElevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card"
             app:layout_constraintVertical_bias="0.034"
@@ -155,6 +157,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card1"
             app:layout_constraintVertical_bias="0.034"
@@ -195,13 +198,14 @@
             android:layout_width="match_parent"
             android:layout_height="71dp"
             android:visibility="gone"
+            app:cardElevation="6dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3">
+            app:layout_constraintVertical_bias="0.1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -255,6 +259,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card3"
             app:layout_constraintVertical_bias="0.034"
@@ -300,6 +305,7 @@
             android:layout_marginLeft="15dp"
             app:cardCornerRadius="15dp"
             android:visibility="gone"
+            app:cardElevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card4"
             app:layout_constraintVertical_bias="0.034"
@@ -382,16 +388,15 @@
         </androidx.cardview.widget.CardView>
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/postTask"
             android:layout_width="284dp"
             android:layout_height="61dp"
-            android:backgroundTint="@color/main"
             android:text="Готово!"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:visibility="gone"
-            android:background="@drawable/button"
+            app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/card4"
             app:layout_constraintHorizontal_bias="0.5"
@@ -416,22 +421,20 @@
             app:rippleColor="@color/main"
             app:tint="@android:color/white" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/main"
-            android:src="@drawable/back"
+            android:text="←Назад"
             android:visibility="gone"
-            app:backgroundTint="@color/main"
+            android:textColor="@color/main"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.042"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/card"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.069"
-            app:rippleColor="@color/main"
-            app:tint="@android:color/white" />
+            app:layout_constraintVertical_bias="0.04" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

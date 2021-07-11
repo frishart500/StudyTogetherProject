@@ -11,7 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#D091EC"
+        android:background="@color/main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".27"
@@ -197,6 +197,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImg"
+        android:transitionName="example_transition"
         android:layout_width="109dp"
         android:layout_height="108dp"
         app:civ_border_color="@color/main"

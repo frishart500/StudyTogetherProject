@@ -13,10 +13,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private BottomAppBar bottomAppBar;
     private BottomNavigationView navView;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -62,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), CreateTaskActivity.class));
             }
         });
+
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
 
         //проверка интеренет соединения
         checkInternetConection();
@@ -113,31 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Dialog dialog;
-        dialog = new Dialog(MainActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.exit_from_app_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(false);
-        TextView textCancel = dialog.findViewById(R.id.no);
-        TextView yes = dialog.findViewById(R.id.yes);
-        textCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishAffinity();
-                System.exit(0);
-            }
-        });
-
-        dialog.show();
-
+        finishAffinity();
+        System.exit(0);
     }
 
     private void checkInternetConection() {

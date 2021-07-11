@@ -2,14 +2,23 @@ package com.example.studytogetherproject.MainClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
+import com.example.studytogetherproject.Onboarding.IntroActivity;
 import com.example.studytogetherproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,6 +26,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     //переменные
     private FirebaseAuth mAuth;
     private ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         animation.start();
+
         //поток
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -41,12 +52,15 @@ public class SplashScreenActivity extends AppCompatActivity {
                 if(mAuth.getCurrentUser() != null){
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }else{
                     intent = new Intent(getApplicationContext(), IntroActivity.class);
                     startActivity(intent);
+                    finish();
                 }
-                finish();
             }
-        }, 4650);
+        }, 3500);
     }
+
+
 }

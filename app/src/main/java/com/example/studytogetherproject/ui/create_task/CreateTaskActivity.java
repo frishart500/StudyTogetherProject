@@ -7,15 +7,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -52,7 +58,7 @@ import java.util.Calendar;
 public class CreateTaskActivity extends AppCompatActivity {
     private EditText describtionOfTask, nameOfTask, dateToFinish, classText, points;
     private CardView card1, card2, card3, card4, card5, card6;
-    private FloatingActionButton fab, back_btn;
+    private FloatingActionButton fab;
     private Button postTask;
     private String phone;
     private ImageView calendar, addPhotoForTask, taskImage, deleteImg, back;
@@ -61,13 +67,18 @@ public class CreateTaskActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private Uri imgUri;
     private Uri downloadUri;
-    private TextView subject;
+    private TextView subject, back_btn;
     private Snackbar snackbar;
+
+    private DatabaseReference uidRef = null;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
+
+
         getSupportActionBar().hide();
         init();
         createListOfTheSubjects();
@@ -77,7 +88,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainLight));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
+
 
     }
     private void onClicks() {
@@ -160,10 +172,8 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
     }
+
     private void postingTask(View v) {
-        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
 
         ValueEventListener val = new ValueEventListener() {
             @Override
@@ -196,26 +206,6 @@ public class CreateTaskActivity extends AppCompatActivity {
                                 .child("points").setValue(users.getPoints());
 
                         getUser();
-                        if (counterForTasks == 1) {
-                            FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
-                            Dialog dialog;
-                            dialog = new Dialog(getApplicationContext());
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            dialog.setContentView(R.layout.dialog_first_task);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            dialog.setCancelable(false);
-
-                            Button ok = dialog.findViewById(R.id.ok);
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                    FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("points").setValue(String.valueOf((pointsCount - countPoint) + 100));
-                                }
-                            });
-
-                            dialog.show();
-                        }
                     }
                 }
             }
@@ -225,12 +215,16 @@ public class CreateTaskActivity extends AppCompatActivity {
 
             }
         };
-        uidRefGetUid.addListenerForSingleValueEvent(val);
+        uidRef.addListenerForSingleValueEvent(val);
     }
 
     private void init() {
+
+        uidRef = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
         fab = findViewById(R.id.fab_forward);
         back_btn = findViewById(R.id.back_btn);
+        back_btn.setPaintFlags(back_btn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         card1 = findViewById(R.id.card);
         card2 = findViewById(R.id.card1);
@@ -333,10 +327,6 @@ public class CreateTaskActivity extends AppCompatActivity {
     }
 
     private void getUser() {
-        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference uidRefGetUid = rootRef.child("User").child(uid);
-
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -402,7 +392,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
             }
         };
-        uidRefGetUid.addListenerForSingleValueEvent(eventListener);
+        uidRef.addListenerForSingleValueEvent(eventListener);
     }
 
     @Override

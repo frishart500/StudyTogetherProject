@@ -11,6 +11,7 @@
         android:layout_width="149dp"
         android:layout_height="145dp"
         android:src="@drawable/znak"
+        android:transitionName="example_transition"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

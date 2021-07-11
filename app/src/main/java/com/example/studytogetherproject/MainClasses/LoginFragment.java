@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +48,7 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth mAuth;
     private Button btnEnter;
     private TextView forgetPassword;
+    private CardView loginCard, passwordCard;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,6 +109,8 @@ public class LoginFragment extends Fragment {
 
     private void init(View view) {
         //создание объектов
+        loginCard = view.findViewById(R.id.cardView1);
+        passwordCard = view.findViewById(R.id.cardView2);
         email = view.findViewById(R.id.email);
         password = view.findViewById(R.id.password);
         btnEnter = view.findViewById(R.id.enterBtn);
@@ -113,6 +118,8 @@ public class LoginFragment extends Fragment {
         forgetPassword.setPaintFlags(forgetPassword.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mAuth = FirebaseAuth.getInstance();
     }
+
+
 
     private void setOnClickEnter() {
         btnEnter.setOnClickListener(new View.OnClickListener() {

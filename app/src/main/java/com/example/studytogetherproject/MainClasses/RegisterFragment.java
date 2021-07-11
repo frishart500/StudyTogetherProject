@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -35,10 +36,10 @@ import java.util.Calendar;
 public class RegisterFragment extends Fragment {
     private CardView cs1, cs2, cs3, cs4, cs5, cs6, cs7;
     private FloatingActionButton reg;
-    private ImageView dataImg, back;
+    private ImageView dataImg;
     private Button reg1;
     private EditText email, password, name, phone, data, describtion;
-    private TextView subject;
+    private TextView subject, back;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     // TODO: Rename parameter arguments, choose names that match
     @Override
@@ -137,6 +138,7 @@ public class RegisterFragment extends Fragment {
         subject = view.findViewById(R.id.subject);
         dataImg = view.findViewById(R.id.dataImg);
         back = view.findViewById(R.id.back);
+        back.setPaintFlags(back.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         cs1 = view.findViewById(R.id.cardView1);
         cs2 = view.findViewById(R.id.cardView2);

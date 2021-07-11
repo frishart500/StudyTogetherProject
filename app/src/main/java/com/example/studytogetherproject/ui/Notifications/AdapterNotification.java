@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.studytogetherproject.Chat.ChatActivity;
 import com.example.studytogetherproject.Moduls.FinishTask;
 import com.example.studytogetherproject.Moduls.Friends;
@@ -40,6 +46,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AdapterNotification extends RecyclerView.Adapter<AdapterNotification.ViewHolder> {
 
     private ArrayList<Friends> arrayList = new ArrayList<>();
@@ -53,6 +61,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         this.context = context;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,36 +74,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         Friends item = arrayList.get(position);
         holder.nameOfTask.setText(item.getNameOfTask());
         holder.name.setText(item.getName());
-        ValueEventListener val = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String image2 = ds.child("imgUri2").getValue(String.class);
-                    Log.d("IMAGE", image2);
-                    if (image2.equals("boy1")) {
-                        holder.userImg.setImageResource(R.drawable.boy1);
-                    } else if (image2.equals("boy2")) {
-                        holder.userImg.setImageResource(R.drawable.boy2);
-                    } else if (image2.equals("boy3")) {
-                        holder.userImg.setImageResource(R.drawable.boy3);
-                    } else if (image2.equals("girl1")) {
-                        holder.userImg.setImageResource(R.drawable.girl1);
-                    } else if (image2.equals("girl2")) {
-                        holder.userImg.setImageResource(R.drawable.girl2);
-                    } else if (image2.equals("girl3")) {
-                        holder.userImg.setImageResource(R.drawable.girl3);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        FirebaseDatabase.getInstance().getReference("Friends").addListenerForSingleValueEvent(val);
-
+        Glide.with(context).load(item.getImgUri2()).into(holder.userImg);
     }
 
     @Override
@@ -106,14 +86,18 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         TextView name, nameOfTask;
         ImageView userImg;
         Button yes, no;
+        ImageView imageView;
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             name = itemView.findViewById(R.id.name);
             userImg = itemView.findViewById(R.id.imgItem);
             nameOfTask = itemView.findViewById(R.id.nameOfTask);
             yes = itemView.findViewById(R.id.yes);
             no = itemView.findViewById(R.id.no);
+            imageView = itemView.findViewById(R.id.imgItem);
 
             parentLayout = itemView.findViewById(android.R.id.content);
 
@@ -164,6 +148,16 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 }
             });
 
+            Fade fade = new Fade();
+            View decor = ((Activity) context).getWindow().getDecorView();
+            fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ((Activity) context).getWindow().setEnterTransition(fade);
+                ((Activity) context).getWindow().setExitTransition(fade);
+            }
+
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -175,7 +169,11 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     intent.putExtra("id", item.getAnotherId());
                     intent.putExtra("describe", item.getDescribtionOfUser());
                     intent.putExtra("subjectToDetail", item.getSubjectOfUser());
-                    context.startActivity(intent);
+
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            (Activity) context, imageView, ViewCompat.getTransitionName(imageView));
+
+                    context.startActivity(intent, options.toBundle());
                 }
             });
 

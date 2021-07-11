@@ -1,6 +1,9 @@
 package com.example.studytogetherproject.ui.friendsInChats;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,25 +13,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.model.Model;
 import com.example.studytogetherproject.Moduls.ItemChat;
 import com.example.studytogetherproject.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class AllYourChatsFragment extends Fragment {
 
@@ -37,6 +50,9 @@ public class AllYourChatsFragment extends Fragment {
     private RecyclerView rv;
     private EditText edit_find;
     private TextView my_chats;
+    private DatabaseReference root = FirebaseDatabase.getInstance().getReference("Image");
+    private StorageReference reference = FirebaseStorage.getInstance().getReference();
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -47,11 +63,6 @@ public class AllYourChatsFragment extends Fragment {
         buildRv();
         readData();
         searchUsers();
-
-        Window window = ((Activity)getContext()).getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.mainLight));
 
         return root;
     }
@@ -90,12 +101,14 @@ public class AllYourChatsFragment extends Fragment {
 
     private void filter(String text) {
         ArrayList<ItemChat> array = new ArrayList<>();
-        for (ItemChat item : arrayList) {
-            if (item.getNameOfTask().toLowerCase().contains(text.toLowerCase())) {
-                array.add(item);
+        if(arrayList != null){
+            for (ItemChat item : arrayList) {
+                if (item.getNameOfTask().toLowerCase().contains(text.toLowerCase())) {
+                    array.add(item);
+                }
             }
+            adapter.filterList(array);
         }
-        adapter.filterList(array);
     }
 
     private void readData() {
@@ -157,5 +170,8 @@ public class AllYourChatsFragment extends Fragment {
         };
         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(valUser);
     }
+
+
+
 
 }
