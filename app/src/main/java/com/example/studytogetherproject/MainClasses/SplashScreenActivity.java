@@ -19,6 +19,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.example.studytogetherproject.Onboarding.IntroActivity;
+import com.example.studytogetherproject.Onboarding.IntroActivityOnboarding;
 import com.example.studytogetherproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -54,7 +55,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else{
-                    intent = new Intent(getApplicationContext(), IntroActivity.class);
+                    intent = new Intent(getApplicationContext(), IntroActivityOnboarding.class);
                     startActivity(intent);
                     finish();
                 }

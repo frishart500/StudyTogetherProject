@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KvantoriumProject"
         tools:replace="android:label">
-        <activity android:name=".Onboarding.IntroActivity"></activity>
+        <activity android:name=".Onboarding.IntroActivityOnboarding"></activity>
+        <activity android:name=".Onboarding.IntroActivity" />
         <activity
             android:name=".ui.create_task.CreateTaskActivity"
             android:screenOrientation="portrait" />
