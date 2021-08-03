@@ -35,7 +35,7 @@ import java.util.Calendar;
 
 public class RegisterFragment extends Fragment {
     private CardView cs1, cs2, cs3, cs4, cs5, cs6, cs7;
-    private FloatingActionButton reg;
+    private TextView reg;
     private ImageView dataImg;
     private Button reg1;
     private EditText email, password, name, phone, data, describtion;
@@ -139,6 +139,7 @@ public class RegisterFragment extends Fragment {
         dataImg = view.findViewById(R.id.dataImg);
         back = view.findViewById(R.id.back);
         back.setPaintFlags(back.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        reg.setPaintFlags(reg.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         cs1 = view.findViewById(R.id.cardView1);
         cs2 = view.findViewById(R.id.cardView2);

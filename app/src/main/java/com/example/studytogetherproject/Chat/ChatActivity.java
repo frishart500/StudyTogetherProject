@@ -69,6 +69,7 @@ import com.example.studytogetherproject.notificationPack.MyResponse;
 import com.example.studytogetherproject.notificationPack.NotificationSender;
 import com.example.studytogetherproject.notificationPack.Token;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,7 +84,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private String nameTitle, phoneTitle, classTextTitle, describeTitle, priceTitle, dateToFinishTitle, id_str, id, justId, anotherId;
 
-    private ImageView back, callImage, userImgChat;
+    private ImageView back, callImage;
+    private CircleImageView userImgChat;
     private TextView nameInChats, classTextInChats, describe, price, dateToFinish;
     //расширяемая карточка
     private ConstraintLayout cl;
@@ -99,7 +101,7 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private ValueEventListener seenListener;
     private FirebaseAuth mAuth;
-    DateTimeFormatter dateFprmat, timeFormat;
+    private DateTimeFormatter dateFprmat, timeFormat;
     private AwesomeMessage message;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -114,7 +116,7 @@ public class ChatActivity extends AppCompatActivity {
         List<AwesomeMessage> awesomeMessages = new ArrayList<>(); // списиок
         adapter = new AwesomeMessageAdapter(this, R.layout.message_item, awesomeMessages);
         messageListView.setAdapter(adapter);
-        classTextInChats.setText(classTextTitle + " класс ↓");
+        classTextInChats.setText(classTextTitle + " " + R.string.grade_down);
         setChatAdapter();
 
         onClick();
@@ -128,22 +130,9 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         getImages();
-        fading();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void fading(){
-        Fade fade = new Fade();
-        View decor = getWindow().getDecorView();
-        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
-        fade.excludeTarget(android.R.id.statusBarBackground, true);
-        fade.excludeTarget(android.R.id.navigationBarBackground, true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setEnterTransition(fade);
-            getWindow().setExitTransition(fade);
-        }
 
     }
+
 
     private void setChatAdapter() {
         childEventListener = new ChildEventListener() {
@@ -476,12 +465,12 @@ public class ChatActivity extends AppCompatActivity {
                         //становиться видимым
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.VISIBLE);
-                        classTextInChats.setText(classTextTitle + " класс ↑");
+                        classTextInChats.setText(classTextTitle + " " + R.string.grade_up);
                     } else {
                         //становиться невидимым
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.GONE);
-                        classTextInChats.setText(classTextTitle + " класс ↓");
+                        classTextInChats.setText(classTextTitle + " " + R.string.grade_down);
                     }
                 }
                 if (v.getId() == R.id.btnFinishInChat) {

@@ -65,6 +65,7 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             String nameInChats = ds.child("name").getValue(String.class);
+                            String nameAnotherUser = ds.child("nameAnotherUser").getValue(String.class);
                             String id = ds.child("anotherId").getValue(String.class);
                             String id1 = ds.child("userId").getValue(String.class);
                             if (id1.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
@@ -105,13 +106,22 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                                 FirebaseDatabase.getInstance().getReference("User").child(id1).addListenerForSingleValueEvent(valAnotherUIDStatus);
                             }
 
-                            if (name.equals(nameInChats)) {
-                                holder.name.setText(arrayList.get(position).getNameAnotherPerson() + ", ");
-                                Glide.with(context).load(item.getImg2()).into(holder.img);
-                            }
-                            if (!name.equals(nameInChats)) {
-                                holder.name.setText(arrayList.get(position).getName() + ", ");
+                            System.out.println(nameInChats + " nameInChats");
+                            System.out.println(nameAnotherUser + " nameAnotherUser");
+                            System.out.println(name + " name");
+                            //here fucking bug
+
+                            if (name.equals(nameAnotherUser)) {
+                                holder.name.setText(item.getName() + ", ");
                                 Glide.with(context).load(item.getImg1()).into(holder.img);
+                                if(nameAnotherUser.equals(item.getName())){
+                                    holder.name.setText(item.getNameAnotherPerson() + ", ");
+                                    Glide.with(context).load(item.getImg2()).into(holder.img);
+                                }
+                            }
+                            else if (nameInChats.equals(item.getName())) {
+                                Glide.with(context).load(item.getImg2()).into(holder.img);
+                                holder.name.setText(item.getNameAnotherPerson() + ", ");
                             }
                         }
 
@@ -157,16 +167,6 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         private void goToChat() {
-            Fade fade = new Fade();
-            View decor = ((Activity) context).getWindow().getDecorView();
-            fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
-            fade.excludeTarget(android.R.id.navigationBarBackground, true);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                ((Activity) context).getWindow().setEnterTransition(fade);
-                ((Activity) context).getWindow().setExitTransition(fade);
-            }
-
             ValueEventListener valUser = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -192,17 +192,19 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
 
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 String nameInChats = ds.child("name").getValue(String.class);
-                                if (name.equals(nameInChats)) {
-                                    intent.putExtra("name", arrayList.get(position).getNameAnotherPerson());
-                                } else if (!name.equals(nameInChats)) {
+                                String nameAnotherUser = ds.child("nameAnotherUser").getValue(String.class);
+
+                                if (name.equals(nameAnotherUser)) {
                                     intent.putExtra("name", arrayList.get(position).getName());
+                                    if(nameAnotherUser.equals(arrayList.get(position).getName())){
+                                        intent.putExtra("name", arrayList.get(position).getNameAnotherPerson());
+                                    }
                                 }
-
-
+                                else if (nameInChats.equals(arrayList.get(position).getName())) {
+                                    intent.putExtra("name", arrayList.get(position).getNameAnotherPerson());
+                                }
                             }
-                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                    (Activity) context, img, ViewCompat.getTransitionName(img));
-                            context.startActivity(intent, options.toBundle());
+                            context.startActivity(intent);
                         }
 
                         @Override

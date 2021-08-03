@@ -46,12 +46,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChangesActivity extends AppCompatActivity {
     private EditText name, data, phone, describtion;
-    private ImageView back, userImg;
+    private ImageView back;
+    private CircleImageView userImg;
     private ImageView dataImg;
     private Button change;
     private TextView subject;
@@ -75,7 +79,9 @@ public class ChangesActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
-        fading();
+
+        getUserImage();
+
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -108,21 +114,6 @@ public class ChangesActivity extends AppCompatActivity {
         });
 
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void fading(){
-        Fade fade = new Fade();
-        View decor = getWindow().getDecorView();
-        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
-        fade.excludeTarget(android.R.id.statusBarBackground, true);
-        fade.excludeTarget(android.R.id.navigationBarBackground, true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setEnterTransition(fade);
-            getWindow().setExitTransition(fade);
-        }
-
-    }
-
     private void createAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         createIntertitialAd(adRequest);
@@ -215,36 +206,6 @@ public class ChangesActivity extends AppCompatActivity {
         dataImg = findViewById(R.id.dataImg);
         change = findViewById(R.id.change);
         userImg = findViewById(R.id.userImg);
-        getUserImg();
-    }
-
-    private void getUserImg(){
-        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String img = snapshot.child("imgUri").getValue(String.class);
-                if(img.equals("boy1")){
-                    userImg.setImageResource(R.drawable.boy1);
-                }else if(img.equals("boy2")){
-                    userImg.setImageResource(R.drawable.boy2);
-                }else if(img.equals("boy3")){
-                    userImg.setImageResource(R.drawable.boy3);
-                }
-
-                if(img.equals("girl1")){
-                    userImg.setImageResource(R.drawable.girl1);
-                }else if(img.equals("girl2")){
-                    userImg.setImageResource(R.drawable.girl2);
-                }else if(img.equals("girl3")){
-                    userImg.setImageResource(R.drawable.girl3);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     private void changes() {
@@ -349,5 +310,19 @@ public class ChangesActivity extends AppCompatActivity {
         });
     }
 
+    private void getUserImage(){
+        FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String img = snapshot.child("imgUri").getValue(String.class);
+                Picasso.get().load(img).into(userImg);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 }

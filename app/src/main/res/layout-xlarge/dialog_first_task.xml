@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="230dp"
     android:id="@+id/preview"
     android:layout_margin="15dp"
@@ -32,12 +32,12 @@
                 android:gravity="center"
                 android:text="Поздравляем с публикацией первого задания!"
                 android:textColor="#601C80"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.347"
+                app:layout_constraintVertical_bias="0.2"
                 tools:layout_editor_absoluteX="0dp" />
 
             <TextView
@@ -46,20 +46,21 @@
                 android:gravity="center"
                 android:text="Вам будет зачислено 100 баллов."
                 android:textColor="#601C80"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20"
                 app:layout_constraintVertical_bias="0.092"
                 tools:layout_editor_absoluteX="0dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/ok"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button"
-                android:backgroundTint="@color/main"
                 android:text="Здорово!"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:textAllCaps="false"
+                app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

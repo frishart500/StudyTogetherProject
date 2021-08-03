@@ -7,21 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
-import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -30,6 +25,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,7 +36,6 @@ import com.example.studytogetherproject.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,24 +48,23 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CreateTaskActivity extends AppCompatActivity {
     private EditText describtionOfTask, nameOfTask, dateToFinish, classText, points;
-    private CardView card1, card2, card3, card4, card5, card6;
-    private FloatingActionButton fab;
+    private CardView card1, card2, card3, card4, card5, card6, cardWithImg;
     private Button postTask;
     private String phone;
-    private ImageView calendar, addPhotoForTask, taskImage, deleteImg, back;
+    private ImageView calendar, addPhotoForTask, back, imgWhichWasAdded, deleteImgFromAdded;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    private Uri imgUri;
-    private Uri downloadUri;
-    private TextView subject, back_btn;
+    private Uri downloadUri, imgUri;
+    private TextView subject, back_btn, fab, textAddImage, textViewithDescription;
     private Snackbar snackbar;
-
     private DatabaseReference uidRef = null;
+    private LinearLayout lin;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -92,6 +86,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
 
     }
+
     private void onClicks() {
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +97,12 @@ public class CreateTaskActivity extends AppCompatActivity {
                 card6.setVisibility(View.VISIBLE);
                 back_btn.setVisibility(View.VISIBLE);
                 postTask.setVisibility(View.VISIBLE);
+                addPhotoForTask.setVisibility(View.VISIBLE);
+                lin.setVisibility(View.VISIBLE);
+
 
                 fab.setVisibility(View.GONE);
+                textViewithDescription.setVisibility(View.GONE);
                 card1.setVisibility(View.GONE);
                 card2.setVisibility(View.GONE);
                 card3.setVisibility(View.GONE);
@@ -118,8 +117,12 @@ public class CreateTaskActivity extends AppCompatActivity {
                 card6.setVisibility(View.GONE);
                 back_btn.setVisibility(View.GONE);
                 postTask.setVisibility(View.GONE);
+                addPhotoForTask.setVisibility(View.GONE);
+                textAddImage.setVisibility(View.GONE);
+                lin.setVisibility(View.GONE);
 
                 fab.setVisibility(View.VISIBLE);
+                textViewithDescription.setVisibility(View.VISIBLE);
                 card1.setVisibility(View.VISIBLE);
                 card2.setVisibility(View.VISIBLE);
                 card3.setVisibility(View.VISIBLE);
@@ -160,7 +163,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                     snackbar.setTextColor(0XFFffffff);
                     snackbar.show();
                 }
-                if(!points.getText().toString().equals("")){
+                if (!points.getText().toString().equals("")) {
                     int countPoint = Integer.parseInt(points.getText().toString());
                     if (countPoint < 100) {
                         snackbar = Snackbar.make(v, "Цена за задние должна быть не меньше 100 и не больше 500 баллов.", Snackbar.LENGTH_LONG);
@@ -223,8 +226,17 @@ public class CreateTaskActivity extends AppCompatActivity {
         uidRef = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         fab = findViewById(R.id.fab_forward);
+        lin = findViewById(R.id.lin);
+        textAddImage = findViewById(R.id.text_addImg);
+        textViewithDescription = findViewById(R.id.textViewithDescription);
+
+        cardWithImg = findViewById(R.id.cardWithImg);
+        imgWhichWasAdded = findViewById(R.id.imgWhichWasAdded);
+        deleteImgFromAdded = findViewById(R.id.deleteImgFromAdded);
+
         back_btn = findViewById(R.id.back_btn);
         back_btn.setPaintFlags(back_btn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        fab.setPaintFlags(fab.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         card1 = findViewById(R.id.card);
         card2 = findViewById(R.id.card1);
@@ -235,7 +247,6 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         addPhotoForTask = findViewById(R.id.addPhotoForTask);
         back = findViewById(R.id.back);
-        taskImage = findViewById(R.id.taskImage);
         classText = findViewById(R.id.classOfUserInTask);
         calendar = findViewById(R.id.calendar);
         nameOfTask = findViewById(R.id.nameOfTask);
@@ -244,7 +255,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         subject = findViewById(R.id.subjectProblem);
         describtionOfTask = findViewById(R.id.describe);
         dateToFinish = findViewById(R.id.dateToFinish);
-        deleteImg = findViewById(R.id.deleteImg);
     }
 
     private void createListOfTheSubjects() {
@@ -363,6 +373,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                     task.setImg(String.valueOf(downloadUri));
                     task.setDescribtionOfUser(describe);
 
+
                     DatabaseReference dr = FirebaseDatabase.getInstance().getReference("Task");
                     dr.push().setValue(task);
                     ValueEventListener valTask = new ValueEventListener() {
@@ -403,6 +414,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         storageReference = storage.getReference().child("TasksPhotos");
         if (requestCode == 123 && resultCode == RESULT_OK) {
             imgUri = data.getData();
+
             StorageReference imageReference = storageReference.child(imgUri.getLastPathSegment());
             UploadTask uploadTask = imageReference.putFile(imgUri);
             uploadTask = imageReference.putFile(imgUri);
@@ -415,7 +427,6 @@ public class CreateTaskActivity extends AppCompatActivity {
                         throw task.getException();
                     }
 
-
                     return imageReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -423,11 +434,13 @@ public class CreateTaskActivity extends AppCompatActivity {
                 public void onComplete(@NonNull com.google.android.gms.tasks.Task<Uri> task) {
                     if (task.isSuccessful()) {
                         downloadUri = task.getResult();
-                        taskImage.setVisibility(View.VISIBLE);
-                        deleteImg.setVisibility(View.VISIBLE);
-                        Picasso.get().load(downloadUri.toString()).into(taskImage);
 
-                        deleteImg.setOnClickListener(new View.OnClickListener() {
+                        Picasso.get().load(downloadUri.toString()).into(imgWhichWasAdded);
+                        addPhotoForTask.setVisibility(View.GONE);
+                        textAddImage.setVisibility(View.GONE);
+                        cardWithImg.setVisibility(View.VISIBLE);
+
+                        deleteImgFromAdded.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 StorageReference photoRef = storage.getReferenceFromUrl(downloadUri.toString());
@@ -438,8 +451,9 @@ public class CreateTaskActivity extends AppCompatActivity {
                                         snackbar.setBackgroundTint(0XFFffffff);
                                         snackbar.setTextColor(0XFF601C80);
                                         snackbar.show();
-                                        taskImage.setVisibility(View.GONE);
-                                        deleteImg.setVisibility(View.GONE);
+                                        cardWithImg.setVisibility(View.GONE);
+                                        addPhotoForTask.setVisibility(View.VISIBLE);
+                                        textAddImage.setVisibility(View.VISIBLE);
                                     }
                                 });
                             }

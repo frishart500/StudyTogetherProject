@@ -4,12 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="390dp"
+    android:layout_width="match_parent"
     android:layout_height="240dp"
     android:layout_margin="15dp"
     android:layout_gravity="center"
-    android:scaleType = "centerCrop"
-    tools:ignore="MissingDefaultResource">
+    android:scaleType = "centerCrop">
 
 
     <androidx.cardview.widget.CardView
@@ -26,9 +25,11 @@
 
             <TextView
                 android:id="@+id/textView55"
-                android:layout_width="307dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:gravity="left"
                 android:padding="5dp"
                 android:text="Выход"
@@ -43,8 +44,10 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="307dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:gravity="left"
                 android:padding="10dp"
                 android:text="Вы уверены, что хотите выйти из своего аккаунта?"
@@ -61,14 +64,15 @@
                 android:id="@+id/yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cornerRadius="15dp"
+                android:layout_marginLeft="15dp"
                 android:text="Да"
                 android:textAllCaps="false"
                 android:textColor="#fff"
+                app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.091"
-                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView26"
                 app:layout_constraintVertical_bias="0.589" />
 
@@ -76,13 +80,14 @@
                 android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cornerRadius="15dp"
                 android:text="Нет"
                 android:textAllCaps="false"
                 android:textColor="#fff"
+                app:cornerRadius="15dp"
+                android:layout_marginRight="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/yes"
-                app:layout_constraintEnd_toEndOf="@+id/textView26"
-                app:layout_constraintHorizontal_bias="0.897"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/yes"
                 app:layout_constraintVertical_bias="0.0" />

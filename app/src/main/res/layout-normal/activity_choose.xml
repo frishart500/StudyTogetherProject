@@ -29,8 +29,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView9"
-                android:layout_width="325dp"
+                android:layout_width="match_parent"
                 android:layout_height="190dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -40,8 +42,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cs6"
-                    android:layout_width="325dp"
-                    android:layout_height="190dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +57,7 @@
                         android:layout_height="116dp"
                         android:background="@android:color/transparent"
                         android:gravity="left"
-                        android:hint="Написать..."
+                        android:hint="@string/type"
                         android:inputType="text|textMultiLine|textCapSentences"
                         android:textColor="@color/main"
                         android:textColorHint="@color/main"
@@ -74,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:text="Оцените работу эксперта:"
+                android:text="@string/working_nice_or_"
                 android:textColor="@color/main"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:progressBackgroundTint="#D091EC"
                 android:progressTint="@color/main"
+                android:numStars="5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.461"
@@ -99,9 +102,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_send"
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:text="Готово!"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="@string/done"
                 app:cornerRadius="15dp"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"

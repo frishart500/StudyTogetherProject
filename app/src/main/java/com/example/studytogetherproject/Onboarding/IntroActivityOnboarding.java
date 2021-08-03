@@ -84,26 +84,31 @@ public class IntroActivityOnboarding extends AppCompatActivity {
                     case 0:
                         btn.setVisibility(View.VISIBLE);
                         btnStart.setVisibility(View.GONE);
+                        skipBtn.setVisibility(View.VISIBLE);
                         balls.setImageResource(R.drawable.first_ball);
                         break;
                     case 1:
                         btn.setVisibility(View.VISIBLE);
                         btnStart.setVisibility(View.GONE);
+                        skipBtn.setVisibility(View.VISIBLE);
                         balls.setImageResource(R.drawable.second_ball);
                         break;
                     case 2:
                         btn.setVisibility(View.VISIBLE);
                         btnStart.setVisibility(View.GONE);
+                        skipBtn.setVisibility(View.VISIBLE);
                         balls.setImageResource(R.drawable.third_ball);
                         break;
                     case 3:
                         btn.setVisibility(View.VISIBLE);
                         btnStart.setVisibility(View.GONE);
+                        skipBtn.setVisibility(View.VISIBLE);
                         balls.setImageResource(R.drawable.fourth_ball);
                         break;
                     case 4:
                         btnStart.setVisibility(View.VISIBLE);
                         btn.setVisibility(View.GONE);
+                        skipBtn.setVisibility(View.GONE);
                         balls.setImageResource(R.drawable.fifth_ball);
                         btnStart.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -119,8 +124,8 @@ public class IntroActivityOnboarding extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
 
+        });
         list = new ArrayList<>();
         list.add(new SlideFragment1());
         list.add(new SlideFragment2());

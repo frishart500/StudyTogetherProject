@@ -45,6 +45,8 @@
         app:layout_constraintVertical_bias="1.0">
 
 
+
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -94,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:background="@android:color/transparent"
-                            android:hint="Предмет"
+                            android:hint="@string/subject_change"
                             android:textColor="@color/main"
                             android:textColorHint="@color/main"
                             android:textSize="18dp"
@@ -138,7 +140,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:hint="Имя"
+                            android:hint="@string/name_change"
                             android:padding="10dp"
                             android:textColor="@color/main"
                             android:textColorHint="@color/main"
@@ -182,7 +184,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:hint="Дата рождения"
+                            android:hint="@string/date_change"
                             android:inputType="date"
                             android:padding="10dp"
                             android:textColor="@color/main"
@@ -240,7 +242,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:hint="Номер телефона"
+                            android:hint="@string/phone_change"
                             android:inputType="phone"
                             android:padding="10dp"
                             android:textColor="@color/main"
@@ -288,7 +290,7 @@
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:gravity="left"
-                            android:hint="Описание"
+                            android:hint="@string/description_change"
                             android:inputType="text|textMultiLine|textCapSentences"
                             android:padding="10dp"
                             android:textColor="@color/main"
@@ -306,9 +308,11 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/change"
-                    android:layout_width="288dp"
+                    android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Сохранить!"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/save_btn_change"
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     app:cornerRadius="15dp"
@@ -330,13 +334,12 @@
         android:id="@+id/userImg"
         android:layout_width="109dp"
         android:layout_height="108dp"
-        android:transitionName="user_transition"
         app:civ_border_color="@color/main"
+        tools:src = "@drawable/boy1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06"
-        tools:src="@drawable/boy1" />
+        app:layout_constraintVertical_bias="0.06" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

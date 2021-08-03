@@ -19,10 +19,8 @@
         android:label="StudyTogether"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.KvantoriumProject"
+        android:theme="@style/Theme.White.KvantoriumProject"
         tools:replace="android:label">
-        <activity android:name=".Onboarding.IntroActivityOnboarding"></activity>
-        <activity android:name=".Onboarding.IntroActivity" />
         <activity
             android:name=".ui.create_task.CreateTaskActivity"
             android:screenOrientation="portrait" />
@@ -30,13 +28,14 @@
             android:name=".MainClasses.LoginOrSignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Onboarding.AppIntroActivity"
+            android:name=".Onboarding.IntroActivityOnboarding"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainClasses.ChooseGenderActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainClasses.SplashScreenActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //иницилизация
         navView = findViewById(R.id.nav_view);
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);

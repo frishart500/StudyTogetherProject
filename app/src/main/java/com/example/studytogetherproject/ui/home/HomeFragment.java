@@ -127,23 +127,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Fade fade = new Fade();
-        View decor = ((Activity)getContext()).getWindow().getDecorView();
-        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
-        fade.excludeTarget(android.R.id.statusBarBackground, true);
-        fade.excludeTarget(android.R.id.navigationBarBackground, true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ((Activity)getContext()).getWindow().setEnterTransition(fade);
-            ((Activity)getContext()).getWindow().setExitTransition(fade);
-        }
 
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        (Activity)getContext(), userImg, ViewCompat.getTransitionName(userImg));
-                startActivity(new Intent(getContext(), ChangesActivity.class), options.toBundle());
+                startActivity(new Intent(getContext(), ChangesActivity.class));
             }
         });
 

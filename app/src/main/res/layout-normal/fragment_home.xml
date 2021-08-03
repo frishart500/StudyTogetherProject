@@ -39,16 +39,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:text="400"
+            android:text=""
             android:textColor="@color/main"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/email"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16" />
+            app:layout_constraintVertical_bias="0.04" />
 
         <TextView
             android:id="@+id/addPoints"
@@ -69,8 +69,8 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_width="23dp"
+            android:layout_height="24dp"
             android:src="@drawable/znak"
             app:layout_constraintBottom_toBottomOf="@+id/points"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,67 +79,47 @@
             app:layout_constraintTop_toTopOf="@+id/points"
             app:layout_constraintVertical_bias="0.0" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="@color/main"
+            android:textSize="24sp"
+            android:alpha="0.1"
+            android:textStyle="normal"
+            android:elevation="6dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/addPoints"
+            app:layout_constraintEnd_toStartOf="@+id/stars"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toTopOf="@+id/addPoints" />
+
         <ImageView
             android:id="@+id/stars"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:src="@drawable/zero"
-            app:layout_constraintBottom_toBottomOf="@+id/email"
+            app:layout_constraintBottom_toBottomOf="@+id/addPoints"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text=""
-            android:layout_marginTop="10dp"
-            android:textColor="@color/main"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.117" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text=""
-            android:textColor="@color/mainLight"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            app:layout_constraintVertical_bias="0.03" />
-
-
-
+            app:layout_constraintTop_toTopOf="@+id/addPoints"
+            app:layout_constraintVertical_bias="0.037" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:cardCornerRadius="15dp"
             android:layout_marginBottom="15dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:elevation="6dp"
-            app:cardElevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email"
-            app:layout_constraintVertical_bias="0.02"
+            app:layout_constraintTop_toBottomOf="@+id/points"
+            app:layout_constraintVertical_bias="0.06"
             tools:layout_editor_absoluteX="13dp">
 
             <LinearLayout
@@ -148,27 +128,27 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_weight="0"
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="0"
                     android:fontFamily="@font/montserrat"
                     android:text="Дата рождения:"
                     android:textColor="@color/main"
-                    android:textSize="15sp"
-                    android:layout_margin="15dp"/>
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/montserrat"
                     android:text=""
                     android:textColor="@color/main"
-                    android:background="@android:color/transparent"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_margin="15dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.036"
@@ -177,10 +157,7 @@
                     app:layout_constraintVertical_bias="1.0" />
 
 
-
-
             </LinearLayout>
-
 
 
         </androidx.cardview.widget.CardView>
@@ -362,18 +339,20 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/changeBtn"
-            android:layout_width="269dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_height="54dp"
-            app:cornerRadius="15dp"
             android:backgroundTint="@color/main"
+            android:elevation="6dp"
             android:text="Редактировать"
             android:textAllCaps="false"
-            android:elevation="6dp"
+            app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card3"
-            app:layout_constraintVertical_bias="0.239" />
+            app:layout_constraintVertical_bias="0.15" />
 
         <TextView
             android:id="@+id/exit"
@@ -384,10 +363,10 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.199"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/changeBtn"
             app:layout_constraintTop_toBottomOf="@+id/changeBtn"
-            app:layout_constraintVertical_bias="0.391" />
+            app:layout_constraintVertical_bias="0.212" />
 
         <TextView
             android:id="@+id/goToComments"
@@ -397,8 +376,8 @@
             android:textColor="#601C80"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/exit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.773"
+            app:layout_constraintEnd_toEndOf="@+id/changeBtn"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/exit"
             app:layout_constraintVertical_bias="0.0" />
@@ -406,17 +385,59 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toEndOf="@+id/userImg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text=""
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        app:layout_constrainedWidth="true"
+        android:textColor="@color/mainLight"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="0.0" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImg"
         android:layout_width="109dp"
         android:layout_height="108dp"
         app:civ_border_color="@color/main"
-        android:transitionName="user_transition"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.1"
         android:elevation="6dp"
        tools:src = "@drawable/boy1"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

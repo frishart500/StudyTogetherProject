@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/back_cross"
         app:layout_constraintBottom_toTopOf="@+id/cardView8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,12 +21,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView8"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
         app:cardCornerRadius="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="366dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="20dp"
@@ -49,37 +49,37 @@
                 android:layout_height="wrap_content"
                 android:text="Выберите персонажа: "
                 android:textColor="@color/main"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="318dp"
-                android:layout_height="174dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
 
                 <ImageView
                     android:id="@+id/mail"
-                    android:layout_width="123dp"
-                    android:layout_height="122dp"
+                    android:layout_width="140dp"
+                    android:layout_height="131dp"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/boy1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.082"
+                    app:layout_constraintHorizontal_bias="0.221"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/femail"
-                    android:layout_width="123dp"
-                    android:layout_height="122dp"
+                    android:layout_width="140dp"
+                    android:layout_height="131dp"
                     android:src="@drawable/girl1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.673"
-                    app:layout_constraintStart_toEndOf="@+id/mail"
+                    app:layout_constraintHorizontal_bias="0.736"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/mail"
                     app:layout_constraintVertical_bias="0.0" />
 

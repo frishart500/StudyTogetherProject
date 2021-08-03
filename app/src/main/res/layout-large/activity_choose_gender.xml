@@ -21,12 +21,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView8"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
         app:cardCornerRadius="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="366dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="20dp"
@@ -49,12 +49,12 @@
                 android:layout_height="wrap_content"
                 android:text="Выберите персонажа: "
                 android:textColor="@color/main"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="318dp"
-                android:layout_height="174dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
@@ -67,7 +67,7 @@
                     android:src="@drawable/boy1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.082"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,8 +78,8 @@
                     android:src="@drawable/girl1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.673"
-                    app:layout_constraintStart_toEndOf="@+id/mail"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/mail"
                     app:layout_constraintVertical_bias="0.0" />
 

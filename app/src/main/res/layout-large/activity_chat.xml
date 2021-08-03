@@ -13,13 +13,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
+        app:cardCornerRadius="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        app:cardCornerRadius="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
+        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,13 +32,14 @@
             android:layout_height="match_parent"
             android:padding="15dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgUserChat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_constraintBottom_toBottomOf="@+id/classTextInChats"
-                app:layout_constraintEnd_toStartOf="@+id/nameInChats"
-                app:layout_constraintHorizontal_bias="0.64"
+                android:transitionName="chat_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
@@ -49,29 +51,30 @@
                 android:fontFamily="@font/montserrat"
                 android:text="Name, "
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imgUserChat"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.246"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toEndOf="@+id/imgUserChat"
                 app:layout_constraintTop_toTopOf="@+id/imgUserChat"
-                app:layout_constraintVertical_bias="0.521"/>
+                app:layout_constraintVertical_bias="0.5" />
 
             <TextView
                 android:id="@+id/classTextInChats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat"
                 android:text="11 класс ↓"
                 android:textColor="@color/main"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="@+id/imgUserChat"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.128"
+                app:layout_constraintHorizontal_bias="0.08"
                 app:layout_constraintStart_toEndOf="@+id/nameInChats"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/imgUserChat" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl"
@@ -93,7 +96,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Цена:"
                     android:textColor="@color/main"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
@@ -108,7 +111,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="100"
                     android:textColor="@color/main"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -118,15 +121,15 @@
                     app:layout_constraintVertical_bias="0.044" />
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="27dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:src="@drawable/znak"
-                    app:layout_constraintBottom_toBottomOf="@+id/priceInChat"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.079"
                     app:layout_constraintStart_toEndOf="@+id/priceInChat"
-                    app:layout_constraintTop_toTopOf="@+id/priceInChat"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.046" />
 
                 <TextView
                     android:id="@+id/textView32"
@@ -135,7 +138,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Срок:"
                     android:textColor="@color/main"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
@@ -150,7 +153,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="07.03.21"
                     android:textColor="@color/main"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +170,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="Описание:"
                     android:textColor="@color/main"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -183,19 +186,21 @@
                     android:src="@drawable/call"
                     app:layout_constraintBottom_toTopOf="@+id/describtionInChat"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.899"
+                    app:layout_constraintHorizontal_bias="0.89"
                     app:layout_constraintStart_toEndOf="@+id/textView34"
                     app:layout_constraintTop_toBottomOf="@+id/dateToFinishInChat"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/describtionInChat"
-                    android:layout_width="316dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="Чтобы накачать в бак 117 л воды, требуется на 5 минут больше времени, чем на то, чтобы выкачать из него 96 л воды. За одну минуту можно выкачать на 3 л воды больше, чем накачать. Сколько литров воды накачивается в бак за минуту? Помогите решить, пожалуйста.💜"
+                    android:text=""
                     android:textColor="@color/main"
                     android:textSize="15sp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.024"
@@ -203,15 +208,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView34"
                     app:layout_constraintVertical_bias="0.056" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnFinishInChat"
-                    android:layout_width="184dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/main"
                     android:text="Закончить!"
+                    app:cornerRadius="15dp"
                     android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent"
@@ -222,15 +228,15 @@
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/back_cross"
                 app:layout_constraintBottom_toBottomOf="@id/classTextInChats"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.843"
+                app:layout_constraintHorizontal_bias="0.872"
                 app:layout_constraintStart_toEndOf="@+id/classTextInChats"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.666" />
+                app:layout_constraintVertical_bias="0.931" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,11 +245,11 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_above="@+id/lin"
         android:divider="@android:color/transparent"
         android:transcriptMode="alwaysScroll"
@@ -254,10 +260,13 @@
         android:stackFromBottom="true"
         tools:listitem="@layout/message_item" />
 
-    <LinearLayout
-        android:id="@+id/lin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="15dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
@@ -265,36 +274,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975">
+        app:layout_constraintVertical_bias="0.975"
+        android:layout_width="match_parent"
+        android:minHeight="60dp"
+        app:layout_constraintHeight_max="120dp"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/addPhoto"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/add_photo"
-            />
+        <LinearLayout
+            android:id="@+id/lin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:layout_marginLeft="10dp"
+                android:id="@+id/addPhoto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/add_photo"
+                />
 
 
-        <EditText
-            android:id="@+id/messageEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Напишите сообщение"
-            android:padding="10dp"
-            android:textColor="@color/main"
-            android:textColorHint="@color/main"
-            android:backgroundTint="@color/main" />
+            <EditText
+                android:id="@+id/messageEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Напишите сообщение"
+                android:maxHeight="120dp"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/main"
+                android:textColorHint="@color/main"
+                android:backgroundTint="@color/main" />
 
-        <Button
-            android:id="@+id/sendMessage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/send"
-            android:enabled="false" />
+            <Button
+                android:id="@+id/sendMessage"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/send"
+                android:enabled="false" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>
