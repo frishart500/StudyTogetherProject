@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:padding="8dp"
-        android:text="Комментарии"
+        android:text="@string/comment"
         android:textColor="@color/white"
         android:textSize="32dp"
         android:textStyle="bold"

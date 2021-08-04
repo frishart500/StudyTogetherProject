@@ -28,7 +28,7 @@
                 android:gravity="left"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
-                android:text="-Выберите желаемую цену:"
+                android:text="@string/get_good_price"
                 android:textColor="#601C80"
                 android:textSize="18sp" />
 
@@ -149,7 +149,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="Выберите класс"
+                            android:hint="@string/choose_the_class"
                             android:textColorHint="@color/main"
                             android:background="@android:color/transparent"
                             android:id="@+id/find_class"
@@ -169,7 +169,7 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="15dp"
-                    android:text="Готово!"
+                    android:text="@string/done"
                     android:textAllCaps="false" />
 
             </LinearLayout>

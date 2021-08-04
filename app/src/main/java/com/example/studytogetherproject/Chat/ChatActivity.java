@@ -116,7 +116,7 @@ public class ChatActivity extends AppCompatActivity {
         List<AwesomeMessage> awesomeMessages = new ArrayList<>(); // списиок
         adapter = new AwesomeMessageAdapter(this, R.layout.message_item, awesomeMessages);
         messageListView.setAdapter(adapter);
-        classTextInChats.setText(classTextTitle + " " + R.string.grade_down);
+        classTextInChats.setText(classTextTitle + " " + getResources().getString(R.string.grade_down));
         setChatAdapter();
 
         onClick();
@@ -465,12 +465,12 @@ public class ChatActivity extends AppCompatActivity {
                         //становиться видимым
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.VISIBLE);
-                        classTextInChats.setText(classTextTitle + " " + R.string.grade_up);
+                        classTextInChats.setText(classTextTitle + " " + getResources().getString(R.string.grade_up));
                     } else {
                         //становиться невидимым
                         TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                         cl.setVisibility(View.GONE);
-                        classTextInChats.setText(classTextTitle + " " + R.string.grade_down);
+                        classTextInChats.setText(classTextTitle + " " + getResources().getString(R.string.grade_down));
                     }
                 }
                 if (v.getId() == R.id.btnFinishInChat) {

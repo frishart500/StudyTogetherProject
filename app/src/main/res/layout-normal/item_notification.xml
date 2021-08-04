@@ -26,12 +26,11 @@
             android:padding="15dp">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/imgItem"
                 android:layout_width="70dp"
                 android:layout_height="66dp"
                 android:src="@drawable/user_img"
-                app:civ_border_color="@color/main"
                 android:transitionName="example_transition"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +60,7 @@
                 android:id="@+id/textView27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="хочет выполнить задание:"
+                android:text="@string/wants_to_do_u_task"
                 android:textColor="@color/main"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgItem"
@@ -90,7 +89,7 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Вы согласны?"
+                android:text="@string/are_you_agree"
                 android:textColor="@color/main"
                 android:layout_marginBottom="15dp"
                 android:textSize="18sp"
@@ -109,7 +108,7 @@
                 android:backgroundTint="@color/main"
                 android:layout_marginTop="15dp"
                 app:cornerRadius="15dp"
-                android:text="Да"
+                android:text="@string/yes"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +123,7 @@
                 android:layout_height="55dp"
                 app:cornerRadius="15dp"
                 android:backgroundTint="@color/main"
-                android:text="Нет"
+                android:text="@string/no"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@+id/yes"
                 app:layout_constraintEnd_toEndOf="parent"

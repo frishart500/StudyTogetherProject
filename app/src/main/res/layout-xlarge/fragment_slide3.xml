@@ -22,7 +22,7 @@
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Как работает приложение?"
+        android:text="@string/how_it_works"
         android:textColor="@color/main"
         android:gravity="center"
         android:layout_marginRight="10dp"
@@ -41,13 +41,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:gravity="center"
-        android:text=" - Публикуете задание 📝\n
-- У вас списывают баллы 💸\n
-- Эксперты кидают заявки 👨‍🎓\n
-- Выбираете эксперта 🔍\n
-- Эксперт помогает вам🤝\n
-- Эксперт получает баллы 💎\n
-- Пишите отзыв о работе 📃"
+        android:text="@string/lets_explain"
         android:textColor="@color/mainLight"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

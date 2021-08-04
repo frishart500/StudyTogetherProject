@@ -57,8 +57,8 @@ public class DashboardFragment extends Fragment{
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         initView(root);
-        tabLayout.addTab(tabLayout.newTab().setText("Все задания"));
-        tabLayout.addTab(tabLayout.newTab().setText("Мои задания"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.all_tasks));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.my_tasks));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final DashAdapter adapter = new DashAdapter(getChildFragmentManager(), getContext(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);

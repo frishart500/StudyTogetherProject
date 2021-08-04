@@ -40,8 +40,8 @@ public class LoginOrSignUpActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         imageView = findViewById(R.id.image);
         tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Вход"));
-        tabLayout.addTab(tabLayout.newTab().setText("Регистрация"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.enter));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.register));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

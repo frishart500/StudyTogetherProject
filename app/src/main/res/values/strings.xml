@@ -1,66 +1,162 @@
 <resources>
     <string name="app_name">StudyTogetherProject</string>
-    <string name="enter">Вход</string>
-    <string name="enterBtn">Войти</string>
-    <string name="password">Пароль</string>
-    <string name="forgetPassword">Забыли пароль</string>
-    <string name="registration">Зарегистрироваться</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Личный кабинет</string>
-    <string name="title_dashboard">Список покупок</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="changeText">Редактировать профиль</string>
-    <string name="dateOfBirth">Дата рождения:</string>
-    <string name="data">Дата рождения</string>
-    <string name="phone">Телефон:</string>
-    <string name="forgetPasswordText">Восстановление пароля</string>
-    <string name="repair">восстановить</string>
-    <string name="telephone">Телефон</string>
-    <string name="registr">Регистрация</string>
-    <string name="redact">Изменение профиля</string>
-    <string name="name">Имя</string>
-    <string name="nameOfBuy">Сообщение</string>
-    <string name="enterWith">Войти с помощью:</string>
-    <string name="chat">Чат</string>
-    <string name="listOfUsers">Список экспертов</string>
-
-    <string name="describeString">Описание</string>
-    <string name="subject">Твоя специализация</string>
-
-    <string name="startTask">Начать задание</string>
-    <string name="aboutTask">Опишите задание</string>
-    <string name="finishTask">Закончить задание</string>
-
-    <string name="my_chats">У вас пока что нет чатов!</string>
-    <string name="my_notifications">У вас пока что нет уведомлений!</string>
-    <string name="main_tasks">Здесь заданий пока что нет!</string>
-    <string name="my_tasks">Здесь заданий пока что нет!</string>
-
-    <string name="for_task_description">Вам необходимы баллы чтобы опубликовать задание, чтобы их получить выполняйте задания других людей!</string>
 
     <!--Changes-->
-    <string name="subject_change">Предмет</string>
-    <string name="name_change">Имя</string>
-    <string name="date_change" >Дата рождения</string>
-    <string name="phone_change">Номер телефона</string>
-    <string name="description_change">Описание</string>
-    <string name="save_btn_change">Сохранить!</string>
+    <string name="subject_change">Subject</string>
+    <string name="name_change">Name</string>
+    <string name="date_change">Birthday</string>
+    <string name="phone_change">Phone number</string>
+    <string name="description_change">Description</string>
+    <string name="save_btn_change">Save!</string>
     <!--Chat-->
-    <string name="edit_message">Напишите сообщение</string>
-    <string name="price">Цена:</string>
-    <string name="last_day">Срок:</string>
-    <string name="description">Описание:</string>
-    <string name="finish_task_btn">Закончить!</string>
-    <string name="grade_up">класс ↑</string>
-    <string name="grade_down">класс ↓</string>
+    <string name="edit_message">Write a message</string>
+    <string name="price">Price:</string>
+    <string name="last_day">Term:</string>
+    <string name="description">Description:</string>
+    <string name="finish_task_btn">Finish!</string>
+    <string name="grade_up">grade ↑</string>
+    <string name="grade_down">grade ↓</string>
     <!--Choose-->
-    <string name="working_nice_or_">Оцените работу эксперта:</string>
-    <string name="type">Написать...</string>
-    <string name="done">Готово!</string>
+    <string name="working_nice_or_">Evaluate the work of an expert:</string>
+    <string name="type">Write...</string>
+    <string name="done">Done!</string>
     <!--ChooseGender-->
-    <string name="choose_gender">Выберите персонажа:</string>
+    <string name="choose_gender">Choose the character:</string>
     <!--Comment-->
-    <string name="comment">Комментарии</string>
+    <string name="comment">Comments</string>
     <!--CreateTask-->
+    <string name="add_task">Adding a task</string>
+    <string name="for_task_description">You need points to publish the task, in order to get them, complete the tasks of other people!You need points to publish the task, in order to get them, complete the tasks of other people!</string>
+    <string name="name_of_task_creator">Job name</string>
+    <string name="grade">Grade</string>
+    <string name="next">Next→</string>
+    <string name="back">←Back</string>
+    <string name="add_photo">Add photo!</string>
+    <string name="description_of_task_creator">Task description...</string>
+    <string name="price_creator">Price</string>
+    <string name="date_creator">Term</string>
+    <!--Detail-->
+    <string name="specilisation_detail">Specialization:</string>
+    <string name="description_of_profile_detail">Profile description:</string>
+    <!--ForgetPassword-->
+    <string name="forget_the_pass">Forgot password?</string>
+    <string name="type_email">Enter your email below to restore password</string>
+    <string name="email">E-mail</string>
+    <string name="refresh">Restore</string>
+    <!--Image-->
+    <string name="image">Image</string>
+    <!--OnBoarding-->
+    <string name="continue_onboarding">Skip</string>
+    <string name="start">Start</string>
+    <string name="next_onboarding">Next</string>
+    <!--DialogFirstTask-->
+    <string name="congratulations_first">Congratulations on publishing your first assignment!</string>
+    <string name="nice">Nice!</string>
+    <string name="gained">You will be credited with 100 points.</string>
+    <!--ExitOrNot-->
+    <string name="exit">Exit</string>
+    <string name="are_u_sure">Are you sure you want to log out of your account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <!--Filter-->
+    <string name="get_good_price">-Choose your desired price:</string>
+    <string name="choose_the_class">Choose a grade</string>
+    <!--AllChats-->
+    <string name="chats">Chats</string>
+    <string name="find_task">Find a task...</string>
+    <string name="my_chats">You have no chats yet!</string>
+    <!--AllTasks-->
+    <string name="main_tasks">There are no tasks here yet!</string>
+    <!--Dashboard-->
+    <string name="tasks">Tasks</string>
+    <string name="all_tasks">All tasks</string>
+    <string name="my_tasks">My tasks</string>
+    <!--Profile-->
+    <string name="subject_profile">Specialization:</string>
+    <string name="dateOfBirth">Birthday:</string>
+    <string name="phone">Phone number:</string>
+    <string name="exit_profile">←Exit</string>
+    <string name="rewrite">Edit</string>
+    <!--Login-->
+    <string name="enter_to_acc_or_create">Sign in to your account or create a new one to post or complete the assignment!</string>
+    <string name="enterBtn">Enter</string>
+    <string name="password">Password</string>
+    <string name="forgetPassword">Forgot password</string>
+    <!--MyTasks-->
+    <string name="my_tasks_no">There are no tasks here yet!</string>
+    <!--Notification-->
+    <string name="notifications">Notifications</string>
+    <string name="my_notifications">You have no notifications yet!</string>
+    <!--Registration-->
+    <string name="name">Name</string>
+    <string name="describeString">Description</string>
+    <string name="subject">Your specialization</string>
+    <string name="next_register">Next→</string>
+    <string name="data">Birthday</string>
+    <string name="telephone">Phone number</string>
+    <!--Slide1-->
+    <string name="welcome">Welcome!</string>
+    <string name="lets_do_it">Let me tell you more about our application</string>
+    <!--Slide2-->
+    <string name="points_and_rating">Points and rating</string>
+    <string name="after_this_tut">At the end of the tutorial you will be given 500 points<br />→To get points, complete tasks<br />→To post the task you need to spend them<br />→For completing tasks, the expert is given a grade that affects the rating 🔥</string>
+    <!--Slide3-->
+    <string name="how_it_works">How does the app work?</string>
+    <string name="lets_explain">Publish the task 📝<br /> →Your points are being deducted 💸<br />→ Experts submit applications 👨‍🎓<br />→ Choose an expert 🔍<br />→ An expert helps you🤝<br />→ The expert receives points 💎<br />→ Write a review about the work 📃</string>
+    <!--Slide4-->
+    <string name="finish_task_slide4">Completing the quest</string>
+    <string name="to_finish">To finish the task, click the "Finish task" button. Then wait for the second person to press this button and the task will be completely completed 🧠</string>
+    <!--Slide5-->
+    <string name="congratulations_u_finish_tut">Congratulations, now we can definitely study together 🥳</string>
+    <!--HowMuchTasksWereDone-->
+    <string name="cool_that_u_with_us">Surprisingly, you have already completed the whole: </string>
+    <string name="concratulations_with_high_lvl">Congratulations on leveling up!</string>
+    <!--InternetConection-->
+    <string name="conection_internet">Connect to the Internet</string>
+    <string name="check_intenrt_con">Check your network connection.</string>
+    <string name="settings">Settings</string>
+    <string name="exit_from_app_internet">Exit</string>
+    <!--Item-->
+    <string name="subject_item">Subject:</string>
+    <string name="grade_item">Grade:</string>
+    <string name="do_it">Solve</string>
+    <string name="what_about">Task</string>
+    <!--ItemChats-->
+    <string name="grade_chats">grade</string>
+    <!--ItemNotification-->
+    <string name="are_you_agree">Are you agree?</string>
+    <string name="wants_to_do_u_task">wants to solve your task:</string>
+    <!--ItemComment-->
+    <string name="name_comm">Name:</string>
+    <string name="rating">Mark:</string>
+
+    <!--LoginOrSignUp-->
+    <string name="enter">Enter</string>
+    <string name="register">Register</string>
+
+
+    <string-array name="subjects">
+
+        <item>Algebra</item>
+        <item>English</item>
+        <item>Biology</item>
+        <item>Geography</item>
+        <item>Geometry</item>
+        <item>IT</item>
+        <item>Art</item>
+        <item>History</item>
+        <item>Literature</item>
+        <item>German</item>
+        <item>life safety fundamentals</item>
+        <item>Social science</item>
+        <item>French</item>
+        <item>Physics</item>
+        <item>PE</item>
+        <item>Chemistry</item>
+
+
+    </string-array>
+
 
 </resources>

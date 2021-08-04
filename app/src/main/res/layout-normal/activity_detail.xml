@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:text="Специализация:"
+                    android:text="@string/specilisation_detail"
                     android:textColor="@color/main"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="Описание профиля:"
+                    android:text="@string/description_of_profile_detail"
                     android:textColor="@color/main"
                     android:textSize="16sp" />
 
@@ -179,7 +179,7 @@
             android:id="@+id/goToComments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Комментарии"
+            android:text="@string/comment"
             android:textColor="#601C80"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"

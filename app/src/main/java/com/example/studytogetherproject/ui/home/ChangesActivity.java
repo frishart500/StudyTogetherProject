@@ -176,17 +176,20 @@ public class ChangesActivity extends AppCompatActivity {
                     }
                 });
 
-                String[] countryArray = {"Алгебра", "Англ. яз.", "Биология", "География",
-                        "Геометрия", "Информатика", "Искусство", "История", "Литература", "Немецкий язык", "ОБЖ", "Обществознание",
-                        "Русский язык", "Физика", "Физкультура", "Химия"};
-                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_for_list, R.id.textSubject, countryArray);
+                //////////
+
+                String[] subjectsArray = getResources().getStringArray(R.array.subjects);
+
+                ///////////
+
+                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_for_list, R.id.textSubject, subjectsArray);
                 list.setAdapter(adapter);
 
                 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         dialog.dismiss();
-                        subject.setText(countryArray[position]);
+                        subject.setText(subjectsArray[position]);
                     }
                 });
 

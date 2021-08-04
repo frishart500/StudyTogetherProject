@@ -48,12 +48,12 @@
                 android:layout_height="20dp"
                 android:src="@drawable/close_eye"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imgItem"
                 app:layout_constraintEnd_toEndOf="@+id/imgItem"
                 app:layout_constraintHorizontal_bias="0.857"
                 app:layout_constraintStart_toStartOf="@+id/imgItem"
                 app:layout_constraintTop_toTopOf="@+id/imgItem"
-                app:layout_constraintVertical_bias="0.728" />
+                app:layout_constraintVertical_bias="0.934" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/montserrat"
-                        android:text="класс"
+                        android:text="@string/grade_chats"
                         android:textColor="#601C80"
                         android:textSize="16sp" />
 

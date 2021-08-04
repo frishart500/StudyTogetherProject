@@ -198,6 +198,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                         postTask.setEnabled(true);
                         int count = pointsCount - countPoint;
                         int counterForTasks = counterTasksCreated + 1;
+
                         FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("countOfHowMuchTasksCreated").setValue(String.valueOf(counterForTasks));
                         Users users = new Users();
                         int rounded = (int) Math.round(count / 100.0) * 100;
@@ -208,6 +209,32 @@ public class CreateTaskActivity extends AppCompatActivity {
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .child("points").setValue(users.getPoints());
 
+                        if(counterForTasks == 1){
+                            final Dialog dialog = new Dialog(CreateTaskActivity.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_first_task);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.setCancelable(false);
+
+                            Button ok = dialog.findViewById(R.id.ok);
+
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    int points = Integer.parseInt(users.getPoints());
+                                    int result = points + 100;
+
+                                    FirebaseDatabase.getInstance().getReference("User")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .child("points").setValue(String.valueOf(result));
+
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            dialog.show();
+                        }
                         getUser();
                     }
                 }
@@ -277,17 +304,16 @@ public class CreateTaskActivity extends AppCompatActivity {
                     }
                 });
 
-                String[] countryArray = {"Алгебра", "Англ. яз.", "Биология", "География",
-                        "Геометрия", "Информатика", "Искусство", "История", "Литература", "Немецкий язык", "ОБЖ", "Обществознание",
-                        "Русский язык", "Физика", "Физкультура", "Химия"};
-                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_for_list, R.id.textSubject, countryArray);
+                String[] subjectsArray = getResources().getStringArray(R.array.subjects);
+
+                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_for_list, R.id.textSubject, subjectsArray);
                 list.setAdapter(adapter);
 
                 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         dialog.dismiss();
-                        subject.setText(countryArray[position]);
+                        subject.setText(subjectsArray[position]);
                     }
                 });
 

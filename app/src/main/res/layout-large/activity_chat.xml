@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Chat.ChatActivity"
     android:padding="8dp"
-    android:id="@+id/chat">
+    tools:context=".Chat.ChatActivity">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
-        app:cardCornerRadius="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_weight="0"
+        app:cardCornerRadius="15dp"
         app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,13 +47,20 @@
                 android:id="@+id/nameInChats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/montserrat"
-                android:text="Name, "
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Nameasdfasdfasdf, "
                 android:textColor="@color/main"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="@+id/imgUserChat"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/classTextInChats"
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toEndOf="@+id/imgUserChat"
                 app:layout_constraintTop_toTopOf="@+id/imgUserChat"
@@ -69,12 +75,12 @@
                 android:textColor="@color/main"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintVertical_bias="0.5"
-                app:layout_constraintBottom_toBottomOf="@+id/imgUserChat"
+                app:layout_constraintBottom_toBottomOf="@+id/nameInChats"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
-                app:layout_constraintStart_toEndOf="@+id/nameInChats"
-                app:layout_constraintTop_toTopOf="@+id/imgUserChat" />
+                app:layout_constraintHorizontal_bias="0.471"
+                app:layout_constraintStart_toEndOf="@+id/imgUserChat"
+                app:layout_constraintTop_toTopOf="@+id/nameInChats"
+                app:layout_constraintVertical_bias="0.484" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl"
@@ -94,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="Цена:"
+                    android:text="@string/price"
                     android:textColor="@color/main"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="Срок:"
+                    android:text="@string/last_day"
                     android:textColor="@color/main"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -168,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="Описание:"
+                    android:text="@string/description"
                     android:textColor="@color/main"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -195,12 +201,12 @@
                     android:id="@+id/describtionInChat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
                     android:fontFamily="@font/montserrat"
                     android:text=""
                     android:textColor="@color/main"
                     android:textSize="15sp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginLeft="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.024"
@@ -212,12 +218,13 @@
                     android:id="@+id/btnFinishInChat"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
-                    android:text="Закончить!"
-                    app:cornerRadius="15dp"
-                    android:textAllCaps="false"
                     android:layout_marginRight="25dp"
-                    android:layout_marginLeft="25dp"                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@string/finish_task_btn"
+                    android:textAllCaps="false"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent"
@@ -247,82 +254,78 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_above="@+id/lin"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_above="@+id/lin"
+        android:layout_weight="2"
         android:divider="@android:color/transparent"
+        android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintBottom_toTopOf="@+id/lin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="8dp"
-        android:stackFromBottom="true"
         tools:listitem="@layout/message_item" />
 
 
-
     <androidx.cardview.widget.CardView
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:cardCornerRadius="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:minHeight="60dp"
+        android:orientation="horizontal"
+        app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        android:layout_width="match_parent"
-        android:minHeight="60dp"
-        app:layout_constraintHeight_max="120dp"
-        android:layout_height="wrap_content">
+        app:layout_constraintVertical_bias="0.975">
 
         <LinearLayout
             android:id="@+id/lin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <Button
-                android:layout_marginLeft="10dp"
                 android:id="@+id/addPhoto"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:background="@drawable/add_photo"
-                />
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_photo" />
 
 
             <EditText
                 android:id="@+id/messageEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Напишите сообщение"
-                android:maxHeight="120dp"
-                android:background="@android:color/transparent"
-                android:padding="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@color/main"
+                android:hint="@string/edit_message"
+                android:maxHeight="120dp"
+                android:padding="10dp"
                 android:textColor="@color/main"
-                android:textColorHint="@color/main"
-                android:backgroundTint="@color/main" />
+                android:textColorHint="@color/main" />
 
             <Button
                 android:id="@+id/sendMessage"
-                android:layout_marginRight="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/send"
                 android:enabled="false" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
 </LinearLayout>
