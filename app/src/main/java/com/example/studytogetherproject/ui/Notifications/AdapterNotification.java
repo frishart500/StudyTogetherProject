@@ -54,7 +54,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     private Context context;
     private InterstitialAd mInterstitialAd;
     private final String TAG = "---AdMob";
-    View parentLayout;
 
     public AdapterNotification(Context context, ArrayList<Friends> arrayList) {
         this.arrayList = arrayList;
@@ -99,7 +98,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             no = itemView.findViewById(R.id.no);
             imageView = itemView.findViewById(R.id.imgItem);
 
-            parentLayout = itemView.findViewById(android.R.id.content);
+
 
             MobileAds.initialize(context, new OnInitializationCompleteListener() {
                 @Override
@@ -148,15 +147,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 }
             });
 
-            Fade fade = new Fade();
-            View decor = ((Activity) context).getWindow().getDecorView();
-            fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
-            fade.excludeTarget(android.R.id.navigationBarBackground, true);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                ((Activity) context).getWindow().setEnterTransition(fade);
-                ((Activity) context).getWindow().setExitTransition(fade);
-            }
+
 
             name.setOnClickListener(new View.OnClickListener() {
                 @Override

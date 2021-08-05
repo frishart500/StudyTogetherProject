@@ -54,7 +54,7 @@
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="Nameasdfasdfasdf, "
+                android:text="Task, "
                 android:textColor="@color/main"
                 android:textSize="20sp"
                 android:textStyle="bold"

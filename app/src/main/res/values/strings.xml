@@ -8,7 +8,8 @@
     <string name="date_change">Birthday</string>
     <string name="phone_change">Phone number</string>
     <string name="description_change">Description</string>
-    <string name="save_btn_change">Save!</string>
+    <string name="save_btn_change">Save</string>
+    <string name="saving">Profile changed correctly!</string>
     <!--Chat-->
     <string name="edit_message">Write a message</string>
     <string name="price">Price:</string>
@@ -20,7 +21,7 @@
     <!--Choose-->
     <string name="working_nice_or_">Evaluate the work of an expert:</string>
     <string name="type">Write...</string>
-    <string name="done">Done!</string>
+    <string name="done">Done</string>
     <!--ChooseGender-->
     <string name="choose_gender">Choose the character:</string>
     <!--Comment-->
@@ -36,6 +37,11 @@
     <string name="description_of_task_creator">Task description...</string>
     <string name="price_creator">Price</string>
     <string name="date_creator">Term</string>
+    <string name="delete_img">You have deleted the picture.</string>
+    <string name="no_money">You do not have enough points to post the assignment.</string>
+    <string name="published">Published!</string>
+    <string name="enter_all_info">Enter all the information in the paragraphs to publish the assignment.</string>
+    <string name="price_should">The price for the rear must be no less than 100 and no more than 500 points.</string>
     <!--Detail-->
     <string name="specilisation_detail">Specialization:</string>
     <string name="description_of_profile_detail">Profile description:</string>
@@ -44,6 +50,8 @@
     <string name="type_email">Enter your email below to restore password</string>
     <string name="email">E-mail</string>
     <string name="refresh">Restore</string>
+    <string name="try_again">Try again later!</string>
+    <string name="success_letter">A letter with a password change has been sent to your mail!</string>
     <!--Image-->
     <string name="image">Image</string>
     <!--OnBoarding-->
@@ -52,7 +60,7 @@
     <string name="next_onboarding">Next</string>
     <!--DialogFirstTask-->
     <string name="congratulations_first">Congratulations on publishing your first assignment!</string>
-    <string name="nice">Nice!</string>
+    <string name="nice">Nice</string>
     <string name="gained">You will be credited with 100 points.</string>
     <!--ExitOrNot-->
     <string name="exit">Exit</string>
@@ -78,6 +86,7 @@
     <string name="phone">Phone number:</string>
     <string name="exit_profile">←Exit</string>
     <string name="rewrite">Edit</string>
+    <string name="profile_promise">When completing the assignment, please do not log out of your account!</string>
     <!--Login-->
     <string name="enter_to_acc_or_create">Sign in to your account or create a new one to post or complete the assignment!</string>
     <string name="enterBtn">Enter</string>
@@ -85,6 +94,7 @@
     <string name="forgetPassword">Forgot password</string>
     <!--MyTasks-->
     <string name="my_tasks_no">There are no tasks here yet!</string>
+    <string name="delete_task">You have deleted the task! The points that you paid for the task have been returned to you.</string>
     <!--Notification-->
     <string name="notifications">Notifications</string>
     <string name="my_notifications">You have no notifications yet!</string>
@@ -95,6 +105,8 @@
     <string name="next_register">Next→</string>
     <string name="data">Birthday</string>
     <string name="telephone">Phone number</string>
+    <string name="registration_load">Loading...</string>
+    <string name="registr_not">Registration failed! You must enter all the information.</string>
     <!--Slide1-->
     <string name="welcome">Welcome!</string>
     <string name="lets_do_it">Let me tell you more about our application</string>
@@ -122,6 +134,7 @@
     <string name="grade_item">Grade:</string>
     <string name="do_it">Solve</string>
     <string name="what_about">Task</string>
+    <string name="task_sent">Your application has been sent!</string>
     <!--ItemChats-->
     <string name="grade_chats">grade</string>
     <!--ItemNotification-->
@@ -134,6 +147,7 @@
     <!--LoginOrSignUp-->
     <string name="enter">Enter</string>
     <string name="register">Register</string>
+    <string name="loading">Load...</string>
 
 
     <string-array name="subjects">

@@ -359,6 +359,23 @@
             app:layout_constraintVertical_bias="0.113" />
 
         <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/profile_promise"
+            android:textColor="#601C80"
+            android:textSize="16sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/changeBtn"
+            app:layout_constraintHorizontal_bias="0.477"
+            app:layout_constraintStart_toStartOf="@+id/changeBtn"
+            app:layout_constraintTop_toBottomOf="@+id/changeBtn"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
             android:id="@+id/exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -369,7 +386,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/changeBtn"
-            app:layout_constraintTop_toBottomOf="@+id/changeBtn"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
             app:layout_constraintVertical_bias="0.121" />
 
         <TextView

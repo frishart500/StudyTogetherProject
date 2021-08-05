@@ -126,7 +126,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //вход по нажатию
-                Snackbar snackbar = Snackbar.make(v, "Вход...", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(v, getResources().getString(R.string.loading), Snackbar.LENGTH_LONG);
                 snackbar.setBackgroundTint(0XFFffffff);
                 snackbar.setTextColor(0XFF601C80);
                 snackbar.show();

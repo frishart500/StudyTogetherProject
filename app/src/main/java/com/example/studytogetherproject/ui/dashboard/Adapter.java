@@ -224,7 +224,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 public void onClick(View v) {
                     apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
                     goToChat();
-                    Snackbar snackbar = Snackbar.make(v, "Ваша заявка была отправлена!", Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(v, ((Activity) context).getResources().getString(R.string.task_sent), Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(0XFFffffff);
                     snackbar.setTextColor(0XFF601C80);
                     snackbar.show();
@@ -243,7 +243,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                     if (response.code() == 200) {
                         if (response.body().success != 1) {
-                            Toast.makeText(context, "NOOOOOOOOOOOOOO", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "NOOOOOOOOOOOOOO", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

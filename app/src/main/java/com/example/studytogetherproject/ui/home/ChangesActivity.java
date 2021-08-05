@@ -98,7 +98,7 @@ public class ChangesActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar snackbar = Snackbar.make(v, "Профиль корректно изменен!", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(v, getResources().getString(R.string.saving), Snackbar.LENGTH_LONG);
                 snackbar.setBackgroundTint(0XFFffffff);
                 snackbar.setTextColor(0XFF601C80);
                 snackbar.show();

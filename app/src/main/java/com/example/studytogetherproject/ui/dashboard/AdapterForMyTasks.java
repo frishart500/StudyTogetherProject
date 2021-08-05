@@ -1,5 +1,6 @@
 package com.example.studytogetherproject.ui.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -197,7 +198,7 @@ public class AdapterForMyTasks extends RecyclerView.Adapter<AdapterForMyTasks.Vi
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(), arrayList.size());
 
-                    Snackbar snackbar = Snackbar.make(v, "Вы удалили задание! Баллы, которые вы заплатили за задание были вам возвращены.", Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(v, ((Activity)context).getResources().getString(R.string.delete_task), Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(0XFFffffff);
                     snackbar.setTextColor(0XFF601C80);
                     snackbar.show();

@@ -106,22 +106,21 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolder> 
                                 FirebaseDatabase.getInstance().getReference("User").child(id1).addListenerForSingleValueEvent(valAnotherUIDStatus);
                             }
 
-                            System.out.println(nameInChats + " nameInChats");
-                            System.out.println(nameAnotherUser + " nameAnotherUser");
-                            System.out.println(name + " name");
+
+
                             //here fucking bug
 
                             if (name.equals(nameAnotherUser)) {
-                                holder.name.setText(item.getName() + ", ");
+                                holder.name.setText(arrayList.get(position).getName() + ", ");
                                 Glide.with(context).load(item.getImg1()).into(holder.img);
-                                if(nameAnotherUser.equals(item.getName())){
-                                    holder.name.setText(item.getNameAnotherPerson() + ", ");
+                                if(nameAnotherUser.equals(arrayList.get(position).getName())){
+                                    holder.name.setText(arrayList.get(position).getNameAnotherPerson() + ", ");
                                     Glide.with(context).load(item.getImg2()).into(holder.img);
                                 }
                             }
-                            else if (nameInChats.equals(item.getName())) {
+                            else if (nameInChats.equals(arrayList.get(position).getName())) {
                                 Glide.with(context).load(item.getImg2()).into(holder.img);
-                                holder.name.setText(item.getNameAnotherPerson() + ", ");
+                                holder.name.setText(arrayList.get(position).getNameAnotherPerson() + ", ");
                             }
                         }
 

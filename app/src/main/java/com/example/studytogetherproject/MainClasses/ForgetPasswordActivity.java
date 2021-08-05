@@ -89,11 +89,15 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Вы успешно получили письмо на почту!", Toast.LENGTH_SHORT).show();
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar snackbar = Snackbar.make(parentLayout, getResources().getString(R.string.try_again), Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(0XFFffffff);
+                    snackbar.setTextColor(0XFF601C80);
+                    snackbar.show();
                     startActivity(new Intent(getApplicationContext(), LoginOrSignUpActivity.class));
                 } else{
                     View parentLayout = findViewById(android.R.id.content);
-                    Snackbar snackbar = Snackbar.make(parentLayout, "Попробуйте снова!", Snackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(parentLayout, getResources().getString(R.string.try_again), Snackbar.LENGTH_LONG);
                     snackbar.setBackgroundTint(0XFF601C80);
                     snackbar.setTextColor(0XFFffffff);
                     snackbar.show();

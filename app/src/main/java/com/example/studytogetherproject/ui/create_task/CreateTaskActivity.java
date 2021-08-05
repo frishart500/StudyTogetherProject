@@ -151,14 +151,14 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!describtionOfTask.getText().toString().isEmpty() && !nameOfTask.getText().toString().isEmpty()
                         && !dateToFinish.getText().toString().isEmpty() && !classText.getText().toString().isEmpty() && !points.getText().toString().isEmpty()
-                        && !subject.getText().toString().equals("Предмет")) {
+                        && !subject.getText().toString().equals(getResources().getString(R.string.subject_change))) {
                     postingTask(v);
-                    snackbar = Snackbar.make(v, "Опубликовано!", Snackbar.LENGTH_LONG);
+                    snackbar = Snackbar.make(v, getResources().getString(R.string.published), Snackbar.LENGTH_LONG);
                     snackbar.setBackgroundTint(0XFFffffff);
                     snackbar.setTextColor(0XFF601C80);
                     snackbar.show();
                 } else {
-                    snackbar = Snackbar.make(v, "Введите всю информацию в пункты,чтобы опубликовать задание.", Snackbar.LENGTH_LONG);
+                    snackbar = Snackbar.make(v, getResources().getString(R.string.enter_all_info), Snackbar.LENGTH_LONG);
                     snackbar.setBackgroundTint(0XFF601C80);
                     snackbar.setTextColor(0XFFffffff);
                     snackbar.show();
@@ -166,7 +166,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if (!points.getText().toString().equals("")) {
                     int countPoint = Integer.parseInt(points.getText().toString());
                     if (countPoint < 100) {
-                        snackbar = Snackbar.make(v, "Цена за задние должна быть не меньше 100 и не больше 500 баллов.", Snackbar.LENGTH_LONG);
+                        snackbar = Snackbar.make(v, getResources().getString(R.string.price_should), Snackbar.LENGTH_LONG);
                         snackbar.setBackgroundTint(0XFF601C80);
                         snackbar.setTextColor(0XFFffffff);
                         snackbar.show();
@@ -189,7 +189,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                 int countPoint = Integer.parseInt(points.getText().toString());
 
                 if (pointsCount < countPoint) {
-                    snackbar = Snackbar.make(v, "У вас недостаточно баллов, чтобы опубликовать задание.", Snackbar.LENGTH_LONG);
+                    snackbar = Snackbar.make(v, getResources().getString(R.string.no_money), Snackbar.LENGTH_LONG);//getResources().getString(R.string.delete_img)
                     snackbar.setBackgroundTint(0XFF601C80);
                     snackbar.setTextColor(0XFFffffff);
                     snackbar.show();
@@ -473,7 +473,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                                 photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        snackbar = Snackbar.make(v, "Вы удалили картинку.", Snackbar.LENGTH_SHORT);
+                                        snackbar = Snackbar.make(v, getResources().getString(R.string.delete_img), Snackbar.LENGTH_SHORT);
                                         snackbar.setBackgroundTint(0XFFffffff);
                                         snackbar.setTextColor(0XFF601C80);
                                         snackbar.show();

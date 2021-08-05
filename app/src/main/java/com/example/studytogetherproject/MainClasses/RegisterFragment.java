@@ -154,7 +154,7 @@ public class RegisterFragment extends Fragment {
         reg1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar snackbar = Snackbar.make(v, "Регистрация...", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(v, getResources().getString(R.string.registration_load), Snackbar.LENGTH_LONG);
                 snackbar.setBackgroundTint(0XFFffffff);
                 snackbar.setTextColor(0XFF601C80);
                 snackbar.show();
@@ -197,14 +197,14 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registration(String emailS, String passwordS, View v) {
-        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && passwordS.length() >= 6 && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().equals("Твоя специализация") && !phone.getText().toString().isEmpty()) {
+        if (!emailS.isEmpty() && !data.getText().toString().isEmpty() && !passwordS.isEmpty() && passwordS.length() >= 6 && !name.getText().toString().isEmpty() && !describtion.getText().toString().isEmpty() && !subject.getText().toString().equals(getResources().getString(R.string.subject)) && !phone.getText().toString().isEmpty()) {
             Intent intent = new Intent(getContext(), ChooseGenderActivity.class);
             intent.putExtra("email", email.getText().toString());
             intent.putExtra("password", passwordS);
             putIntent(intent);
             startActivity(intent);
         }else {
-            Snackbar snackbar = Snackbar.make(v, "Регистрация провалена! Вы долны ввести всю информацию.", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(v, getResources().getString(R.string.registr_not), Snackbar.LENGTH_LONG);
             snackbar.setBackgroundTint(0XFF601C80);
             snackbar.setTextColor(0XFFffffff);
             snackbar.show();

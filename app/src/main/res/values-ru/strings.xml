@@ -8,26 +8,27 @@
     <string name="date_change">Дата рождения</string>
     <string name="phone_change">Номер телефона</string>
     <string name="description_change">Описание</string>
-    <string name="save_btn_change">Сохранить!</string>
+    <string name="save_btn_change">Сохранить</string>
+    <string name="saving">Профиль корректно изменен!</string>
     <!--Chat-->
     <string name="edit_message">Напишите сообщение</string>
     <string name="price">Цена:</string>
     <string name="last_day">Срок:</string>
     <string name="description">Описание:</string>
-    <string name="finish_task_btn">Закончить!</string>
+    <string name="finish_task_btn">Закончить</string>
     <string name="grade_up">класс ↑</string>
     <string name="grade_down">класс ↓</string>
     <!--Choose-->
     <string name="working_nice_or_">Оцените работу эксперта:</string>
     <string name="type">Написать...</string>
-    <string name="done">Готово!</string>
+    <string name="done">Готово</string>
     <!--ChooseGender-->
     <string name="choose_gender">Выберите персонажа:</string>
     <!--Comment-->
     <string name="comment">Комментарии</string>
     <!--CreateTask-->
     <string name="add_task">Добавление задания</string>
-    <string name="for_task_description">Вам необходимы баллы чтобы опубликовать задание, чтобы их получить выполняйте задания других людей!</string>
+    <string name="for_task_description">Вам необходимы баллы, чтобы опубликовать задание. Для того чтобы их получить выполняйте задания других людей!</string>
     <string name="name_of_task_creator">Название задания</string>
     <string name="grade">Класс</string>
     <string name="next">Дальше→</string>
@@ -36,6 +37,11 @@
     <string name="description_of_task_creator">Описание задания...</string>
     <string name="price_creator">Цена</string>
     <string name="date_creator">Срок</string>
+    <string name="delete_img">Вы удалили картинку.</string>
+    <string name="no_money">У вас недостаточно баллов, чтобы опубликовать задание.</string>
+    <string name="published">Опубликовано!</string>
+    <string name="enter_all_info">Введите всю информацию в пункты,чтобы опубликовать задание.</string>
+    <string name="price_should">Цена за задние должна быть не меньше 100 и не больше 500 баллов.</string>
     <!--Detail-->
     <string name="specilisation_detail">Специализация:</string>
     <string name="description_of_profile_detail">Описание профиля:</string>
@@ -44,6 +50,8 @@
     <string name="type_email">Введите свой email ниже чтобы восстановить пароль</string>
     <string name="email">E-mail</string>
     <string name="refresh">Восстановить</string>
+    <string name="try_again">Попробуйте позже!</string>
+    <string name="success_letter">Письмо с изменением пароля отправлено на вашу почту!</string>
     <!--Image-->
     <string name="image">Картинка</string>
     <!--OnBoarding-->
@@ -52,7 +60,7 @@
     <string name="next_onboarding">Далее</string>
     <!--DialogFirstTask-->
     <string name="congratulations_first">Поздравляем с публикацией первого задания!</string>
-    <string name="nice">Здорово!</string>
+    <string name="nice">Здорово</string>
     <string name="gained">Вам будет зачислено 100 баллов.</string>
     <!--ExitOrNot-->
     <string name="exit">Выход</string>
@@ -78,6 +86,7 @@
     <string name="phone">Телефон:</string>
     <string name="exit_profile">←Выйти</string>
     <string name="rewrite">Редактировать</string>
+    <string name="profile_promise">При выполнении задания, уважительная просьба не выходить из своего аккаунта!</string>
     <!--Login-->
     <string name="enter_to_acc_or_create">Войдите в аккаунт или создайте новый, чтобы опубликовать или выполнить задание!</string>
     <string name="enterBtn">Войти</string>
@@ -85,6 +94,7 @@
     <string name="forgetPassword">Забыли пароль</string>
     <!--MyTasks-->
     <string name="my_tasks_no">Здесь заданий пока что нет!</string>
+    <string name="delete_task">Вы удалили задание! Баллы, которые вы заплатили за задание были вам возвращены.</string>
     <!--Notification-->
     <string name="notifications">Уведомления</string>
     <string name="my_notifications">У вас пока что нет уведомлений!</string>
@@ -95,18 +105,20 @@
     <string name="next_register">Дальше→</string>
     <string name="data">Дата рождения</string>
     <string name="telephone">Телефон</string>
+    <string name="registration_load">Регистрация...</string>
+    <string name="registr_not">Регистрация провалена! Вы должны ввести всю информацию.</string>
     <!--Slide1-->
-    <string name="welcome">Добро подаловать!</string>
-    <string name="lets_do_it">Давай я расскажу поподробней о нашем приложении</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="lets_do_it">Давай я расскажу подробней о нашем приложении</string>
     <!--Slide2-->
     <string name="points_and_rating">Баллы и рейтинг</string>
     <string name="after_this_tut">По окончании туториала вам дадут 500 баллов<br />→Чтобы получать баллы выполняйте задания<br />→Чтобы выложить задание нужно их тратить<br />→За выполнение заданий эксперту ставится оценка, которая влияет на рейтинг 🔥</string>
     <!--Slide3-->
     <string name="how_it_works">Как работает приложение?</string>
-    <string name="lets_explain">Публикуете задание 📝<br /> →У вас списывают баллы 💸<br />→ Эксперты кидают заявки 👨‍🎓<br />→ Выбираете эксперта 🔍<br />→ Эксперт помогает вам🤝<br />→ Эксперт получает баллы 💎<br />→ Пишите отзыв о работе 📃</string>
+    <string name="lets_explain">Публикуете задание 📝<br /> →У вас списывают баллы 💸<br />→ Эксперты кидают заявки 👨‍🎓<br />→ Выбираете эксперта 🔍<br />→ Эксперт помогает вам🤝<br />→ Эксперт получает баллы 💎<br />→ Пишете отзыв о работе 📃</string>
     <!--Slide4-->
     <string name="finish_task_slide4">Завершение задания</string>
-    <string name="to_finish">Чтобы закончить задание нажмите кнопку "Закончит задание". Затем подождите, когда второй человек нажмёт эту кнопку и задание будет полностью завершено 🧠</string>
+    <string name="to_finish">Чтобы закончить задание нажмите кнопку "Закончить задание". Затем подождите, когда второй человек нажмёт эту кнопку и задание будет полностью завершено 🧠</string>
     <!--Slide5-->
     <string name="congratulations_u_finish_tut">Мои поздравления теперь мы точно сможем учиться вместе 🥳</string>
     <!--HowMuchTasksWereDone-->
@@ -122,6 +134,7 @@
     <string name="grade_item">Класс:</string>
     <string name="do_it">Решать</string>
     <string name="what_about">Задание</string>
+    <string name="task_sent">Ваша заявка была отправлена!</string>
     <!--ItemChats-->
     <string name="grade_chats">класс</string>
     <!--ItemNotification-->
@@ -134,7 +147,7 @@
     <!--LoginOrSignUp-->
     <string name="enter">Вход</string>
     <string name="register">Регистрация</string>
-
+    <string name="loading">Вход...</string>
 
     <string-array name="subjects">
 
