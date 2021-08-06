@@ -47,7 +47,7 @@ public class ChooseGenderActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Snackbar snackbar = Snackbar.make(v, "Загрузка...", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(v, getResources().getString(R.string.loading_gender), Snackbar.LENGTH_LONG);
                 switch (v.getId()) {
                     case R.id.back:
                         startActivity(new Intent(getApplicationContext(), LoginOrSignUpActivity.class));

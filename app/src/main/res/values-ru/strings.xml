@@ -24,6 +24,7 @@
     <string name="done">Готово</string>
     <!--ChooseGender-->
     <string name="choose_gender">Выберите персонажа:</string>
+    <string name="loading_gender">Загрузка...</string>
     <!--Comment-->
     <string name="comment">Комментарии</string>
     <!--CreateTask-->
@@ -86,7 +87,7 @@
     <string name="phone">Телефон:</string>
     <string name="exit_profile">←Выйти</string>
     <string name="rewrite">Редактировать</string>
-    <string name="profile_promise">При выполнении задания, уважительная просьба не выходить из своего аккаунта!</string>
+    <string name="profile_promise">При выполнении задания, просьба не выходить из своего аккаунта!</string>
     <!--Login-->
     <string name="enter_to_acc_or_create">Войдите в аккаунт или создайте новый, чтобы опубликовать или выполнить задание!</string>
     <string name="enterBtn">Войти</string>

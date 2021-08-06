@@ -24,6 +24,7 @@
     <string name="done">Done</string>
     <!--ChooseGender-->
     <string name="choose_gender">Choose the character:</string>
+    <string name="loading_gender">Loading...</string>
     <!--Comment-->
     <string name="comment">Comments</string>
     <!--CreateTask-->
