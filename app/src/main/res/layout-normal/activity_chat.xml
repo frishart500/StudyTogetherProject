@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Chat.ChatActivity"
+    tools:context="study_com.study_exmp.studytogetherproject.Chat.ChatActivity"
     android:padding="8dp"
     android:id="@+id/chat">
 

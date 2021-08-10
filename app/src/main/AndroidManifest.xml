@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.studytogetherproject">
+    package="study_com.study_exmp.studytogetherproject">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,19 +22,19 @@
         android:theme="@style/Theme.White.KvantoriumProject"
         tools:replace="android:label">
         <activity
-            android:name=".ui.create_task.CreateTaskActivity"
+            android:name="study_com.study_exmp.studytogetherproject.ui.create_task.CreateTaskActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainClasses.LoginOrSignUpActivity"
+            android:name="study_com.study_exmp.studytogetherproject.MainClasses.LoginOrSignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Onboarding.IntroActivityOnboarding"
+            android:name="study_com.study_exmp.studytogetherproject.Onboarding.IntroActivityOnboarding"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainClasses.ChooseGenderActivity"
+            android:name="study_com.study_exmp.studytogetherproject.MainClasses.ChooseGenderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainClasses.SplashScreenActivity"
+            android:name="study_com.study_exmp.studytogetherproject.MainClasses.SplashScreenActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -44,28 +44,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CommentsAndDetails.DetailActivity"
+            android:name="study_com.study_exmp.studytogetherproject.CommentsAndDetails.DetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Chat.ChooseActivity"
+            android:name="study_com.study_exmp.studytogetherproject.Chat.ChooseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Chat.ImageActivity"
+            android:name="study_com.study_exmp.studytogetherproject.Chat.ImageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Chat.ChatActivity"
+            android:name="study_com.study_exmp.studytogetherproject.Chat.ChatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CommentsAndDetails.CommentActivity"
+            android:name="study_com.study_exmp.studytogetherproject.CommentsAndDetails.CommentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.home.ChangesActivity"
+            android:name="study_com.study_exmp.studytogetherproject.ui.home.ChangesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainClasses.ForgetPasswordActivity"
+            android:name="study_com.study_exmp.studytogetherproject.MainClasses.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainClasses.MainActivity"
+            android:name="study_com.study_exmp.studytogetherproject.MainClasses.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
@@ -75,7 +75,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".notificationPack.MyFirebaseMessagingService"
+            android:name="study_com.study_exmp.studytogetherproject.notificationPack.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -83,7 +83,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".notificationPack.MyFirebaseService"
+            android:name="study_com.study_exmp.studytogetherproject.notificationPack.MyFirebaseService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

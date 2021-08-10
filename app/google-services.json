@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "931649898568",
+    "firebase_url": "https://kvantoriumproject-552ef-default-rtdb.firebaseio.com",
     "project_id": "kvantoriumproject-552ef",
     "storage_bucket": "kvantoriumproject-552ef.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:931649898568:android:c1dd2a5a8d8450be04f07d",
+        "mobilesdk_app_id": "1:931649898568:android:79ffff73795b9b9504f07d",
         "android_client_info": {
-          "package_name": "com.example.kvantoriumproject"
+          "package_name": "study_com.study_exmp.kvantoriumproject"
         }
       },
       "oauth_client": [
