@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="study_com.study_exmp.studytogetherproject.ui.home.HomeFragment"
+        android:name="study_com.studytogetherproject.ui.home.HomeFragment"
         android:label="Дом"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="study_com.study_exmp.studytogetherproject.ui.dashboard.DashboardFragment"
+        android:name="study_com.studytogetherproject.ui.dashboard.DashboardFragment"
         android:label="Список заданий"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="study_com.study_exmp.studytogetherproject.ui.friendsInChats.AllYourChatsFragment"
+        android:name="study_com.studytogetherproject.ui.friendsInChats.AllYourChatsFragment"
         android:label="Чаты"
         tools:layout="@layout/fragment_all_chats" />
 
 
     <fragment
         android:id="@+id/navigation_notifications_"
-        android:name="study_com.study_exmp.studytogetherproject.ui.Notifications.NotificationsFragment"
+        android:name="study_com.studytogetherproject.ui.Notifications.NotificationsFragment"
         android:label="Уведомления"
         tools:layout="@layout/fragment_notifications" />
 

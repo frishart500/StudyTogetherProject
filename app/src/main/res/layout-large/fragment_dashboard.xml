@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="?android:attr/windowBackground"
-    tools:context="study_com.study_exmp.studytogetherproject.ui.dashboard.DashboardFragment"
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.ui.dashboard.DashboardFragment"
     tools:ignore="MissingDefaultResource">
 
     <ImageView

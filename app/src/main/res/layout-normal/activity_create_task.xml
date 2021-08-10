@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="study_com.study_exmp.studytogetherproject.ui.create_task.CreateTaskActivity"
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.ui.create_task.CreateTaskActivity"
     android:id="@+id/create"
     >
 

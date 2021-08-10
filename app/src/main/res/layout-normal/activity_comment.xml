@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="study_com.study_exmp.studytogetherproject.CommentsAndDetails.CommentActivity">
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.CommentsAndDetails.CommentActivity">
 
 
 

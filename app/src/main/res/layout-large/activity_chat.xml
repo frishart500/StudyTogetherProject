@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context="study_com.study_exmp.studytogetherproject.Chat.ChatActivity">
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.Chat.ChatActivity">
 
 
     <androidx.cardview.widget.CardView

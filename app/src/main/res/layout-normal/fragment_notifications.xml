@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="study_com.study_exmp.studytogetherproject.ui.Notifications.NotificationsFragment"
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.ui.Notifications.NotificationsFragment"
     android:orientation="vertical">
 
     <ImageView

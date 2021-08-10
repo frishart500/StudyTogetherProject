@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="study_com.study_exmp.studytogetherproject.ui.home.ChangesActivity"
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.ui.home.ChangesActivity"
     tools:ignore="MissingDefaultResource">
 
 

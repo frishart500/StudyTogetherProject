@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="study_com.study_exmp.studytogetherproject.ui.dashboard.MyTasksFragment">
+    tools:context="study_com.study_exmp.studytogetherproject.study_com.studytogetherproject.ui.dashboard.MyTasksFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="50dp"

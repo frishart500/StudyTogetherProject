@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "study_com.study_exmp.kvantoriumproject"
+        applicationId "study_com.kvantoriumproject"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
